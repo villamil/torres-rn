@@ -46,9 +46,7 @@ export default function Home() {
                 style={{ height: 35, width: 35, marginRight: 10 }}
                 source={MaintenanceLogo}
               />
-              <Title size="tiny" letterSpacing="2px">
-                Mantenimiento
-              </Title>
+              <Title size="tiny">Mantenimiento</Title>
             </TitleLeftContainer>
             <Title color={theme.lowGreen}>$ 700.00 MXN</Title>
           </ServiceTitleContainer>
