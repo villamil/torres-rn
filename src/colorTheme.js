@@ -5,7 +5,8 @@ const themeColors = {
   green: "#4ebc43",
   lowGreen: "#B2DC39",
   white: "#FFFFFF",
-  gray: "#E6E6E6"
+  gray: "#E6E6E6",
+  orange: "#FD7E14"
 };
 
 export default themeColors;
