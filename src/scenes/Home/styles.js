@@ -52,9 +52,10 @@ export const PullMenuContainer = styled.View`
 `;
 
 export const PullContainer = styled.View`
-  flex: 1;
-  align-items: flex-start;
+  width: 100%;
+  align-items: center;
   justify-content: flex-start;
+  height: 60px;
 `;
 
 export const MenuContainer = styled.View`

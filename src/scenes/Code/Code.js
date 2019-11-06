@@ -1,26 +1,25 @@
 import React, { useState } from "react";
-import { Image, TextInput } from "react-native";
+import { Image, TextInput, Animated } from "react-native";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
-import Input from "../../components/input/input";
-
 import Torres from "../../assets/torres.png";
-import SCREENS from "../../navigatorMap";
-
-import theme from "../../colorTheme";
+import Input from "../../components/input/input";
 
 import {
   LogoContainer,
   InputContainer,
   NextContainer,
-  TitleContainer
+  InstructionsContainer
 } from "./styles";
 
-export default function SignIn({ navigation }) {
+import theme from "../../colorTheme";
+
+export default function Code() {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [repeatPasswordValue, setRepeatPasswordValue] = useState("");
 
   return (
     <Container>
@@ -30,9 +29,11 @@ export default function SignIn({ navigation }) {
           source={Torres}
         />
       </LogoContainer>
-      <TitleContainer>
-        <Title>¡Bienvenido!</Title>
-      </TitleContainer>
+      <InstructionsContainer>
+        <Title size="tiny" align="left">
+          Completa la informacion:
+        </Title>
+      </InstructionsContainer>
       <InputContainer>
         <Title size="tiny" color={theme.green}>
           Correo
@@ -49,12 +50,18 @@ export default function SignIn({ navigation }) {
           secureTextEntry={true}
         />
       </InputContainer>
-
-      <NextContainer>
-        <Button
-          text="INGRESAR"
-          onPress={() => navigation.navigate(SCREENS.HOME)}
+      <InputContainer>
+        <Title size="tiny" color={theme.green}>
+          Repetir Contrasenia
+        </Title>
+        <Input
+          value={repeatPasswordValue}
+          onChangeText={text => setRepeatPasswordValue(text)}
+          secureTextEntry={true}
         />
+      </InputContainer>
+      <NextContainer>
+        <Button text="CREAR CUENTA" />
       </NextContainer>
     </Container>
   );

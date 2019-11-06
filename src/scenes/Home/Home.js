@@ -5,6 +5,8 @@ import BottomDrawer from "rn-bottom-drawer";
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
 
+import GeneralDetails from "../../containers/GeneralDetails";
+
 import MaintenanceLogo from "../../assets/maintenance-logo.png";
 import WaterLogo from "../../assets/water-logo.png";
 import MenuIcon from "../../assets/menu-button.png";
@@ -31,7 +33,7 @@ export default function Home() {
         <Image style={{ height: 25, width: 25 }} source={MenuIcon} />
       </MenuContainer>
       <UnitContainer>
-        <Title size="medium" opacity="0.5">
+        <Title size="medium" opacity="0.5" letterSpacing="2px">
           Departamento
         </Title>
         <Title size="XL">101A</Title>
@@ -44,12 +46,12 @@ export default function Home() {
                 style={{ height: 35, width: 35, marginRight: 10 }}
                 source={MaintenanceLogo}
               />
+              <Title size="tiny" letterSpacing="2px">
+                Mantenimiento
+              </Title>
             </TitleLeftContainer>
-            <Title size="tiny">Mantenimiento</Title>
-          </ServiceTitleContainer>
-          <SummaryContainer>
             <Title color={theme.lowGreen}>$ 700.00 MXN</Title>
-          </SummaryContainer>
+          </ServiceTitleContainer>
         </ServiceItem>
         <ServiceItem>
           <ServiceTitleContainer>
@@ -58,12 +60,10 @@ export default function Home() {
                 style={{ height: 35, width: 35, marginRight: 10 }}
                 source={WaterLogo}
               />
+              <Title size="tiny">Agua</Title>
             </TitleLeftContainer>
-            <Title size="tiny">Agua</Title>
-          </ServiceTitleContainer>
-          <SummaryContainer>
             <Title color={theme.lowGreen}>$ 72.00 MXN</Title>
-          </SummaryContainer>
+          </ServiceTitleContainer>
         </ServiceItem>
       </ServicesContainer>
       <BottomDrawer containerHeight={950} offset={-240} startUp={false}>
@@ -72,10 +72,11 @@ export default function Home() {
             <PullBarr />
           </PullMenuContainer>
           <PullContainer>
-            <Title color={theme.dark} opacity="0.7">
+            <Title color={theme.dark} opacity="0.7" letterSpacing="2px">
               Detalles
             </Title>
           </PullContainer>
+          <GeneralDetails />
         </Container>
       </BottomDrawer>
     </Container>

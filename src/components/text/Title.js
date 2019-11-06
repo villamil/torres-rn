@@ -25,6 +25,9 @@ const Title = styled.Text`
   opacity: ${({ opacity }) => {
     return opacity || 1;
   }};
+  letter-spacing: ${({ letterSpacing }) => {
+    return letterSpacing || 0;
+  }};
 `;
 
 const StyledTitle = styled(Title)``;

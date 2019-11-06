@@ -7,13 +7,15 @@ import LandingScreen from "./src/scenes/Landing";
 import SignUpScreen from "./src/scenes/SignUp";
 import SignInScreen from "./src/scenes/SignIn";
 import HomeScreen from "./src/scenes/Home";
+import CodeScreen from "./src/scenes/Code";
 
 const MainNavigator = createStackNavigator(
   {
     Landing: { screen: LandingScreen },
     SignUp: { screen: SignUpScreen },
     SignIn: { screen: SignInScreen },
-    Home: { screen: HomeScreen }
+    Home: { screen: HomeScreen },
+    Code: { screen: CodeScreen }
   },
   {
     headerMode: "none"

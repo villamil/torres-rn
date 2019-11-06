@@ -1,16 +1,19 @@
-import React from "react";
-import { Image, TextInput } from "react-native";
+import React, { useState } from "react";
+import { Image, TextInput, Animated } from "react-native";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
 import Torres from "../../assets/torres.png";
+import Input from "../../components/input/input";
 
+import SCREENS from "../../navigatorMap";
 import { LogoContainer, InputContainer, NextContainer } from "./styles";
 
 import theme from "../../colorTheme";
 
-export default function SignUp() {
+export default function SignUp({ navigation }) {
+  const [codeValue, setCodeValue] = useState("");
   return (
     <Container>
       <LogoContainer>
@@ -20,24 +23,23 @@ export default function SignUp() {
         />
       </LogoContainer>
       <InputContainer>
-        <Title>CODIGO</Title>
-        <TextInput
-          style={{
-            height: 40,
-            borderBottomWidth: 1,
-            width: "100%",
-            color: theme.light,
-            borderBottomColor: theme.light,
-            textDecorationLine: "none",
-            textAlign: "center"
-          }}
+        <Title size="tiny" color={theme.green}>
+          Codigo
+        </Title>
+        <Input
+          textAlign="center"
+          value={codeValue}
+          onChangeText={text => setCodeValue(text)}
         />
-        <Title size="tiny" color={theme.green} style={{ marginTop: 10 }}>
+        <Title size="tiny" color={theme.light} style={{ marginTop: 10 }}>
           Para obtener tu codigo, ponte en contacto con la administracion.
         </Title>
       </InputContainer>
       <NextContainer>
-        <Button text="SIGUIENTE" />
+        <Button
+          text="SIGUIENTE"
+          onPress={() => navigation.navigate(SCREENS.CODE)}
+        />
       </NextContainer>
     </Container>
   );
