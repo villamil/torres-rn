@@ -55,3 +55,14 @@ export const ViewMoreContainer = styled.View`
   width: 90%;
   justify-content: flex-end;
 `;
+
+export const BankDetailsContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const BankContainer = styled.View`
+  height: 50px;
+  width: 90%;
+`;

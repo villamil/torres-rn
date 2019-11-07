@@ -14,12 +14,32 @@ import {
   UpperRow,
   LowerRow,
   DetailLogoContainer,
-  ViewMoreContainer
+  ViewMoreContainer,
+  BankDetailsContainer,
+  BankContainer
 } from "./styles";
 
 export default function GeneralDetails() {
   return (
     <DetailsContainer>
+      <BankContainer>
+        <BankDetailsContainer>
+          <Title color={theme.dark} size="tiny">
+            CLABE
+          </Title>
+          <Title color={theme.dark} size="tiny">
+            044320010035196356
+          </Title>
+        </BankDetailsContainer>
+        <BankDetailsContainer>
+          <Title color={theme.dark} size="tiny">
+            Referencia
+          </Title>
+          <Title color={theme.dark} size="tiny">
+            10116
+          </Title>
+        </BankDetailsContainer>
+      </BankContainer>
       <DetailContainer>
         <UpperRow>
           <DetailLogoContainer>

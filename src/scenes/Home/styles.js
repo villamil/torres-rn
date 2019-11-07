@@ -2,11 +2,12 @@ import styled from "styled-components";
 import theme from "../../colorTheme";
 
 export const UnitContainer = styled.View`
-  height: 20%;
+  height: 15%;
   justify-content: center;
 `;
 
 export const ServicesContainer = styled.View`
+  margin-top: 15px;
   width: 90%;
   flex: 1;
 `;
@@ -55,7 +56,7 @@ export const PullContainer = styled.View`
   width: 100%;
   align-items: center;
   justify-content: flex-start;
-  height: 60px;
+  height: 50px;
 `;
 
 export const MenuContainer = styled.TouchableOpacity`

@@ -11,6 +11,7 @@ import HomeScreen from "./src/scenes/Home";
 import CodeScreen from "./src/scenes/Code";
 
 import RulesScreen from "./src/containers/Rules";
+import Menu from "./src/containers/Menu";
 
 const MainStack = createStackNavigator(
   {
@@ -25,26 +26,31 @@ const MainStack = createStackNavigator(
   }
 );
 
-const MenuNavigator = createDrawerNavigator({
-  MainStack: {
-    screen: MainStack,
-    navigationOptions: ({ navigation }) => {
-      let drawerLockMode = "locked-closed";
-      const hasHome = navigation.state.routes.find(
-        route => route.routeName === "Home"
-      );
+const MenuNavigator = createDrawerNavigator(
+  {
+    MainStack: {
+      screen: MainStack,
+      navigationOptions: ({ navigation }) => {
+        let drawerLockMode = "locked-closed";
+        const hasHome = navigation.state.routes.find(
+          route => route.routeName === "Home"
+        );
 
-      if (hasHome) {
-        drawerLockMode = "unlocked";
+        if (hasHome) {
+          drawerLockMode = "unlocked";
+        }
+
+        return { drawerLockMode };
       }
-
-      return { drawerLockMode };
+    },
+    RulesScreen: {
+      screen: RulesScreen
     }
   },
-  RulesScreen: {
-    screen: RulesScreen
+  {
+    contentComponent: Menu
   }
-});
+);
 
 const AppContent = createAppContainer(MenuNavigator);
 
