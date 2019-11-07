@@ -6,6 +6,7 @@ const themeColors = {
   lowGreen: "#B2DC39",
   white: "#FFFFFF",
   gray: "#E6E6E6",
+  darkGray: "#BBBBBB",
   orange: "#FD7E14",
   yellow: "#FFCC33"
 };

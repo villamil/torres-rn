@@ -28,3 +28,33 @@ export const LineDivider = styled.View`
   width: 100%;
   height: 1px;
 `;
+
+export const MenuItemsContainer = styled.View`
+  margin-top: 20px;
+  align-items: center;
+  /* justify-content: center; */
+  height: 60%;
+`;
+
+export const MenuItemContainer = styled.TouchableOpacity`
+  width: 90%;
+  height: 40px;
+  margin-top: 15px;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+`;
+
+export const ItemWrapper = styled.View`
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const FooterContainer = styled.View`
+  flex: 1;
+  width: 90%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+`;
