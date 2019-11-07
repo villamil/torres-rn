@@ -21,3 +21,10 @@ export const NextContainer = styled.View`
 export const TitleContainer = styled.View`
   height: 10%;
 `;
+
+export const CheckBoxContainer = styled.View`
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  width: 80%;
+`;

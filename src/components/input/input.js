@@ -7,7 +7,7 @@ import theme from "../../colorTheme";
 
 const ORIGINAL_COLOR = theme.light;
 const SUCCESS_COLOR = theme.green;
-const FAILED_COLOR = theme.gray;
+const FAILED_COLOR = theme.yellow;
 const ORIGINAL_VALUE = 0;
 const SUCCESS_VALUE = 1;
 
@@ -76,7 +76,11 @@ export default function Input({
           borderBottomColor
         }}
       />
-      <Title size="tiny" color={theme.gray} style={{ alignSelf: "flex-start" }}>
+      <Title
+        size="tiny"
+        color={theme.yellow}
+        style={{ alignSelf: "flex-start" }}
+      >
         {errorMessage}
       </Title>
     </InputContainer>

@@ -1,6 +1,7 @@
 import React from "react";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import { createDrawerNavigator } from "react-navigation-drawer";
 import { StatusBar } from "react-native";
 
 import LandingScreen from "./src/scenes/Landing";
@@ -9,7 +10,9 @@ import SignInScreen from "./src/scenes/SignIn";
 import HomeScreen from "./src/scenes/Home";
 import CodeScreen from "./src/scenes/Code";
 
-const MainNavigator = createStackNavigator(
+import RulesScreen from "./src/containers/Rules";
+
+const MainStack = createStackNavigator(
   {
     Landing: { screen: LandingScreen },
     SignUp: { screen: SignUpScreen },
@@ -22,7 +25,28 @@ const MainNavigator = createStackNavigator(
   }
 );
 
-const AppContent = createAppContainer(MainNavigator);
+const MenuNavigator = createDrawerNavigator({
+  MainStack: {
+    screen: MainStack,
+    navigationOptions: ({ navigation }) => {
+      let drawerLockMode = "locked-closed";
+      const hasHome = navigation.state.routes.find(
+        route => route.routeName === "Home"
+      );
+
+      if (hasHome) {
+        drawerLockMode = "unlocked";
+      }
+
+      return { drawerLockMode };
+    }
+  },
+  RulesScreen: {
+    screen: RulesScreen
+  }
+});
+
+const AppContent = createAppContainer(MenuNavigator);
 
 const App = () => {
   return (

@@ -1,5 +1,12 @@
 import React from "react";
-import { Image, View, StyleSheet, Text, ScrollView } from "react-native";
+import {
+  Image,
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  TouchableOpacity
+} from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 
 import Container from "../../components/layout/Container";
@@ -26,10 +33,10 @@ import {
   MenuContainer
 } from "./styles";
 
-export default function Home() {
+export default function Home({ navigation }) {
   return (
     <Container>
-      <MenuContainer>
+      <MenuContainer onPress={() => navigation.openDrawer()}>
         <Image style={{ height: 25, width: 25 }} source={MenuIcon} />
       </MenuContainer>
       <UnitContainer>

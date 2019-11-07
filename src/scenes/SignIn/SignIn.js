@@ -6,6 +6,7 @@ import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/input";
+import CheckBox from "../../components/Checkbox";
 
 import Torres from "../../assets/torres.png";
 import SCREENS from "../../navigatorMap";
@@ -18,12 +19,14 @@ import {
   LogoContainer,
   InputContainer,
   NextContainer,
-  TitleContainer
+  TitleContainer,
+  CheckBoxContainer
 } from "./styles";
 
 const initialState = {
-  email: "",
-  password: "",
+  email: "asdasd@asdasd.com",
+  password: "asdasds",
+  rememberLogin: false,
   errors: {}
 };
 
@@ -42,6 +45,13 @@ export default function SignIn({ navigation }) {
       setInputFields(initialState);
       navigation.navigate(SCREENS.HOME);
     }
+  }
+
+  function onRememberLogin() {
+    setInputFields({
+      ...inputFields,
+      rememberLogin: !inputFields.rememberLogin
+    });
   }
 
   return (
@@ -78,6 +88,17 @@ export default function SignIn({ navigation }) {
           errorMessage={inputFields.errors.password}
         />
       </InputContainer>
+
+      <CheckBoxContainer>
+        <Title color={theme.green} size="tiny" style={{ marginRight: 10 }}>
+          Mantener sesion
+        </Title>
+        <CheckBox
+          style={{ alignSelf: "flex-end" }}
+          onPress={onRememberLogin}
+          checked={inputFields.rememberLogin}
+        />
+      </CheckBoxContainer>
 
       <NextContainer>
         <Button text="INGRESAR" onPress={onSubmit} />

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Image, TextInput, Animated } from "react-native";
+import validate from "validate.js";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
 import Torres from "../../assets/torres.png";
 import Input from "../../components/input/input";
+import constraints from "./constraints";
 
 import {
   LogoContainer,
@@ -17,9 +19,21 @@ import {
 import theme from "../../colorTheme";
 
 export default function Code() {
-  const [emailValue, setEmailValue] = useState("");
-  const [passwordValue, setPasswordValue] = useState("");
-  const [repeatPasswordValue, setRepeatPasswordValue] = useState("");
+  const [inputFields, setInputFields] = useState({});
+
+  function onSubmit() {
+    let preInputFields = inputFields;
+    if (inputFields.repeatPassword !== inputFields.password) {
+      delete preInputFields.repeatPassword;
+    }
+    let errors = validate(preInputFields, constraints);
+    if (errors) {
+      setInputFields({ ...inputFields, errors });
+    } else {
+      setInputFields({ ...inputFields, errors: {} });
+      console.log("CREATE ACCOUNT!!!!");
+    }
+  }
 
   return (
     <Container>
@@ -38,16 +52,25 @@ export default function Code() {
         <Title size="tiny" color={theme.green}>
           Correo
         </Title>
-        <Input value={emailValue} onChangeText={text => setEmailValue(text)} />
+        <Input
+          value={inputFields.email}
+          onChangeText={text => setInputFields({ ...inputFields, email: text })}
+          keyboardType="email-address"
+          textContentType="emailAddress"
+          errorMessage={inputFields.errors && inputFields.errors.email}
+        />
       </InputContainer>
       <InputContainer>
         <Title size="tiny" color={theme.green}>
           Contrasenia
         </Title>
         <Input
-          value={passwordValue}
-          onChangeText={text => setPasswordValue(text)}
+          value={inputFields.password}
+          onChangeText={text =>
+            setInputFields({ ...inputFields, password: text })
+          }
           secureTextEntry={true}
+          errorMessage={inputFields.errors && inputFields.errors.password}
         />
       </InputContainer>
       <InputContainer>
@@ -55,13 +78,16 @@ export default function Code() {
           Repetir Contrasenia
         </Title>
         <Input
-          value={repeatPasswordValue}
-          onChangeText={text => setRepeatPasswordValue(text)}
+          value={inputFields.repeatPassword}
+          onChangeText={text =>
+            setInputFields({ ...inputFields, repeatPassword: text })
+          }
           secureTextEntry={true}
+          errorMessage={inputFields.errors && inputFields.errors.repeatPassword}
         />
       </InputContainer>
       <NextContainer>
-        <Button text="CREAR CUENTA" />
+        <Button text="CREAR CUENTA" onPress={onSubmit} />
       </NextContainer>
     </Container>
   );
