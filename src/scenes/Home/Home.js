@@ -13,10 +13,12 @@ import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
 
 import GeneralDetails from "../../containers/GeneralDetails";
+import SCREENS from "../../navigatorMap";
 
 import MaintenanceLogo from "../../assets/maintenance-logo.png";
 import WaterLogo from "../../assets/water-logo.png";
 import MenuIcon from "../../assets/menu-button.png";
+import AddIcon from "../../assets/add.png";
 
 import theme from "../../colorTheme";
 
@@ -30,14 +32,20 @@ import {
   PullBarr,
   PullMenuContainer,
   PullContainer,
-  MenuContainer
+  MenuContainer,
+  MenuTouchable
 } from "./styles";
 
 export default function Home({ navigation }) {
   return (
     <Container>
-      <MenuContainer onPress={() => navigation.openDrawer()}>
-        <Image style={{ height: 25, width: 25 }} source={MenuIcon} />
+      <MenuContainer>
+        <MenuTouchable onPress={() => navigation.openDrawer()}>
+          <Image style={{ height: 25, width: 25 }} source={MenuIcon} />
+        </MenuTouchable>
+        <MenuTouchable onPress={() => navigation.navigate(SCREENS.INVITE)}>
+          <Image style={{ height: 25, width: 25 }} source={AddIcon} />
+        </MenuTouchable>
       </MenuContainer>
       <UnitContainer>
         <Title size="medium" opacity="0.5" letterSpacing="2px">

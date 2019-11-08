@@ -3,7 +3,8 @@ const SCREENS = {
   SIGN_IN: "SignIn",
   LANDING: "Landing",
   HOME: "Home",
-  CODE: "Code"
+  CODE: "Code",
+  INVITE: "Invite"
 };
 
 export default SCREENS;

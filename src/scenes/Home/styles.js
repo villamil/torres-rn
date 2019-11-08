@@ -59,7 +59,12 @@ export const PullContainer = styled.View`
   height: 50px;
 `;
 
-export const MenuContainer = styled.TouchableOpacity`
+export const MenuContainer = styled.View`
   padding: 20px;
-  align-self: flex-start;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `;
+
+export const MenuTouchable = styled.TouchableOpacity``;
