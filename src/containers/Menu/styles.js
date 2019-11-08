@@ -10,7 +10,6 @@ export const MenuContainer = styled.View`
 export const ProfileContainer = styled.View`
   width: 90%;
   height: 30%;
-  /* background-color: gray; */
   align-items: flex-start;
   align-self: center;
   justify-content: center;
@@ -32,7 +31,6 @@ export const LineDivider = styled.View`
 export const MenuItemsContainer = styled.View`
   margin-top: 20px;
   align-items: center;
-  /* justify-content: center; */
   height: 60%;
 `;
 

@@ -23,6 +23,8 @@ export default function Input({
   onChangeText,
   secureTextEntry = false,
   errorMessage,
+  backgroundColor,
+  enabled = true,
   ...restProps
 }) {
   const [interpolatedColor, setInterpolatedColor] = useState(
@@ -59,13 +61,14 @@ export default function Input({
           color: theme.light,
           textDecorationLine: "none",
           textAlign: textAlign || "left",
-          backgroundColor: theme.lowDark
+          backgroundColor: backgroundColor || theme.lowDark
         }}
         onBlur={onBlur}
         onFocus={onFocus}
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
+        editable={enabled}
         {...restProps}
       />
       {/* <Animated.View

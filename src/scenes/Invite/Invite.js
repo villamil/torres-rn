@@ -1,15 +1,30 @@
-import React from "react";
-import { Share, Button, Linking } from "react-native";
+import React, { useState } from "react";
+import { Share, Linking, Image } from "react-native";
 
 import Title from "../../components/text/Title";
 import Container from "../../components/layout/Container";
+import Button from "../../components/button/Button";
+import CheckBox from "../../components/Checkbox";
+import Input from "../../components/input/input";
+import TorresLogo from "../../assets/torres-gray.png";
 import theme from "../../colorTheme";
 
+import {
+  LogoContainer,
+  UnitContainer,
+  ActionContainer,
+  CheckBoxContainer,
+  CodeContainer
+} from "./styles";
+
 export default function Invite() {
+  const [isOwner, setOwner] = useState(false);
+  const [code, setCode] = useState("SJDW-DWJE-ADWW");
+
   async function onShare() {
     try {
       const result = await Share.share({
-        message: "http://torres://hi"
+        message: `http://torres://${code}`
       });
 
       if (result.action === Share.sharedAction) {
@@ -28,8 +43,44 @@ export default function Invite() {
 
   return (
     <Container type="light">
-      <Title color={theme.dark}>101A</Title>
-      <Button onPress={onShare} title="Compartir" />
+      <LogoContainer>
+        <Image style={{ height: 50, width: 50 }} source={TorresLogo} />
+      </LogoContainer>
+      <UnitContainer>
+        <Title color={theme.dark} size="large">
+          101A
+        </Title>
+        <Title color={theme.darkGray} size="small">
+          Comparte este codigo para invitar a alguien a este departamento!
+        </Title>
+      </UnitContainer>
+      <CodeContainer>
+        <Input
+          backgroundColor={theme.darkGray}
+          enabled={false}
+          textAlign="center"
+          value={code}
+        />
+      </CodeContainer>
+      <CheckBoxContainer>
+        <Title color={theme.darkGray} size="small">
+          Es duenio:{" "}
+        </Title>
+        <CheckBox
+          backgroundColor={theme.light}
+          checked={isOwner}
+          onPress={() => {
+            setOwner(!isOwner);
+          }}
+        />
+      </CheckBoxContainer>
+      <ActionContainer>
+        <Button
+          backgroundColor={theme.dark}
+          onPress={onShare}
+          text="Compartir"
+        />
+      </ActionContainer>
     </Container>
   );
 }
