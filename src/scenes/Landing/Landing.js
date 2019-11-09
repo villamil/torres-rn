@@ -1,5 +1,6 @@
-import React from "react";
-import { Image } from "react-native";
+import React, { useEffect } from "react";
+import { Image, Linking } from "react-native";
+import queryString from "query-string";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
@@ -38,6 +39,15 @@ const CarouselItems = [
 ];
 
 export default function Landing({ navigation }) {
+  useEffect(() => {
+    Linking.getInitialURL().then(url => {
+      if (url) {
+        const params = queryString.parse(url.replace("app://torres?", ""));
+        navigation.navigate(SCREENS.SIGN_UP, { code: params.code });
+      }
+    });
+  }, []);
+
   return (
     <Container>
       <LogoContainer>

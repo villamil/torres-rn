@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Image, TextInput, Animated } from "react-native";
 import validate from "validate.js";
 
@@ -16,6 +16,12 @@ import theme from "../../colorTheme";
 export default function SignUp({ navigation }) {
   const [inputFields, setInputFields] = useState({});
   const [codeError, setCodeError] = useState("");
+
+  useEffect(() => {
+    if (navigation.getParam("code")) {
+      setInputFields({ ...inputFields, code: navigation.getParam("code") });
+    }
+  }, []);
 
   function onSubmit() {
     const error = validate(inputFields, constraints);

@@ -24,7 +24,7 @@ export default function Invite() {
   async function onShare() {
     try {
       const result = await Share.share({
-        message: `http://torres://${code}`
+        message: `https://villamil.github.io/torres-link?code=${code}`
       });
 
       if (result.action === Share.sharedAction) {
@@ -62,18 +62,6 @@ export default function Invite() {
           value={code}
         />
       </CodeContainer>
-      <CheckBoxContainer>
-        <Title color={theme.darkGray} size="small">
-          Es duenio:{" "}
-        </Title>
-        <CheckBox
-          backgroundColor={theme.light}
-          checked={isOwner}
-          onPress={() => {
-            setOwner(!isOwner);
-          }}
-        />
-      </CheckBoxContainer>
       <ActionContainer>
         <Button
           backgroundColor={theme.dark}
