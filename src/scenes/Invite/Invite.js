@@ -6,7 +6,10 @@ import Container from "../../components/layout/Container";
 import Button from "../../components/button/Button";
 import CheckBox from "../../components/Checkbox";
 import Input from "../../components/input/input";
+
 import TorresLogo from "../../assets/torres-gray.png";
+import NextLogo from "../../assets/next.png";
+
 import theme from "../../colorTheme";
 
 import {
@@ -14,10 +17,11 @@ import {
   UnitContainer,
   ActionContainer,
   CheckBoxContainer,
-  CodeContainer
+  CodeContainer,
+  BackContainer
 } from "./styles";
 
-export default function Invite() {
+export default function Invite({ navigation }) {
   const [isOwner, setOwner] = useState(false);
   const [code, setCode] = useState("SJDW-DWJE-ADWW");
 
@@ -43,6 +47,20 @@ export default function Invite() {
 
   return (
     <Container type="light">
+      <BackContainer onPress={() => navigation.goBack()}>
+        <Image
+          style={{
+            height: 25,
+            width: 25,
+            transform: [{ rotate: "180deg" }],
+            marginRight: 10
+          }}
+          source={NextLogo}
+        />
+        <Title color={theme.dark} size="small">
+          Regresar
+        </Title>
+      </BackContainer>
       <LogoContainer>
         <Image style={{ height: 50, width: 50 }} source={TorresLogo} />
       </LogoContainer>

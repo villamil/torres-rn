@@ -13,7 +13,7 @@ export const UnitContainer = styled.View`
 `;
 
 export const ActionContainer = styled.View`
-  height: 30%;
+  height: 35%;
   justify-content: flex-end;
 `;
 
@@ -30,4 +30,11 @@ export const CodeContainer = styled.View`
   height: 15%;
   justify-content: flex-end;
   align-items: flex-end;
+`;
+
+export const BackContainer = styled.TouchableOpacity`
+  width: 90%;
+  height: 10%;
+  flex-direction: row;
+  align-items: center;
 `;

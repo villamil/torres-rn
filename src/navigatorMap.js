@@ -4,7 +4,8 @@ const SCREENS = {
   LANDING: "Landing",
   HOME: "Home",
   CODE: "Code",
-  INVITE: "Invite"
+  INVITE: "Invite",
+  USERS: "Users"
 };
 
 export default SCREENS;

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Image,
-  View,
-  StyleSheet,
-  Text,
-  ScrollView,
-  TouchableOpacity
-} from "react-native";
+import { Image, Dimensions } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 
 import Container from "../../components/layout/Container";
@@ -37,6 +30,9 @@ import {
 } from "./styles";
 
 export default function Home({ navigation }) {
+  const deviceHeight = Math.round(Dimensions.get("window").height);
+  const drawerOffset = Math.round(deviceHeight * 0.33);
+  const drawerHeight = Math.round(deviceHeight * 1.3);
   return (
     <Container>
       <MenuContainer>
@@ -79,7 +75,11 @@ export default function Home({ navigation }) {
           </ServiceTitleContainer>
         </ServiceItem>
       </ServicesContainer>
-      <BottomDrawer containerHeight={950} offset={-240} startUp={false}>
+      <BottomDrawer
+        containerHeight={drawerHeight}
+        offset={Math.abs(drawerOffset) * -1}
+        startUp={false}
+      >
         <Container type="light" radius="100px">
           <PullMenuContainer>
             <PullBarr />

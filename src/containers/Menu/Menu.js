@@ -5,11 +5,13 @@ import AuctionLogo from "../../assets/auction-dark.png";
 import NextLogo from "../../assets/next.png";
 import TorresLogo from "../../assets/torres-gray.png";
 import PoliceLogo from "../../assets/police-dark.png";
+import UsersLogo from "../../assets/users.png";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
 import ProfileIcon from "../../components/ProfileIcon/ProfileIcon";
 import theme from "../../colorTheme";
+import SCREENS from "../../navigatorMap";
 
 import {
   MenuContainer,
@@ -25,7 +27,7 @@ import {
 const firstName = "Luis Rafael";
 const lastName = "Villamil Santa Cruz";
 
-export default function Menu() {
+export default function Menu({ navigation }) {
   return (
     <MenuContainer>
       <ProfileContainer>
@@ -41,6 +43,19 @@ export default function Menu() {
       </ProfileContainer>
       <LineDivider />
       <MenuItemsContainer>
+        <MenuItemContainer onPress={() => navigation.navigate(SCREENS.USERS)}>
+          <ItemWrapper>
+            <Image
+              style={{ height: 20, width: 20, marginRight: 10 }}
+              source={UsersLogo}
+            />
+            <Title color={theme.lowDark} size="tiny">
+              Usuarios
+            </Title>
+          </ItemWrapper>
+          <Image style={{ height: 15, width: 15 }} source={NextLogo} />
+        </MenuItemContainer>
+
         <MenuItemContainer>
           <ItemWrapper>
             <Image
