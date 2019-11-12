@@ -2,10 +2,10 @@ import styled from "styled-components";
 import theme from "../../colorTheme";
 
 export const DetailsContainer = styled.View`
-  flex: 1;
   width: 100%;
   align-items: center;
   justify-content: flex-start;
+  height: 57%;
 `;
 
 export const TitleContainer = styled.View`
@@ -18,7 +18,7 @@ export const DetailContainer = styled.View`
   justify-content: space-between;
   background-color: ${theme.gray};
   padding: 20px;
-  height: 12%;
+  height: 120;
   width: 100%;
   margin-bottom: 15px;
 `;

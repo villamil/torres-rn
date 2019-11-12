@@ -11,6 +11,7 @@ import NextLogo from "../../assets/next.png";
 import CalendarLogo from "../../assets/calendar.png";
 
 import theme from "../../colorTheme";
+import SCREEN from "../../navigatorMap";
 
 import {
   BackContainer,
@@ -24,6 +25,7 @@ import {
   FieldTextContainer,
   DateContainer
 } from "./styles";
+import SCREENS from "../../navigatorMap";
 
 export default function Filter({ navigation }) {
   const [inputFields, setInputFields] = useState({});
@@ -112,7 +114,11 @@ export default function Filter({ navigation }) {
         </DateContainer>
       </FilterContainer>
       <ActionContainer>
-        <Button backgroundColor={theme.lowDark} text="Continuar" />
+        <Button
+          backgroundColor={theme.lowDark}
+          text="Continuar"
+          onPress={() => navigation.navigate(SCREENS.DETAILS)}
+        />
       </ActionContainer>
     </Container>
   );

@@ -4,6 +4,7 @@ import BottomDrawer from "rn-bottom-drawer";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
+import Button from "../../components/button/Button";
 
 import GeneralDetails from "../../containers/GeneralDetails";
 import UnitsSelector from "../../containers/UnitsSelector";
@@ -23,7 +24,7 @@ import {
   ServiceItem,
   ServiceTitleContainer,
   TitleLeftContainer,
-  SummaryContainer,
+  ViewMoreContainer,
   PullBarr,
   PullMenuContainer,
   PullContainer,
@@ -143,7 +144,14 @@ export default function Home({ navigation }) {
               Detalles
             </Title>
           </PullContainer>
-          <GeneralDetails navigation={navigation} />
+          <GeneralDetails />
+          <ViewMoreContainer>
+            <Button
+              text="Ver Mas"
+              backgroundColor={theme.lowDark}
+              onPress={() => navigation.navigate(SCREENS.FILTER)}
+            />
+          </ViewMoreContainer>
         </Container>
       </BottomDrawer>
     </Container>

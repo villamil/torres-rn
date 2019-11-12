@@ -93,3 +93,9 @@ export const CloseContainer = styled.View`
 `;
 
 export const CloseTouchable = styled.TouchableOpacity``;
+
+export const ViewMoreContainer = styled.View`
+  height: 5%;
+  width: 90%;
+  justify-content: flex-end;
+`;

@@ -12,6 +12,7 @@ import CodeScreen from "./src/scenes/Code";
 import InviteScreen from "./src/scenes/Invite";
 import UsersScreen from "./src/scenes/Users";
 import FilterScreen from "./src/scenes/Filter";
+import DetailsScreen from "./src/scenes/Details";
 
 import theme from "./src/colorTheme";
 
@@ -27,7 +28,8 @@ const MainStack = createStackNavigator(
     Code: { screen: CodeScreen },
     Invite: { screen: InviteScreen },
     Users: { screen: UsersScreen },
-    Filter: { screen: FilterScreen }
+    Filter: { screen: FilterScreen },
+    Details: { screen: DetailsScreen }
   },
   {
     headerMode: "none"

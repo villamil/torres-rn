@@ -78,14 +78,6 @@ export default function GeneralDetails({ navigation }) {
           </Title>
         </LowerRow>
       </DetailContainer>
-
-      <ViewMoreContainer>
-        <Button
-          text="Ver Mas"
-          backgroundColor={theme.lowDark}
-          onPress={() => navigation.navigate(SCREENS.FILTER)}
-        />
-      </ViewMoreContainer>
     </DetailsContainer>
   );
 }

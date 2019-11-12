@@ -6,7 +6,8 @@ const SCREENS = {
   CODE: "Code",
   INVITE: "Invite",
   USERS: "Users",
-  FILTER: "Filter"
+  FILTER: "Filter",
+  DETAILS: "Details"
 };
 
 export default SCREENS;
