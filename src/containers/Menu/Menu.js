@@ -1,11 +1,13 @@
 import React from "react";
-import { Image } from "react-native";
+import { Image, Alert } from "react-native";
 
 import AuctionLogo from "../../assets/auction-dark.png";
 import NextLogo from "../../assets/next.png";
 import TorresLogo from "../../assets/torres-gray.png";
 import PoliceLogo from "../../assets/police-dark.png";
 import UsersLogo from "../../assets/users.png";
+import HouseLogo from "../../assets/home.png";
+import LogoutLogo from "../../assets/logout.png";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
@@ -56,7 +58,32 @@ export default function Menu({ navigation }) {
           <Image style={{ height: 15, width: 15 }} source={NextLogo} />
         </MenuItemContainer>
 
-        <MenuItemContainer>
+        <MenuItemContainer
+          onPress={() => {
+            navigation.goBack();
+            navigation.navigate(SCREENS.HOME, { unitPopUp: true });
+          }}
+        >
+          <ItemWrapper>
+            <Image
+              style={{ height: 20, width: 20, marginRight: 10 }}
+              source={HouseLogo}
+            />
+            <Title color={theme.lowDark} size="tiny">
+              Departamentos
+            </Title>
+          </ItemWrapper>
+          <Image style={{ height: 15, width: 15 }} source={NextLogo} />
+        </MenuItemContainer>
+
+        <MenuItemContainer
+          onPress={() =>
+            Alert.alert(
+              "Muy pronto!",
+              "Estamos mejorando la aplicacion constantemente."
+            )
+          }
+        >
           <ItemWrapper>
             <Image
               style={{ height: 20, width: 20, marginRight: 10 }}
@@ -69,7 +96,14 @@ export default function Menu({ navigation }) {
           <Image style={{ height: 15, width: 15 }} source={NextLogo} />
         </MenuItemContainer>
 
-        <MenuItemContainer>
+        <MenuItemContainer
+          onPress={() =>
+            Alert.alert(
+              "Muy pronto!",
+              "Estamos mejorando la aplicacion constantemente."
+            )
+          }
+        >
           <ItemWrapper>
             <Image
               style={{ height: 20, width: 20, marginRight: 10 }}
@@ -80,6 +114,18 @@ export default function Menu({ navigation }) {
             </Title>
           </ItemWrapper>
           <Image style={{ height: 15, width: 15 }} source={NextLogo} />
+        </MenuItemContainer>
+
+        <MenuItemContainer>
+          <ItemWrapper>
+            <Image
+              style={{ height: 20, width: 20, marginRight: 10 }}
+              source={LogoutLogo}
+            />
+            <Title color={theme.lowDark} size="tiny">
+              Cerrar sesion
+            </Title>
+          </ItemWrapper>
         </MenuItemContainer>
       </MenuItemsContainer>
       <LineDivider />

@@ -3,7 +3,9 @@ import theme from "../../colorTheme";
 
 const backgroundColors = {
   light: theme.light,
-  dark: theme.dark
+  dark: theme.dark,
+  gray: theme.gray,
+  darkGray: theme.darkGray
 };
 
 const Container = styled.View`

@@ -1,17 +1,19 @@
-import React from "react";
-import { Image, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image, Dimensions, Modal, TouchableOpacity } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
 
 import GeneralDetails from "../../containers/GeneralDetails";
+import UnitsSelector from "../../containers/UnitsSelector";
 import SCREENS from "../../navigatorMap";
 
 import MaintenanceLogo from "../../assets/maintenance-logo.png";
 import WaterLogo from "../../assets/water-logo.png";
 import MenuIcon from "../../assets/menu-button.png";
 import AddIcon from "../../assets/add.png";
+import CloseIcon from "../../assets/cross.png";
 
 import theme from "../../colorTheme";
 
@@ -26,15 +28,67 @@ import {
   PullMenuContainer,
   PullContainer,
   MenuContainer,
-  MenuTouchable
+  MenuTouchable,
+  ModalContainer,
+  CloseContainer,
+  ModalContent,
+  CloseTouchable
 } from "./styles";
 
 export default function Home({ navigation }) {
+  const [unitPopUp, setUnitPopUp] = useState(false);
   const deviceHeight = Math.round(Dimensions.get("window").height);
   const drawerOffset = Math.round(deviceHeight * 0.33);
   const drawerHeight = Math.round(deviceHeight * 1.3);
+
+  if (navigation.getParam("unitPopUp") && !unitPopUp) {
+    setUnitPopUp(true);
+  }
+
   return (
     <Container>
+      <Modal
+        animationType="fade"
+        visible={unitPopUp}
+        transparent={true}
+        onRequestClose={() => {
+          setUnitPopUp(false);
+          navigation.setParams({ unitPopUp: false });
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "rgba(230,230,230, 0.2)"
+          }}
+          activeOpacity={1}
+          onPressOut={() => {
+            setUnitPopUp(false);
+            navigation.setParams({ unitPopUp: false });
+          }}
+        >
+          <ModalContainer>
+            <ModalContent>
+              <CloseContainer>
+                <CloseTouchable
+                  onPress={() => {
+                    setUnitPopUp(false);
+                    navigation.setParams({ unitPopUp: false });
+                  }}
+                >
+                  <Image style={{ height: 20, width: 20 }} source={CloseIcon} />
+                </CloseTouchable>
+                <Title color={theme.dark} size="small">
+                  Selecciona
+                </Title>
+              </CloseContainer>
+              <UnitsSelector />
+            </ModalContent>
+          </ModalContainer>
+        </TouchableOpacity>
+      </Modal>
       <MenuContainer>
         <MenuTouchable onPress={() => navigation.openDrawer()}>
           <Image style={{ height: 25, width: 25 }} source={MenuIcon} />

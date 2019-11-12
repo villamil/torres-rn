@@ -1,7 +1,8 @@
 import React from "react";
-import { Image, Switch, View } from "react-native";
+import { Image, Switch, Alert } from "react-native";
 
 import NextLogo from "../../assets/next.png";
+import DeleteLogo from "../../assets/cross.png";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
@@ -14,7 +15,8 @@ import {
   NameContainer,
   HeaderContainer,
   BackTextContainer,
-  LineDivider
+  LineDivider,
+  DeleteContainer
 } from "./styles";
 
 import theme from "../../colorTheme";
@@ -29,8 +31,24 @@ const swipeoutBtns = [
 ];
 
 export default function Users({ navigation }) {
+  function onDelete() {
+    Alert.alert(
+      "Eliminar a Luis Villamil",
+      "Seguro que quiere eliminar a este usuario?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ],
+      { cancelable: false }
+    );
+  }
+
   return (
-    <Container type="light">
+    <Container type="gray">
       <BackContainer>
         <BackTextContainer onPress={() => navigation.goBack()}>
           <Image
@@ -42,12 +60,11 @@ export default function Users({ navigation }) {
             }}
             source={NextLogo}
           />
-          <Title color={theme.darkGray} size="small">
-            Regresar
+          <Title color={theme.dark} size="small">
+            Usuarios
           </Title>
         </BackTextContainer>
       </BackContainer>
-      <Title color={theme.lowDark}>Usuarios</Title>
 
       <HeaderContainer>
         <Title color={theme.lowDark} size="small">
@@ -55,10 +72,11 @@ export default function Users({ navigation }) {
         </Title>
       </HeaderContainer>
 
-      <LineDivider />
       <UsersContainer>
         <UserContainer>
-          <ProfileIcon firstName={firstName} lastName={lastName} size="60" />
+          <DeleteContainer onPress={onDelete}>
+            <Image style={{ width: 20, height: 20 }} source={DeleteLogo} />
+          </DeleteContainer>
           <NameContainer>
             <Title color={theme.dark} size="small" align="left">
               {firstName} {lastName}
@@ -70,9 +88,10 @@ export default function Users({ navigation }) {
           <Switch value={true} />
         </UserContainer>
 
-        <LineDivider />
         <UserContainer>
-          <ProfileIcon firstName={firstName} lastName={lastName} size="60" />
+          <DeleteContainer onPress={onDelete}>
+            <Image style={{ width: 20, height: 20 }} source={DeleteLogo} />
+          </DeleteContainer>
           <NameContainer>
             <Title color={theme.dark} size="small" align="left">
               {firstName} {lastName}
@@ -83,7 +102,6 @@ export default function Users({ navigation }) {
           </NameContainer>
           <Switch />
         </UserContainer>
-        <LineDivider />
       </UsersContainer>
     </Container>
   );

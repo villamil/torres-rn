@@ -2,7 +2,7 @@ import styled from "styled-components";
 import theme from "../../colorTheme";
 
 export const HeaderContainer = styled.View`
-  height: 10%;
+  height: 5%;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
@@ -13,6 +13,8 @@ export const BackTextContainer = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
 `;
+
+export const DeleteContainer = styled.TouchableOpacity``;
 
 export const BackContainer = styled.View`
   width: 90%;
@@ -28,11 +30,15 @@ export const UsersContainer = styled.View`
 `;
 
 export const UserContainer = styled.View`
-  width: 90%;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-bottom: 20;
   height: 120;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  background-color: ${theme.light};
 `;
 
 export const NameContainer = styled.View`

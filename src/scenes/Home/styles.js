@@ -68,3 +68,28 @@ export const MenuContainer = styled.View`
 `;
 
 export const MenuTouchable = styled.TouchableOpacity``;
+
+export const ModalContainer = styled.View`
+  width: 80%;
+  height: 80%;
+  background-color: ${theme.gray};
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+`;
+
+export const ModalContent = styled.View`
+  flex: 1;
+  width: 100%;
+`;
+
+export const CloseContainer = styled.View`
+  height: 70;
+  width: 40%;
+  margin-left: 10;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+`;
+
+export const CloseTouchable = styled.TouchableOpacity``;
