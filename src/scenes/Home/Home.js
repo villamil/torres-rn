@@ -143,7 +143,7 @@ export default function Home({ navigation }) {
               Detalles
             </Title>
           </PullContainer>
-          <GeneralDetails />
+          <GeneralDetails navigation={navigation} />
         </Container>
       </BottomDrawer>
     </Container>

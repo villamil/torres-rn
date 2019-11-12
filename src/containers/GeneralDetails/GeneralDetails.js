@@ -6,6 +6,7 @@ import MaintenanceDark from "../../assets/maintenance-logo-dark.png";
 import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
 import theme from "../../colorTheme";
+import SCREENS from "../../navigatorMap";
 
 import {
   DetailsContainer,
@@ -19,7 +20,7 @@ import {
   BankContainer
 } from "./styles";
 
-export default function GeneralDetails() {
+export default function GeneralDetails({ navigation }) {
   return (
     <DetailsContainer>
       <BankContainer>
@@ -79,7 +80,11 @@ export default function GeneralDetails() {
       </DetailContainer>
 
       <ViewMoreContainer>
-        <Button text="Ver Mas" backgroundColor={theme.lowDark} />
+        <Button
+          text="Ver Mas"
+          backgroundColor={theme.lowDark}
+          onPress={() => navigation.navigate(SCREENS.FILTER)}
+        />
       </ViewMoreContainer>
     </DetailsContainer>
   );

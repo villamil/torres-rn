@@ -82,7 +82,7 @@ export default function Invite({ navigation }) {
       </CodeContainer>
       <ActionContainer>
         <Button
-          backgroundColor={theme.dark}
+          backgroundColor={theme.lowDark}
           onPress={onShare}
           text="Compartir"
         />

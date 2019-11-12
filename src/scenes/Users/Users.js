@@ -3,10 +3,12 @@ import { Image, Switch, Alert } from "react-native";
 
 import NextLogo from "../../assets/next.png";
 import DeleteLogo from "../../assets/cross.png";
+import InviteLogo from "../../assets/send.png";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
-import ProfileIcon from "../../components/ProfileIcon/ProfileIcon";
+
+import SCREENS from "../../navigatorMap";
 
 import {
   BackContainer,
@@ -15,7 +17,7 @@ import {
   NameContainer,
   HeaderContainer,
   BackTextContainer,
-  LineDivider,
+  InviteContainer,
   DeleteContainer
 } from "./styles";
 
@@ -64,6 +66,12 @@ export default function Users({ navigation }) {
             Usuarios
           </Title>
         </BackTextContainer>
+        <InviteContainer onPress={() => navigation.navigate(SCREENS.INVITE)}>
+          <Title color={theme.dark} size="small">
+            Invitar
+          </Title>
+          <Image style={{ height: 25, width: 25 }} source={InviteLogo} />
+        </InviteContainer>
       </BackContainer>
 
       <HeaderContainer>
