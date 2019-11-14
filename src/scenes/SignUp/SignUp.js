@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Image, TextInput, Animated } from "react-native";
 import validate from "validate.js";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
@@ -12,8 +14,24 @@ import SCREENS from "../../navigatorMap";
 import { LogoContainer, InputContainer, NextContainer } from "./styles";
 import constraints from "./constraints";
 import theme from "../../colorTheme";
+import { validateCode } from "../../store/actions/signUpAction";
 
-export default function SignUp({ navigation }) {
+const mapStateToProps = ({ singUp }) => {
+  return {
+    singUp
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      validateCode
+    },
+    dispatch
+  );
+};
+
+function SignUp({ navigation, validateCode }) {
   const [inputFields, setInputFields] = useState({});
   const [codeError, setCodeError] = useState("");
 
@@ -28,6 +46,7 @@ export default function SignUp({ navigation }) {
     if (error) {
       setCodeError(error.code);
     } else {
+      validateCode(inputFields.code);
       navigation.navigate(SCREENS.CODE);
       setCodeError("");
     }
@@ -61,3 +80,8 @@ export default function SignUp({ navigation }) {
     </Container>
   );
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);

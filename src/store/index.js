@@ -15,7 +15,7 @@ const persistConfig = {
   // whitelist: [
   //   'authReducer',
   // ],
-  blacklist: ["systemReducer"]
+  blacklist: ["systemReducer", "signUp"]
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
