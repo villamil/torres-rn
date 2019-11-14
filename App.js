@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
-import { StatusBar, View } from "react-native";
+import { StatusBar, View, Button } from "react-native";
+import { PersistGate } from "redux-persist/integration/react";
+import { Provider } from "react-redux";
+
+import { store, persistor } from "./src/store";
 
 import LandingScreen from "./src/scenes/Landing";
 import SignUpScreen from "./src/scenes/SignUp";
@@ -13,6 +17,8 @@ import InviteScreen from "./src/scenes/Invite";
 import UsersScreen from "./src/scenes/Users";
 import FilterScreen from "./src/scenes/Filter";
 import DetailsScreen from "./src/scenes/Details";
+
+import SystemCheck from "./src/components/SystemCheck";
 
 import theme from "./src/colorTheme";
 
@@ -66,10 +72,15 @@ const AppContent = createAppContainer(MenuNavigator);
 
 const App = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar backgroundColor={theme.dark} barStyle="light-content" />
-      <AppContent />
-    </View>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <SystemCheck />
+        <View style={{ flex: 1 }}>
+          <StatusBar backgroundColor={theme.dark} barStyle="light-content" />
+          <AppContent />
+        </View>
+      </PersistGate>
+    </Provider>
   );
 };
 

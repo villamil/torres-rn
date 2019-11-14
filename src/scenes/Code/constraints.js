@@ -1,4 +1,14 @@
 const constraints = {
+  firstName: {
+    presence: {
+      message: "^Ingresa tu nombre."
+    }
+  },
+  lastName: {
+    presence: {
+      message: "^Ingresa tus apellidos."
+    }
+  },
   email: {
     presence: {
       message: "^Ingresa un correo electronico."
