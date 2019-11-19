@@ -1,25 +1,23 @@
 import React, { useState } from "react";
 import {
   Image,
-  TextInput,
-  Animated,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  SafeAreaView,
-  View,
   ScrollView
 } from "react-native";
 import validate from "validate.js";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import Container from "../../components/layout/Container";
-import ScrollContainer from "../../components/layout/ScrollContainer";
 import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
-import KeyboardShift from "../../components/KeyboardShift/KeyboardShift";
 import Torres from "../../assets/torres.png";
 import Input from "../../components/input/input";
 import constraints from "./constraints";
+
+import { startSignUp } from "../../store/actions/signUpAction";
 
 import {
   LogoContainer,
@@ -30,8 +28,25 @@ import {
 
 import theme from "../../colorTheme";
 
-export default function Code() {
-  const [inputFields, setInputFields] = useState({});
+const mapStateToProps = ({ singUp, system }) => {
+  return {
+    singUp,
+    system
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ startSignUp }, dispatch);
+};
+
+function Code({ singUp, startSignUp }) {
+  const [inputFields, setInputFields] = useState({
+    firstName: "Luis",
+    lastName: "Villamil",
+    email: "villamildasdasd@dasdas.com",
+    password: "1234",
+    repeatPassword: "1234"
+  });
 
   function onSubmit() {
     let preInputFields = inputFields;
@@ -42,6 +57,11 @@ export default function Code() {
     if (errors) {
       setInputFields({ ...inputFields, errors });
     } else {
+      console.log(singUp);
+      startSignUp({
+        ...inputFields,
+        code: singUp.code
+      });
       setInputFields({ ...inputFields, errors: {} });
       console.log("CREATE ACCOUNT!!!!");
     }
@@ -140,3 +160,5 @@ export default function Code() {
     </KeyboardAvoidingView>
   );
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Code);

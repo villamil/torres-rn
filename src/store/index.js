@@ -3,11 +3,14 @@ import { createStore, applyMiddleware } from "redux";
 import { createLogger } from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import createSagaMiddleware from "redux-saga";
+import wsMiddleware from "./middleware";
 
 import rootReducer from "./reducers";
 import rootSaga from "./sagas";
 
 const sagaMiddleware = createSagaMiddleware();
+
+const middleware = [sagaMiddleware, wsMiddleware];
 
 const persistConfig = {
   key: "root",
@@ -15,12 +18,12 @@ const persistConfig = {
   // whitelist: [
   //   'authReducer',
   // ],
-  blacklist: ["systemReducer", "signUp"]
+  blacklist: ["system", "signUp"]
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(persistedReducer, applyMiddleware(sagaMiddleware));
+const store = createStore(persistedReducer, applyMiddleware(...middleware));
 
 let persistor = persistStore(store);
 

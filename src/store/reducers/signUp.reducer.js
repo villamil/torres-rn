@@ -1,17 +1,36 @@
-import { VALIDATE_CODE_RESPONSE } from "../actions/signUpAction";
+import {
+  VALID_CODE,
+  INVALID_CODE,
+  RESTORE_CODE
+} from "../actions/signUpAction";
 
 const initialState = {
   code: "",
-  isValidCode: false
+  isOnwer: false,
+  isValidCode: false,
+  hasError: false
 };
 
 const systemReducer = (state = initialState, action) => {
   switch (action.type) {
-    case VALIDATE_CODE_RESPONSE: {
+    case VALID_CODE: {
       return {
         ...state,
-        code: action.payload.code,
-        isValidCode: action.payload.isValidCode
+        ...action.payload
+      };
+    }
+    case INVALID_CODE: {
+      return {
+        ...state,
+        code: "",
+        isOnwer: false,
+        isValidCode: false,
+        hasError: true
+      };
+    }
+    case RESTORE_CODE: {
+      return {
+        ...initialState
       };
     }
     default: {

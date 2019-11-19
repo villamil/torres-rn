@@ -7,10 +7,11 @@ import {
   systemUpdateInternetStatus,
   systemUpdateServerStatus
 } from "../../store/actions/system";
+import { wsConnect } from "../../store/actions/websocket.actions";
 
-const mapStateToProps = ({ systemReducer }) => {
+const mapStateToProps = ({ system }) => {
   return {
-    system: systemReducer
+    system
   };
 };
 
@@ -18,62 +19,37 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       systemUpdateInternetStatus,
-      systemUpdateServerStatus
+      systemUpdateServerStatus,
+      wsConnect
     },
     dispatch
   );
 };
 
-function SystemCheck({
-  system,
-  systemUpdateInternetStatus,
-  systemUpdateServerStatus
-}) {
-  const [ws, setWS] = useState();
+function SystemCheck({ system, systemUpdateInternetStatus, wsConnect }) {
   useEffect(() => {
-    const retryServerConnection = setInterval(() => {
-      if (!system.hasAccessToServer) {
-        checkServerConnection();
-      }
-    }, 1000 * 5);
     const unsubscribe = NetInfo.addEventListener(state => {
       systemUpdateInternetStatus(state.isConnected);
-      if (state.isConnected) {
-        checkServerConnection();
-      }
     });
     return function cleanup() {
       systemUpdateInternetStatus(false);
       unsubscribe();
-      clearInterval(retryServerConnection);
-      if (ws) {
-        systemUpdateServerStatus(false);
-        ws.close();
-      }
     };
   }, []);
 
-  function checkServerConnection() {
-    const newWS = new WebSocket(`ws://${SERVER_URI}:${SERVER_PORT}/status`);
-    setWS(newWS);
-  }
-
-  if (ws) {
-    ws.onopen = () => {
-      systemUpdateServerStatus(true);
-    };
-    ws.onerror = e => {
-      systemUpdateServerStatus(false);
-    };
-    ws.onclose = () => {
-      systemUpdateServerStatus(false);
-    };
-  }
+  // useEffect(() => {
+  //   const retryServerConnection = setInterval(() => {
+  //     console.log(system.hasAccessToServer);
+  //     if (!system.hasAccessToServer) {
+  //       wsConnect(`ws://${SERVER_URI}:${SERVER_PORT}/status`);
+  //     }
+  //   }, 1000 * 5);
+  //   return function cleanup() {
+  //     clearInterval(retryServerConnection);
+  //   };
+  // }, []);
 
   return null;
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SystemCheck);
+export default connect(mapStateToProps, mapDispatchToProps)(SystemCheck);

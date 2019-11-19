@@ -8,9 +8,10 @@ export const systemUpdateInternetStatus = status => ({
   }
 });
 
-export const systemUpdateServerStatus = status => ({
+export const systemUpdateServerStatus = (status, websocket) => ({
   type: SYSTEM_UPDATE_SERVER_STATUS,
   payload: {
-    hasAccessToServer: status
+    hasAccessToServer: status,
+    websocket
   }
 });
