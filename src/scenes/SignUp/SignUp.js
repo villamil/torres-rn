@@ -88,7 +88,11 @@ function SignUp({ navigation, validateCode, restoreCode, singUp }) {
           </Title>
         </InputContainer>
         <NextContainer>
-          <Button text="SIGUIENTE" onPress={onSubmit} />
+          {singUp.loading ? (
+            <Button text="CARGANDO..." disabled />
+          ) : (
+            <Button text="SIGUIENTE" onPress={onSubmit} />
+          )}
         </NextContainer>
       </Container>
     </TouchableWithoutFeedback>

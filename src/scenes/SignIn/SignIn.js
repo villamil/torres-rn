@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Image, TextInput } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Image, BackHandler } from "react-native";
 import validate from "validate.js";
 
 import Container from "../../components/layout/Container";
@@ -32,6 +32,19 @@ const initialState = {
 
 export default function SignIn({ navigation }) {
   const [inputFields, setInputFields] = useState(initialState);
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        navigation.navigate(SCREENS.LANDING);
+        return true;
+      }
+    );
+    return () => {
+      backHandler.remove();
+    };
+  }, []);
 
   function onInputChange(name, value) {
     setInputFields({ ...inputFields, [name]: value });

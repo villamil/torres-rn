@@ -40,11 +40,15 @@ export function* signUp({ payload }) {
       },
       body: JSON.stringify(payload)
     }).then(response => response.json());
-    if (result.error) {
-    } else {
-    }
     console.log(result);
-  } catch (error) {}
+    if (result.error) {
+      yield put({ type: SIGNUP_ERROR });
+    } else {
+      yield put({ type: SIGNUP_RESULT });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function* signUpSaga() {

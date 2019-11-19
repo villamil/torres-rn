@@ -1,22 +1,35 @@
 import {
+  VALIDATE_CODE,
   VALID_CODE,
   INVALID_CODE,
-  RESTORE_CODE
+  RESTORE_CODE,
+  SIGNUP_RESULT,
+  SIGNUP_ERROR,
+  SIGNUP_START
 } from "../actions/signUpAction";
 
 const initialState = {
   code: "",
   isOnwer: false,
   isValidCode: false,
-  hasError: false
+  hasError: false,
+  signUpDone: false,
+  loading: false
 };
 
 const systemReducer = (state = initialState, action) => {
   switch (action.type) {
+    case VALIDATE_CODE: {
+      return {
+        ...state,
+        loading: true
+      };
+    }
     case VALID_CODE: {
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        loading: false
       };
     }
     case INVALID_CODE: {
@@ -25,12 +38,35 @@ const systemReducer = (state = initialState, action) => {
         code: "",
         isOnwer: false,
         isValidCode: false,
-        hasError: true
+        hasError: true,
+        loading: false
       };
     }
     case RESTORE_CODE: {
       return {
         ...initialState
+      };
+    }
+    case SIGNUP_START: {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+    case SIGNUP_RESULT: {
+      return {
+        ...state,
+        signUpDone: true,
+        loading: false
+      };
+    }
+
+    case SIGNUP_ERROR: {
+      return {
+        ...state,
+        hasError: true,
+        signUpDone: false,
+        loading: false
       };
     }
     default: {

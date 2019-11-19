@@ -36,7 +36,6 @@ function SystemCheck({ system, systemUpdateInternetStatus, wsConnect }) {
       unsubscribe();
     };
   }, []);
-
   // useEffect(() => {
   //   const retryServerConnection = setInterval(() => {
   //     console.log(system.hasAccessToServer);

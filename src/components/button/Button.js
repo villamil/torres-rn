@@ -10,8 +10,8 @@ const ButtonText = styled.Text`
 `;
 
 const ButtonContainer = styled.TouchableOpacity`
-  background-color: ${({ backgroundColor }) => {
-    return backgroundColor || theme.green;
+  background-color: ${({ backgroundColor, disabled }) => {
+    return disabled ? theme.darkGray : backgroundColor || theme.green;
   }};
   border-radius: 25px;
   padding: 12px 100px 12px 100px;
@@ -21,8 +21,11 @@ const CustomButton = props => (
   <ButtonContainer
     onPress={props.onPress}
     backgroundColor={props.backgroundColor}
+    {...props}
   >
-    <ButtonText color={props.color}>{props.text}</ButtonText>
+    <ButtonText color={props.color} {...props}>
+      {props.text}
+    </ButtonText>
   </ButtonContainer>
 );
 

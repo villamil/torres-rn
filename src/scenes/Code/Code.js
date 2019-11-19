@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Image,
   KeyboardAvoidingView,
@@ -17,7 +17,9 @@ import Torres from "../../assets/torres.png";
 import Input from "../../components/input/input";
 import constraints from "./constraints";
 
-import { startSignUp } from "../../store/actions/signUpAction";
+import SCREENS from "../../navigatorMap";
+
+import { startSignUp, restoreCode } from "../../store/actions/signUpAction";
 
 import {
   LogoContainer,
@@ -27,6 +29,7 @@ import {
 } from "./styles";
 
 import theme from "../../colorTheme";
+import { signUp } from "../../store/sagas/signUp.saga";
 
 const mapStateToProps = ({ singUp, system }) => {
   return {
@@ -36,10 +39,10 @@ const mapStateToProps = ({ singUp, system }) => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ startSignUp }, dispatch);
+  return bindActionCreators({ startSignUp, restoreCode }, dispatch);
 };
 
-function Code({ singUp, startSignUp }) {
+function Code({ singUp, startSignUp, navigation, restoreCode }) {
   const [inputFields, setInputFields] = useState({
     firstName: "Luis",
     lastName: "Villamil",
@@ -47,6 +50,19 @@ function Code({ singUp, startSignUp }) {
     password: "1234",
     repeatPassword: "1234"
   });
+
+  useEffect(() => {
+    console.log(singUp);
+    if (singUp.signUpDone) {
+      restoreCode();
+      navigation.navigate(SCREENS.SIGN_IN);
+    } else if (singUp.hasError) {
+      setInputFields({
+        ...inputFields,
+        errors: { email: "Este correo ya esta registrado." }
+      });
+    }
+  }, [singUp]);
 
   function onSubmit() {
     let preInputFields = inputFields;
@@ -57,13 +73,11 @@ function Code({ singUp, startSignUp }) {
     if (errors) {
       setInputFields({ ...inputFields, errors });
     } else {
-      console.log(singUp);
       startSignUp({
         ...inputFields,
         code: singUp.code
       });
       setInputFields({ ...inputFields, errors: {} });
-      console.log("CREATE ACCOUNT!!!!");
     }
   }
 
@@ -152,7 +166,11 @@ function Code({ singUp, startSignUp }) {
               />
             </InputContainer>
             <NextContainer>
-              <Button text="CREAR CUENTA" onPress={onSubmit} />
+              {singUp.loading ? (
+                <Button text="CARGANDO..." disabled />
+              ) : (
+                <Button text="CREAR CUENTA" onPress={onSubmit} />
+              )}
             </NextContainer>
           </Container>
         </ScrollView>
