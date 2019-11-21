@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Image, BackHandler } from "react-native";
 import validate from "validate.js";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/input";
 import CheckBox from "../../components/Checkbox";
+
+import { authenticate } from "../../store/actions/auth.action";
 
 import Torres from "../../assets/torres.png";
 import SCREENS from "../../navigatorMap";
@@ -24,13 +28,23 @@ import {
 } from "./styles";
 
 const initialState = {
-  email: "asdasd@asdasd.com",
-  password: "asdasds",
+  email: "villamil_50@hotmail.com",
+  password: "1234",
   rememberLogin: false,
   errors: {}
 };
 
-export default function SignIn({ navigation }) {
+const mapStateToProps = ({ auth }) => {
+  return {
+    auth
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ authenticate }, dispatch);
+};
+
+function SignIn({ navigation, authenticate }) {
   const [inputFields, setInputFields] = useState(initialState);
 
   useEffect(() => {
@@ -56,7 +70,12 @@ export default function SignIn({ navigation }) {
       setInputFields({ ...inputFields, errors });
     } else {
       setInputFields(initialState);
-      navigation.navigate(SCREENS.HOME);
+      authenticate({
+        rememberSesion: inputFields.rememberLogin,
+        email: inputFields.email,
+        password: inputFields.password
+      });
+      // navigation.navigate(SCREENS.HOME);
     }
   }
 
@@ -119,3 +138,5 @@ export default function SignIn({ navigation }) {
     </Container>
   );
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
