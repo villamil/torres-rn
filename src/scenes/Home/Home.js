@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Image, Dimensions, Modal, TouchableOpacity } from "react-native";
+import {
+  Image,
+  Dimensions,
+  Modal,
+  TouchableOpacity,
+  BackHandler
+} from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 
 import Container from "../../components/layout/Container";
@@ -41,6 +47,19 @@ export default function Home({ navigation }) {
   const deviceHeight = Math.round(Dimensions.get("window").height);
   const drawerOffset = Math.round(deviceHeight * 0.33);
   const drawerHeight = Math.round(deviceHeight * 1.3);
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      whatis => {
+        console.log(whatis);
+        return true;
+      }
+    );
+    return () => {
+      backHandler.remove();
+    };
+  }, []);
 
   if (navigation.getParam("unitPopUp") && !unitPopUp) {
     setUnitPopUp(true);

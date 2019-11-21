@@ -13,7 +13,16 @@ export function* authenticate({ payload }) {
       },
       body: JSON.stringify(payload)
     }).then(response => response.json());
-    console.log("result", result);
+    if (result.error) {
+      yield put({ type: AUTH_ERROR });
+    } else {
+      const payloadResult = {
+        token: result.token,
+        isOwner: result.metadata.isOwner,
+        defaultUnitId: result.metadata.defaultUnit.id
+      };
+      yield put({ type: AUTH_SUCCESS, payload: payloadResult });
+    }
   } catch (error) {
     console.log("error", error);
   }

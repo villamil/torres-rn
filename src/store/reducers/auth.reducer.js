@@ -1,8 +1,16 @@
-import { AUTH_START, AUTH_SUCCESS, AUTH_ERROR } from "../actions/auth.action";
+import {
+  AUTH_START,
+  AUTH_SUCCESS,
+  AUTH_ERROR,
+  AUTH_LOGOUT,
+  REMEMBER_SESION
+} from "../actions/auth.action";
 
 const initialState = {
   rememberSesion: false,
   token: "",
+  defaultUnitId: "",
+  isOwner: false,
   loading: false,
   logged: false
 };
@@ -19,7 +27,9 @@ const authReducer = (state = initialState, action) => {
     case AUTH_SUCCESS: {
       return {
         ...state,
-        token: "igotit",
+        token: action.payload.token,
+        isOwner: action.payload.isOwner,
+        defaultUnitId: action.payload.defaultUnitId,
         loading: false,
         logged: true
       };
@@ -30,6 +40,15 @@ const authReducer = (state = initialState, action) => {
         token: "",
         loading: false,
         logged: false
+      };
+    }
+    case AUTH_LOGOUT: {
+      return initialState;
+    }
+    case REMEMBER_SESION: {
+      return {
+        ...state,
+        rememberSesion: action.payload.rememberSesion
       };
     }
     default: {

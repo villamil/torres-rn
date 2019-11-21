@@ -9,8 +9,9 @@ import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/input";
 import CheckBox from "../../components/Checkbox";
+import AuthCheck from "../../components/AuthCheck";
 
-import { authenticate } from "../../store/actions/auth.action";
+import { authenticate, rememberSesion } from "../../store/actions/auth.action";
 
 import Torres from "../../assets/torres.png";
 import SCREENS from "../../navigatorMap";
@@ -41,12 +42,12 @@ const mapStateToProps = ({ auth }) => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ authenticate }, dispatch);
+  return bindActionCreators({ authenticate, rememberSesion }, dispatch);
 };
 
-function SignIn({ navigation, authenticate }) {
+function SignIn({ navigation, authenticate, auth, rememberSesion }) {
   const [inputFields, setInputFields] = useState(initialState);
-
+  console.log(auth);
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",
@@ -75,19 +76,16 @@ function SignIn({ navigation, authenticate }) {
         email: inputFields.email,
         password: inputFields.password
       });
-      // navigation.navigate(SCREENS.HOME);
     }
   }
 
   function onRememberLogin() {
-    setInputFields({
-      ...inputFields,
-      rememberLogin: !inputFields.rememberLogin
-    });
+    rememberSesion(!auth.rememberSesion);
   }
 
   return (
     <Container>
+      <AuthCheck navigation={navigation} />
       <LogoContainer>
         <Image
           style={{ width: 50, height: 50, marginRight: 10 }}
@@ -128,7 +126,7 @@ function SignIn({ navigation, authenticate }) {
         <CheckBox
           style={{ alignSelf: "flex-end" }}
           onPress={onRememberLogin}
-          checked={inputFields.rememberLogin}
+          checked={auth.rememberSesion}
         />
       </CheckBoxContainer>
 

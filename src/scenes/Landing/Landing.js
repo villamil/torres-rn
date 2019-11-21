@@ -7,6 +7,7 @@ import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
 import ButtonText from "../../components/button/ButtonText";
 import Carousel from "../../components/Carousel";
+import AuthCheck from "../../components/AuthCheck";
 
 import Torres from "../../assets/torres.png";
 import MaintenanceCard from "../../assets/maintenance-card.png";
@@ -50,6 +51,7 @@ export default function Landing({ navigation }) {
 
   return (
     <Container>
+      <AuthCheck navigation={navigation} />
       <LogoContainer>
         <Image
           style={{ width: 80, height: 80, marginRight: 10 }}
