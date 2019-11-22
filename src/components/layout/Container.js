@@ -4,6 +4,7 @@ import theme from "../../colorTheme";
 const backgroundColors = {
   light: theme.light,
   dark: theme.dark,
+  darkBlue: theme.darkBlue,
   gray: theme.gray,
   darkGray: theme.darkGray
 };
