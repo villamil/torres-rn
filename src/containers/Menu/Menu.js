@@ -30,9 +30,6 @@ import {
   FooterContainer
 } from "./styles";
 
-const firstName = "Luis Rafael";
-const lastName = "Villamil Santa Cruz";
-
 const mapStateToProps = ({ auth }) => ({
   auth
 });
