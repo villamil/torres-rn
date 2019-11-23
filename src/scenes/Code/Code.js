@@ -52,7 +52,6 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
   });
 
   useEffect(() => {
-    console.log(singUp);
     if (singUp.signUpDone) {
       restoreCode();
       navigation.navigate(SCREENS.SIGN_IN);

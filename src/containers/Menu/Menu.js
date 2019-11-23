@@ -1,5 +1,7 @@
 import React from "react";
 import { Image, Alert } from "react-native";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 import AuctionLogo from "../../assets/auction-dark.png";
 import NextLogo from "../../assets/next.png";
@@ -15,6 +17,8 @@ import ProfileIcon from "../../components/ProfileIcon/ProfileIcon";
 import theme from "../../colorTheme";
 import SCREENS from "../../navigatorMap";
 
+import { logout } from "../../store/actions/auth.action";
+
 import {
   MenuContainer,
   ProfileContainer,
@@ -29,23 +33,41 @@ import {
 const firstName = "Luis Rafael";
 const lastName = "Villamil Santa Cruz";
 
-export default function Menu({ navigation }) {
+const mapStateToProps = ({ auth }) => ({
+  auth
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      logout
+    },
+    dispatch
+  );
+};
+
+function Menu(props) {
   return (
     <MenuContainer>
       <ProfileContainer>
-        <ProfileIcon firstName={firstName} lastName={lastName} />
+        <ProfileIcon
+          firstName={props.auth.firstName}
+          lastName={props.auth.lastName}
+        />
         <NamesContainer>
           <Title color={theme.lowDark} size="small" align="left">
-            {firstName} {lastName}
+            {props.auth.firstName} {props.auth.lastName}
           </Title>
         </NamesContainer>
         <Title size="tiny" color={theme.lowDark}>
-          villamil_50@hotmail.com
+          {props.auth.email}
         </Title>
       </ProfileContainer>
       <LineDivider />
       <MenuItemsContainer>
-        <MenuItemContainer onPress={() => navigation.navigate(SCREENS.USERS)}>
+        <MenuItemContainer
+          onPress={() => props.navigation.navigate(SCREENS.USERS)}
+        >
           <ItemWrapper>
             <Image
               style={{ height: 20, width: 20, marginRight: 10 }}
@@ -60,8 +82,8 @@ export default function Menu({ navigation }) {
 
         <MenuItemContainer
           onPress={() => {
-            navigation.goBack();
-            navigation.navigate(SCREENS.HOME, { unitPopUp: true });
+            props.navigation.goBack();
+            props.navigation.navigate(SCREENS.HOME, { unitPopUp: true });
           }}
         >
           <ItemWrapper>
@@ -116,7 +138,12 @@ export default function Menu({ navigation }) {
           <Image style={{ height: 15, width: 15 }} source={NextLogo} />
         </MenuItemContainer>
 
-        <MenuItemContainer>
+        <MenuItemContainer
+          onPress={() => {
+            props.logout();
+            props.navigation.navigate(SCREENS.SIGN_IN);
+          }}
+        >
           <ItemWrapper>
             <Image
               style={{ height: 20, width: 20, marginRight: 10 }}
@@ -138,3 +165,5 @@ export default function Menu({ navigation }) {
     </MenuContainer>
   );
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

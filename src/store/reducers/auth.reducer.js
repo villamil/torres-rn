@@ -10,6 +10,9 @@ const initialState = {
   rememberSesion: false,
   token: "",
   defaultUnitId: "",
+  firstName: "",
+  lastName: "",
+  email: "",
   isOwner: false,
   loading: false,
   logged: false
@@ -27,9 +30,7 @@ const authReducer = (state = initialState, action) => {
     case AUTH_SUCCESS: {
       return {
         ...state,
-        token: action.payload.token,
-        isOwner: action.payload.isOwner,
-        defaultUnitId: action.payload.defaultUnitId,
+        ...action.payload,
         loading: false,
         logged: true
       };

@@ -12,8 +12,8 @@ const initialState = {
   code: "",
   isOnwer: false,
   isValidCode: false,
-  hasError: false,
   signUpDone: false,
+  hasError: false,
   loading: false
 };
 

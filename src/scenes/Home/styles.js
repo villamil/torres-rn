@@ -25,15 +25,19 @@ export const ServiceItem = styled.View`
 
 export const ServiceTitleContainer = styled.View`
   width: 100%;
-
-  flex-direction: row;
-  align-items: center;
+  height: 90%;
+  flex-direction: column;
   justify-content: space-between;
 `;
 
 export const TitleLeftContainer = styled.View`
   flex-direction: row;
   align-items: center;
+  align-self: flex-start;
+`;
+
+export const AmountContainer = styled.View`
+  align-self: flex-end;
 `;
 
 export const SummaryContainer = styled.View``;

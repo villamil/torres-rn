@@ -1,6 +1,14 @@
-import React, { useState } from "react";
-import { Image, Dimensions, Modal, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  Image,
+  Dimensions,
+  Modal,
+  TouchableOpacity,
+  BackHandler
+} from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
@@ -15,6 +23,10 @@ import WaterLogo from "../../assets/water-logo.png";
 import MenuIcon from "../../assets/menu-button.png";
 import AddIcon from "../../assets/add.png";
 import CloseIcon from "../../assets/cross.png";
+
+import { getUnit } from "../../store/actions/unit.action";
+import { getMaintenance } from "../../store/actions/maintenance.action";
+import { getWater } from "../../store/actions/water.action";
 
 import theme from "../../colorTheme";
 
@@ -33,16 +45,53 @@ import {
   ModalContainer,
   CloseContainer,
   ModalContent,
-  CloseTouchable
+  CloseTouchable,
+  AmountContainer
 } from "./styles";
 
-export default function Home({ navigation }) {
+const mapStateToProps = ({ auth, unit, maintenance, water }) => ({
+  auth,
+  unit,
+  maintenance,
+  water
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+    {
+      getUnit,
+      getMaintenance,
+      getWater
+    },
+    dispatch
+  );
+};
+
+function Home(props) {
   const [unitPopUp, setUnitPopUp] = useState(false);
   const deviceHeight = Math.round(Dimensions.get("window").height);
   const drawerOffset = Math.round(deviceHeight * 0.33);
   const drawerHeight = Math.round(deviceHeight * 1.3);
 
-  if (navigation.getParam("unitPopUp") && !unitPopUp) {
+  useEffect(() => {
+    props.getUnit(props.auth.defaultUnitId);
+    props.getMaintenance(props.auth.defaultUnitId);
+    props.getWater(props.auth.defaultUnitId);
+  }, []);
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        return true;
+      }
+    );
+    return () => {
+      backHandler.remove();
+    };
+  }, []);
+
+  if (props.navigation.getParam("unitPopUp") && !unitPopUp) {
     setUnitPopUp(true);
   }
 
@@ -54,7 +103,7 @@ export default function Home({ navigation }) {
         transparent={true}
         onRequestClose={() => {
           setUnitPopUp(false);
-          navigation.setParams({ unitPopUp: false });
+          props.navigation.setParams({ unitPopUp: false });
         }}
       >
         <TouchableOpacity
@@ -67,7 +116,7 @@ export default function Home({ navigation }) {
           activeOpacity={1}
           onPressOut={() => {
             setUnitPopUp(false);
-            navigation.setParams({ unitPopUp: false });
+            props.navigation.setParams({ unitPopUp: false });
           }}
         >
           <ModalContainer>
@@ -76,7 +125,7 @@ export default function Home({ navigation }) {
                 <CloseTouchable
                   onPress={() => {
                     setUnitPopUp(false);
-                    navigation.setParams({ unitPopUp: false });
+                    props.navigation.setParams({ unitPopUp: false });
                   }}
                 >
                   <Image style={{ height: 20, width: 20 }} source={CloseIcon} />
@@ -91,10 +140,12 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
       </Modal>
       <MenuContainer>
-        <MenuTouchable onPress={() => navigation.openDrawer()}>
+        <MenuTouchable onPress={() => props.navigation.openDrawer()}>
           <Image style={{ height: 25, width: 25 }} source={MenuIcon} />
         </MenuTouchable>
-        <MenuTouchable onPress={() => navigation.navigate(SCREENS.INVITE)}>
+        <MenuTouchable
+          onPress={() => props.navigation.navigate(SCREENS.INVITE)}
+        >
           <Image style={{ height: 25, width: 25 }} source={AddIcon} />
         </MenuTouchable>
       </MenuContainer>
@@ -102,7 +153,10 @@ export default function Home({ navigation }) {
         <Title size="medium" opacity="0.5" letterSpacing="2px">
           Departamento
         </Title>
-        <Title size="XL">101A</Title>
+        <Title size="XL">
+          {props.unit.data.number}
+          {props.unit.data.section}
+        </Title>
       </UnitContainer>
       <ServicesContainer>
         <ServiceItem>
@@ -114,7 +168,11 @@ export default function Home({ navigation }) {
               />
               <Title size="tiny">Mantenimiento</Title>
             </TitleLeftContainer>
-            <Title color={theme.lowGreen}>$ 700.00 MXN</Title>
+            <AmountContainer>
+              <Title color={theme.light}>
+                $ {props.unit.data.totalMaintenanceOwed} MXN
+              </Title>
+            </AmountContainer>
           </ServiceTitleContainer>
         </ServiceItem>
         <ServiceItem>
@@ -126,7 +184,11 @@ export default function Home({ navigation }) {
               />
               <Title size="tiny">Agua</Title>
             </TitleLeftContainer>
-            <Title color={theme.lowGreen}>$ 72.00 MXN</Title>
+            <AmountContainer>
+              <Title color={theme.light}>
+                $ {props.unit.data.totalWaterOwed} MXN
+              </Title>
+            </AmountContainer>
           </ServiceTitleContainer>
         </ServiceItem>
       </ServicesContainer>
@@ -149,7 +211,7 @@ export default function Home({ navigation }) {
             <Button
               text="Ver Mas"
               backgroundColor={theme.lowDark}
-              onPress={() => navigation.navigate(SCREENS.FILTER)}
+              onPress={() => props.navigation.navigate(SCREENS.FILTER)}
             />
           </ViewMoreContainer>
         </Container>
@@ -157,3 +219,5 @@ export default function Home({ navigation }) {
     </Container>
   );
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

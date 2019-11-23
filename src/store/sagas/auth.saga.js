@@ -5,7 +5,6 @@ import { API_URI, HEADERS } from "../../utils/api";
 
 export function* authenticate({ payload }) {
   try {
-    console.log(payload);
     const result = yield fetch(`${API_URI}/auth`, {
       method: "POST",
       headers: {
@@ -19,7 +18,10 @@ export function* authenticate({ payload }) {
       const payloadResult = {
         token: result.token,
         isOwner: result.metadata.isOwner,
-        defaultUnitId: result.metadata.defaultUnit.id
+        defaultUnitId: result.metadata.defaultUnit.id,
+        firstName: result.metadata.firstName,
+        lastName: result.metadata.lastName,
+        email: result.metadata.email
       };
       yield put({ type: AUTH_SUCCESS, payload: payloadResult });
     }

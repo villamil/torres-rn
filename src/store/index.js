@@ -15,7 +15,7 @@ const middleware = [sagaMiddleware, wsMiddleware];
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "unit", "maintenance", "water"],
   blacklist: ["system", "signUp"]
 };
 

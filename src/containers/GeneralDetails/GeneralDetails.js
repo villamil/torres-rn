@@ -1,5 +1,12 @@
 import React from "react";
-import { Image } from "react-native";
+import {
+  Image,
+  ScrollView,
+  TouchableWithoutFeedback,
+  View
+} from "react-native";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 import MaintenanceDark from "../../assets/maintenance-logo-dark.png";
 
@@ -7,6 +14,7 @@ import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
 import theme from "../../colorTheme";
 import SCREENS from "../../navigatorMap";
+import { MONTHS_MAP } from "../../utils/dates";
 
 import {
   DetailsContainer,
@@ -20,7 +28,35 @@ import {
   BankContainer
 } from "./styles";
 
-export default function GeneralDetails({ navigation }) {
+const mapStateToProps = ({ maintenance, unit }) => ({
+  maintenance,
+  unit
+});
+
+function GeneralDetails(props) {
+  function renderDetailContainer() {
+    return Object.values(props.maintenance.data).map(item => (
+      <DetailContainer key={item.id}>
+        <UpperRow>
+          <DetailLogoContainer>
+            <Image style={{ height: 35, width: 35 }} source={MaintenanceDark} />
+            <Title color={theme.dark} size="tiny">
+              Mantenimiento
+            </Title>
+          </DetailLogoContainer>
+          <Title color={item.paid ? theme.green : theme.lowDark} size="small">
+            $ {item.dueAmount} MXN
+          </Title>
+        </UpperRow>
+        <LowerRow>
+          <Title color={theme.dark} opacity="0.7" size="tiny">
+            {MONTHS_MAP[item.month]} {item.year} -{" "}
+            {item.paid ? "Pagado" : "Pendiente"}
+          </Title>
+        </LowerRow>
+      </DetailContainer>
+    ));
+  }
   return (
     <DetailsContainer>
       <BankContainer>
@@ -37,47 +73,17 @@ export default function GeneralDetails({ navigation }) {
             Referencia
           </Title>
           <Title color={theme.dark} size="tiny">
-            10116
+            {props.unit.data.reference}
           </Title>
         </BankDetailsContainer>
       </BankContainer>
-      <DetailContainer>
-        <UpperRow>
-          <DetailLogoContainer>
-            <Image style={{ height: 35, width: 35 }} source={MaintenanceDark} />
-            <Title color={theme.dark} size="tiny">
-              Mantenimiento
-            </Title>
-          </DetailLogoContainer>
-          <Title color={theme.green} size="small">
-            $ 700.00 MXN
-          </Title>
-        </UpperRow>
-        <LowerRow>
-          <Title color={theme.dark} opacity="0.7" size="tiny">
-            Febrero 2019 - Pagado
-          </Title>
-        </LowerRow>
-      </DetailContainer>
-
-      <DetailContainer>
-        <UpperRow>
-          <DetailLogoContainer>
-            <Image style={{ height: 35, width: 35 }} source={MaintenanceDark} />
-            <Title color={theme.dark} size="tiny">
-              Mantenimiento
-            </Title>
-          </DetailLogoContainer>
-          <Title color={theme.green} size="small">
-            $ 700.00 MXN
-          </Title>
-        </UpperRow>
-        <LowerRow>
-          <Title color={theme.dark} opacity="0.7" size="tiny">
-            Febrero 2019 - Pagado
-          </Title>
-        </LowerRow>
-      </DetailContainer>
+      <ScrollView style={{ width: "100%" }}>
+        <TouchableWithoutFeedback>
+          <View>{renderDetailContainer()}</View>
+        </TouchableWithoutFeedback>
+      </ScrollView>
     </DetailsContainer>
   );
 }
+
+export default connect(mapStateToProps, null)(GeneralDetails);

@@ -29,7 +29,7 @@ import {
 } from "./styles";
 
 const initialState = {
-  email: "villamil_50@hotmail.com",
+  email: "villamil_one@hotmail.com",
   password: "1234",
   rememberLogin: false,
   errors: {}
@@ -47,7 +47,6 @@ const mapDispatchToProps = dispatch => {
 
 function SignIn({ navigation, authenticate, auth, rememberSesion }) {
   const [inputFields, setInputFields] = useState(initialState);
-  console.log(auth);
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",

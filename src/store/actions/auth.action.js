@@ -1,6 +1,7 @@
 export const AUTH_START = "AUTH_START";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_ERROR = "AUTH_ERROR";
+
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const REMEMBER_SESION = "REMEMBER_SESION";
@@ -15,7 +16,10 @@ export const rememberSesion = remember => ({
   payload: { rememberSesion: remember }
 });
 
-export const logout = () => ({
-  type: AUTH_LOGOUT,
-  payload: {}
-});
+export const logout = () => {
+  console.log("log");
+  return {
+    type: AUTH_LOGOUT,
+    payload: {}
+  };
+};
