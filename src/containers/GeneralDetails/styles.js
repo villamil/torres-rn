@@ -26,7 +26,7 @@ export const DetailContainer = styled.View`
 export const DetailLogoContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 37%;
 `;
 
@@ -44,10 +44,18 @@ export const UpperRow = styled.View`
   justify-content: space-between;
 `;
 
+export const CenterRow = styled.View`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
 export const LowerRow = styled.View`
   width: 100%;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const ViewMoreContainer = styled.View`

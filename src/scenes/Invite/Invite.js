@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Share, Linking, Image } from "react-native";
+import { Share, Image } from "react-native";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 import Title from "../../components/text/Title";
 import Container from "../../components/layout/Container";
@@ -16,19 +18,19 @@ import {
   LogoContainer,
   UnitContainer,
   ActionContainer,
-  CheckBoxContainer,
   CodeContainer,
   BackContainer
 } from "./styles";
 
-export default function Invite({ navigation }) {
-  const [isOwner, setOwner] = useState(false);
-  const [code, setCode] = useState("SJDW-DWJE-ADWW");
+const mapStateToProps = ({ unit }) => ({
+  unit
+});
 
+function Invite(props) {
   async function onShare() {
     try {
       const result = await Share.share({
-        message: `https://villamil.github.io/torres-link?code=${code}`
+        message: `https://villamil.github.io/torres-link?code=${props.unit.data.signUpCode}`
       });
 
       if (result.action === Share.sharedAction) {
@@ -47,7 +49,7 @@ export default function Invite({ navigation }) {
 
   return (
     <Container type="light">
-      <BackContainer onPress={() => navigation.goBack()}>
+      <BackContainer onPress={() => props.navigation.goBack()}>
         <Image
           style={{
             height: 25,
@@ -66,7 +68,8 @@ export default function Invite({ navigation }) {
       </LogoContainer>
       <UnitContainer>
         <Title color={theme.dark} size="large">
-          101A
+          {props.unit.data.number}
+          {props.unit.data.section}
         </Title>
         <Title color={theme.darkGray} size="small">
           Comparte este codigo para invitar a alguien a este departamento!
@@ -77,7 +80,7 @@ export default function Invite({ navigation }) {
           backgroundColor={theme.darkGray}
           enabled={false}
           textAlign="center"
-          value={code}
+          value={props.unit.data.signUpCode}
         />
       </CodeContainer>
       <ActionContainer>
@@ -90,3 +93,5 @@ export default function Invite({ navigation }) {
     </Container>
   );
 }
+
+export default connect(mapStateToProps, null)(Invite);

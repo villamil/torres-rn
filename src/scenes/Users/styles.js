@@ -30,9 +30,8 @@ export const InviteContainer = styled.TouchableOpacity`
   width: 25%;
 `;
 
-export const UsersContainer = styled.View`
+export const UsersContainer = styled.ScrollView`
   width: 100%;
-  align-items: center;
 `;
 
 export const UserContainer = styled.View`
@@ -49,6 +48,7 @@ export const UserContainer = styled.View`
 
 export const NameContainer = styled.View`
   width: 60%;
+  height: 50%;
   justify-content: space-between;
 `;
 

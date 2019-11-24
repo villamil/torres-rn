@@ -9,6 +9,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import MaintenanceDark from "../../assets/maintenance-logo-dark.png";
+import WaterDark from "../../assets/water-logo-dark.png";
 
 import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
@@ -23,35 +24,53 @@ import {
   UpperRow,
   LowerRow,
   DetailLogoContainer,
-  ViewMoreContainer,
+  CenterRow,
   BankDetailsContainer,
   BankContainer
 } from "./styles";
 
-const mapStateToProps = ({ maintenance, unit }) => ({
+const mapStateToProps = ({ maintenance, unit, water }) => ({
   maintenance,
+  water,
   unit
 });
 
 function GeneralDetails(props) {
   function renderDetailContainer() {
-    return Object.values(props.maintenance.data).map(item => (
+    const details = [
+      ...Object.values(props.maintenance.data),
+      ...Object.values(props.water.data)
+    ].sort((a, b) => {
+      return a.month - b.month;
+    });
+    return details.map(item => (
       <DetailContainer key={item.id}>
         <UpperRow>
           <DetailLogoContainer>
-            <Image style={{ height: 35, width: 35 }} source={MaintenanceDark} />
-            <Title color={theme.dark} size="tiny">
-              Mantenimiento
+            <Image
+              style={{ height: 35, width: 35 }}
+              source={item.currentMesured ? WaterDark : MaintenanceDark}
+            />
+            <Title color={theme.dark} size="tiny" style={{ marginLeft: 5 }}>
+              {item.currentMesured ? "Agua" : "Mantenimiento"}
             </Title>
           </DetailLogoContainer>
-          <Title color={item.paid ? theme.green : theme.lowDark} size="small">
-            $ {item.dueAmount} MXN
+          <Title color={theme.lowDark} size="small">
+            $ {item.paidAmount} MXN
           </Title>
         </UpperRow>
+        <CenterRow>
+          <Title color={theme.dark} opacity="0.7" size="tiny">
+            De
+          </Title>
+        </CenterRow>
         <LowerRow>
           <Title color={theme.dark} opacity="0.7" size="tiny">
             {MONTHS_MAP[item.month]} {item.year} -{" "}
             {item.paid ? "Pagado" : "Pendiente"}
+          </Title>
+          <Title color={theme.lowDark} size="small">
+            $ {item.dueAmount} MXN
           </Title>
         </LowerRow>
       </DetailContainer>

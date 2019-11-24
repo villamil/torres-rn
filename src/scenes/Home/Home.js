@@ -74,10 +74,12 @@ function Home(props) {
   const drawerHeight = Math.round(deviceHeight * 1.3);
 
   useEffect(() => {
+    console.log("-------UPDATE HOME ----------------");
+    console.log(props.auth.defaultUnitId);
     props.getUnit(props.auth.defaultUnitId);
     props.getMaintenance(props.auth.defaultUnitId);
     props.getWater(props.auth.defaultUnitId);
-  }, []);
+  }, [props.auth]);
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(

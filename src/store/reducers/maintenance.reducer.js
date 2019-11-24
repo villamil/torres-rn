@@ -1,7 +1,8 @@
 import {
   GET_MAINTENANCE_START,
   GET_MAINTENANCE_SUCCESS,
-  GET_MAINTENANCE_ERROR
+  GET_MAINTENANCE_ERROR,
+  CLEAR_MAINTENANCE
 } from "../actions/maintenance.action";
 
 const initialState = {
@@ -31,6 +32,11 @@ const maintenanceReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         hasError: true
+      };
+    }
+    case CLEAR_MAINTENANCE: {
+      return {
+        ...initialState
       };
     }
     default:

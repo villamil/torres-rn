@@ -31,6 +31,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.payload,
+        defaultUnitId: action.payload.defaultUnit.id,
         loading: false,
         logged: true
       };

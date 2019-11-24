@@ -18,6 +18,9 @@ import theme from "../../colorTheme";
 import SCREENS from "../../navigatorMap";
 
 import { logout } from "../../store/actions/auth.action";
+import { clearUnit } from "../../store/actions/unit.action";
+import { clearMaintenance } from "../../store/actions/maintenance.action";
+import { clearWater } from "../../store/actions/water.action";
 
 import {
   MenuContainer,
@@ -37,7 +40,10 @@ const mapStateToProps = ({ auth }) => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      logout
+      logout,
+      clearUnit,
+      clearMaintenance,
+      clearWater
     },
     dispatch
   );
@@ -137,6 +143,9 @@ function Menu(props) {
 
         <MenuItemContainer
           onPress={() => {
+            props.clearUnit();
+            props.clearMaintenance();
+            props.clearWater();
             props.logout();
             props.navigation.navigate(SCREENS.SIGN_IN);
           }}

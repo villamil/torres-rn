@@ -1,7 +1,8 @@
 import {
   GET_WATER_START,
   GET_WATER_SUCCESS,
-  GET_WATER_ERROR
+  GET_WATER_ERROR,
+  CLEAR_WATER
 } from "../actions/water.action";
 
 const initialState = {
@@ -31,6 +32,11 @@ const waterReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         hasError: true
+      };
+    }
+    case CLEAR_WATER: {
+      return {
+        ...initialState
       };
     }
     default:
