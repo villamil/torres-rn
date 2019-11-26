@@ -73,7 +73,7 @@ function Home(props) {
   const drawerOffset = Math.round(deviceHeight * 0.33);
   const drawerHeight = Math.round(deviceHeight * 1.3);
 
-  console.log(props.unit);
+  console.log(props.auth.units);
 
   useEffect(() => {
     console.log("-------UPDATE HOME ----------------");
@@ -97,6 +97,11 @@ function Home(props) {
 
   if (props.navigation.getParam("unitPopUp") && !unitPopUp) {
     setUnitPopUp(true);
+  }
+
+  function handleCloseModal() {
+    setUnitPopUp(false);
+    props.navigation.setParams({ unitPopUp: false });
   }
 
   return (
@@ -126,19 +131,14 @@ function Home(props) {
           <ModalContainer>
             <ModalContent>
               <CloseContainer>
-                <CloseTouchable
-                  onPress={() => {
-                    setUnitPopUp(false);
-                    props.navigation.setParams({ unitPopUp: false });
-                  }}
-                >
+                <CloseTouchable onPress={handleCloseModal}>
                   <Image style={{ height: 20, width: 20 }} source={CloseIcon} />
                 </CloseTouchable>
                 <Title color={theme.dark} size="small">
                   Selecciona
                 </Title>
               </CloseContainer>
-              <UnitsSelector />
+              <UnitsSelector handleCloseModal={handleCloseModal} />
             </ModalContent>
           </ModalContainer>
         </TouchableOpacity>

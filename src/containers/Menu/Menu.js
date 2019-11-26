@@ -77,7 +77,7 @@ function Menu(props) {
               source={UsersLogo}
             />
             <Title color={theme.lowDark} size="tiny">
-              Usuarios
+              Inquilinos
             </Title>
           </ItemWrapper>
           <Image style={{ height: 15, width: 15 }} source={NextLogo} />

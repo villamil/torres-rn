@@ -3,7 +3,8 @@ import {
   AUTH_SUCCESS,
   AUTH_ERROR,
   AUTH_LOGOUT,
-  REMEMBER_SESION
+  REMEMBER_SESION,
+  AUTH_CHANGE_UNIT
 } from "../actions/auth.action";
 
 const initialState = {
@@ -20,6 +21,12 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case AUTH_CHANGE_UNIT: {
+      return {
+        ...state,
+        defaultUnitId: action.payload.unit.id
+      };
+    }
     case AUTH_START: {
       return {
         ...state,

@@ -4,7 +4,14 @@ export const AUTH_ERROR = "AUTH_ERROR";
 
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
+export const AUTH_CHANGE_UNIT = "AUTH_CHANGE_UNIT";
+
 export const REMEMBER_SESION = "REMEMBER_SESION";
+
+export const changeUnit = unit => ({
+  type: AUTH_CHANGE_UNIT,
+  payload: { unit }
+});
 
 export const authenticate = userInfo => ({
   type: AUTH_START,
@@ -17,7 +24,6 @@ export const rememberSesion = remember => ({
 });
 
 export const logout = () => {
-  console.log("log");
   return {
     type: AUTH_LOGOUT,
     payload: {}
