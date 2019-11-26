@@ -73,6 +73,8 @@ function Home(props) {
   const drawerOffset = Math.round(deviceHeight * 0.33);
   const drawerHeight = Math.round(deviceHeight * 1.3);
 
+  console.log(props.unit);
+
   useEffect(() => {
     console.log("-------UPDATE HOME ----------------");
     console.log(props.auth.defaultUnitId);

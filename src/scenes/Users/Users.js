@@ -67,55 +67,38 @@ function Users(props) {
   }
 
   function onAdminChange(user) {
-    const isAdmin =
-      props.unit.data.owners.filter(item => item.id === user.id).length >= 1;
     console.log("-------------CHANGE -------------------");
-    props.changeUserPermision(user.id, props.auth.defaultUnitId, !isAdmin);
+    props.changeUserPermision(user.id, props.auth.defaultUnitId, !user.isOwner);
   }
 
   function renderUsers() {
-    const users = [
-      ...props.unit.data.owners
-        .filter(item => item.id !== props.auth.userId)
-        .map(item => ({ ...item, isOwner: true })),
-      ...props.unit.data.tenants
-        .filter(item => item.id !== props.auth.userId)
-        .map(item => ({ ...item, isOwner: false }))
-    ].sort((a, b) => {
-      if (a.firstName < b.firstName) {
-        return -1;
-      }
-      if (a.firstName > b.firstName) {
-        return 1;
-      }
-      return 0;
-    });
+    return props.unit.data.userUnit
+      .filter(item => item.user.id !== props.auth.userId)
+      .map(item => {
+        console.log("-------division --------------");
+        console.log(item.user.firstName, item.isOwner);
+        return (
+          <UserContainer key={item.user.id}>
+            <DeleteContainer onPress={() => onDelete(item.user)}>
+              <Image style={{ width: 20, height: 20 }} source={DeleteLogo} />
+            </DeleteContainer>
 
-    return users.map(user => {
-      console.log("-------division --------------");
-      console.log(user.firstName, user.isOwner);
-      return (
-        <UserContainer key={user.id}>
-          <DeleteContainer onPress={() => onDelete(user)}>
-            <Image style={{ width: 20, height: 20 }} source={DeleteLogo} />
-          </DeleteContainer>
-
-          <NameContainer>
-            <Title color={theme.dark} size="small" align="left">
-              {user.firstName} {user.lastName}
-            </Title>
-            <Title color={theme.darkGray} size="tiny" align="left">
-              {user.email}
-            </Title>
-          </NameContainer>
-          <CheckBox
-            checked={user.isOwner}
-            onPress={() => onAdminChange(user)}
-            backgroundColor={theme.white}
-          />
-        </UserContainer>
-      );
-    });
+            <NameContainer>
+              <Title color={theme.dark} size="small" align="left">
+                {item.user.firstName} {item.user.lastName}
+              </Title>
+              <Title color={theme.darkGray} size="tiny" align="left">
+                {item.user.email}
+              </Title>
+            </NameContainer>
+            <CheckBox
+              checked={item.isOwner}
+              onPress={() => onAdminChange(item)}
+              backgroundColor={theme.white}
+            />
+          </UserContainer>
+        );
+      });
   }
 
   return (

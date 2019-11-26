@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Image } from "react-native";
-import Picker from "react-native-picker";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
@@ -30,35 +29,41 @@ import SCREENS from "../../navigatorMap";
 export default function Filter({ navigation }) {
   const [inputFields, setInputFields] = useState({});
 
-  function onFromDate() {
-    Picker.init({
-      pickerData: [["Enero", "Febrero"], [2016, 2017, 2018]],
-      pickerTitleText: "Selecciona",
-      pickerConfirmBtnText: "Confirmar",
-      pickerCancelBtnText: "Cancelar",
-      pickerFontSize: 24,
-      pickerToolBarFontSize: 18,
-      onPickerConfirm: ([month, year]) => {
-        setInputFields({ ...inputFields, fromDate: { month, year } });
-      }
-    });
-    Picker.show();
-  }
+  // function onFromDate() {
+  //   Picker.init({
+  //     pickerData: [
+  //       ["Enero", "Febrero"],
+  //       [2016, 2017, 2018]
+  //     ],
+  //     pickerTitleText: "Selecciona",
+  //     pickerConfirmBtnText: "Confirmar",
+  //     pickerCancelBtnText: "Cancelar",
+  //     pickerFontSize: 24,
+  //     pickerToolBarFontSize: 18,
+  //     onPickerConfirm: ([month, year]) => {
+  //       setInputFields({ ...inputFields, fromDate: { month, year } });
+  //     }
+  //   });
+  //   Picker.show();
+  // }
 
-  function onEndDate() {
-    Picker.init({
-      pickerData: [["Enero", "Febrero"], [2016, 2017, 2018]],
-      pickerTitleText: "Selecciona",
-      pickerConfirmBtnText: "Confirmar",
-      pickerCancelBtnText: "Cancelar",
-      pickerFontSize: 24,
-      pickerToolBarFontSize: 18,
-      onPickerConfirm: ([month, year]) => {
-        setInputFields({ ...inputFields, endDate: { month, year } });
-      }
-    });
-    Picker.show();
-  }
+  // function onEndDate() {
+  //   Picker.init({
+  //     pickerData: [
+  //       ["Enero", "Febrero"],
+  //       [2016, 2017, 2018]
+  //     ],
+  //     pickerTitleText: "Selecciona",
+  //     pickerConfirmBtnText: "Confirmar",
+  //     pickerCancelBtnText: "Cancelar",
+  //     pickerFontSize: 24,
+  //     pickerToolBarFontSize: 18,
+  //     onPickerConfirm: ([month, year]) => {
+  //       setInputFields({ ...inputFields, endDate: { month, year } });
+  //     }
+  //   });
+  //   Picker.show();
+  // }
 
   return (
     <Container type="gray">
@@ -85,7 +90,7 @@ export default function Filter({ navigation }) {
           </Title>
           <Dropdown />
         </FieldContainer>
-        <DateContainer onPress={onFromDate}>
+        <DateContainer>
           <FieldTextContainer>
             <Title color={theme.lowDark} size="small">
               Desde
@@ -99,7 +104,7 @@ export default function Filter({ navigation }) {
           <Image style={{ height: 30, width: 30 }} source={CalendarLogo} />
         </DateContainer>
 
-        <DateContainer onPress={onEndDate}>
+        <DateContainer>
           <FieldTextContainer>
             <Title color={theme.lowDark} size="small">
               Hasta

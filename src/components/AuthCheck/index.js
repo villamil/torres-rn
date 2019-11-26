@@ -11,6 +11,7 @@ const mapStateToProps = ({ auth }) => {
 };
 
 function AuthCheck({ auth, navigation }) {
+  console.log(auth);
   useEffect(() => {
     if (auth.logged) {
       navigation.navigate(SCREENS.HOME);
