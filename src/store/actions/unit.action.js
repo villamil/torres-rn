@@ -22,12 +22,12 @@ export const clearUnit = () => ({
   payload: {}
 });
 
-export const deleteUser = (userId, unitId) => ({
+export const deleteUser = userUnitId => ({
   type: DELETE_USER_START,
-  payload: { userId, unitId }
+  payload: { userUnitId }
 });
 
-export const changeUserPermision = (userId, unitId, makeAdmin) => ({
+export const changeUserPermision = (userUnitId, makeAdmin) => ({
   type: CHANGE_USER_PERMISSION_START,
-  payload: { userId, unitId, makeAdmin }
+  payload: { userUnitId, makeAdmin }
 });

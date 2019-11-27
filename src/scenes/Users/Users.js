@@ -47,9 +47,9 @@ const mapDispatchToProps = dispatch => {
 };
 
 function Users(props) {
-  function onDelete(user) {
+  function onDelete(userUnit) {
     Alert.alert(
-      `Eliminar a ${user.firstName} ${user.lastName}`,
+      `Eliminar a ${userUnit.user.firstName} ${userUnit.user.lastName}`,
       "Seguro que quiere eliminar a este usuario?",
       [
         {
@@ -59,27 +59,24 @@ function Users(props) {
         },
         {
           text: "Eliminar",
-          onPress: () => props.deleteUser(user.id, props.auth.defaultUnitId)
+          onPress: () => props.deleteUser(userUnit.id)
         }
       ],
       { cancelable: false }
     );
   }
 
-  function onAdminChange(user) {
-    console.log("-------------CHANGE -------------------");
-    props.changeUserPermision(user.id, props.auth.defaultUnitId, !user.isOwner);
+  function onAdminChange(userUnit) {
+    props.changeUserPermision(userUnit.id, !userUnit.isOwner);
   }
 
   function renderUsers() {
     return props.unit.data.userUnit
       .filter(item => item.user.id !== props.auth.userId)
       .map(item => {
-        console.log("-------division --------------");
-        console.log(item.user.firstName, item.isOwner);
         return (
           <UserContainer key={item.user.id}>
-            <DeleteContainer onPress={() => onDelete(item.user)}>
+            <DeleteContainer onPress={() => onDelete(item)}>
               <Image style={{ width: 20, height: 20 }} source={DeleteLogo} />
             </DeleteContainer>
 

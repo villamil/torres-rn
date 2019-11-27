@@ -30,12 +30,9 @@ export function* getUnit({ payload }) {
 
 export function* deleteUser({ payload }) {
   try {
-    const result = yield fetch(
-      `${API_URI}/users/${payload.userId}/unit/${payload.unitId}`,
-      {
-        method: "DELETE"
-      }
-    ).then(response => response.json());
+    const result = yield fetch(`${API_URI}/user-unit/${payload.userUnitId}`, {
+      method: "DELETE"
+    }).then(response => response.json());
     if (result.error) {
       yield put({ type: DELETE_USER_ERROR });
     } else {
@@ -48,19 +45,18 @@ export function* deleteUser({ payload }) {
 
 export function* changeUserPermission({ payload }) {
   try {
-    const result = yield fetch(
-      `${API_URI}/users/${payload.userId}/unit/${payload.unitId}`,
-      {
-        method: "POST",
-        headers: {
-          ...HEADERS
-        },
-        body: JSON.stringify(payload)
-      }
-    ).then(response => response.json());
+    console.log(payload.userUnitId);
+    const result = yield fetch(`${API_URI}/user-unit/${payload.userUnitId}`, {
+      method: "POST",
+      headers: {
+        ...HEADERS
+      },
+      body: JSON.stringify(payload)
+    }).then(response => response.json());
     if (result.error) {
       yield put({ type: CHANGE_USER_PERMISSION_ERROR });
     } else {
+      console.log("sagas", result);
       yield put({ type: CHANGE_USER_PERMISSION_SUCCESS, payload: result });
     }
   } catch (error) {
