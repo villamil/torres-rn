@@ -160,7 +160,11 @@ function Home(props) {
       </UnitContainer>
       <ServicesContainer>
         <ServiceItem
-          onPress={() => props.navigation.navigate(SCREENS.MAINTENANCE_OWED)}
+          onPress={() =>
+            props.navigation.navigate(SCREENS.MAINTENANCE_OWED, {
+              type: "maintenance"
+            })
+          }
         >
           <ServiceTitleContainer>
             <TitleLeftContainer>
@@ -178,7 +182,11 @@ function Home(props) {
           </ServiceTitleContainer>
         </ServiceItem>
         <ServiceItem
-          onPress={() => props.navigation.navigate(SCREENS.WATER_OWED)}
+          onPress={() =>
+            props.navigation.navigate(SCREENS.MAINTENANCE_OWED, {
+              type: "water"
+            })
+          }
         >
           <ServiceTitleContainer>
             <TitleLeftContainer>
