@@ -7,7 +7,7 @@ export const UnitContainer = styled.View`
 `;
 
 export const ServicesContainer = styled.View`
-  margin-top: 15px;
+  margin-top: 40px;
   width: 90%;
   flex: 1;
 `;
@@ -15,10 +15,10 @@ export const ServicesContainer = styled.View`
 export const ServiceItem = styled.TouchableOpacity`
   background-color: ${theme.lowDark};
   width: 100%;
-  height: 20%;
+  height: 40%;
   padding: 8px 10px 8px 10px;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   align-items: flex-start;
   justify-content: space-between;
 `;

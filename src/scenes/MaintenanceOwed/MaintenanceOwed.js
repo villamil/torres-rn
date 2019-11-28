@@ -30,11 +30,9 @@ function MaintenanceOwed(props) {
       props.navigation.getParam("type") === "maintenance"
         ? Object.values(props.maintenance.data)
         : Object.values(props.water.data);
-    const details = [...data]
-      .filter(item => !item.paid)
-      .sort((a, b) => {
-        return a.month - b.month;
-      });
+    const details = [...data].sort((a, b) => {
+      return a.month - b.month;
+    });
     return details.map(item => (
       <DetailContainer key={item.id}>
         <UpperRow>

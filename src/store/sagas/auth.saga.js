@@ -1,4 +1,5 @@
 import { takeEvery, put, call } from "redux-saga/effects";
+import { SERVER_URI, SERVER_PORT } from "react-native-dotenv";
 
 import { AUTH_START, AUTH_SUCCESS, AUTH_ERROR } from "../actions/auth.action";
 import { API_URI, HEADERS } from "../../utils/api";
@@ -6,9 +7,9 @@ import fetch from "../../utils/fetchWithTimeout";
 
 export function* authenticate({ payload }) {
   try {
-    console.log("wtf");
+    console.log(API_URI);
     const result = yield fetch(
-      `${API_URI}/auth`,
+      `${SERVER_URI}:${SERVER_PORT}/auth`,
       {
         method: "POST",
         headers: {
@@ -18,7 +19,7 @@ export function* authenticate({ payload }) {
       },
       1000 * 10
     ).then(response => response.json());
-    console.log(result);
+    // console.log(result);
     if (result.error) {
       yield put({ type: AUTH_ERROR });
     } else {
@@ -29,7 +30,7 @@ export function* authenticate({ payload }) {
       yield put({ type: AUTH_SUCCESS, payload: payloadResult });
     }
   } catch (error) {
-    console.log("error", error);
+    console.log("error auth", error);
     yield put({ type: AUTH_ERROR });
   }
 }

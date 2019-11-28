@@ -13,7 +13,6 @@ export const CheckBoxBorder = styled.View`
   width: 25;
   height: 25;
   background-color: ${({ checked, checkedColor, backgroundColor }) => {
-    console.log(checkedColor, backgroundColor);
     return checked
       ? checkedColor || theme.green
       : backgroundColor || theme.dark;

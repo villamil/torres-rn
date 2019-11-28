@@ -26,44 +26,19 @@ import {
 } from "./styles";
 import SCREENS from "../../navigatorMap";
 
+const movementsTypes = [
+  {
+    label: "Mantenimiento",
+    value: "maintenance"
+  },
+  {
+    label: "Agua",
+    value: "water"
+  }
+];
+
 export default function Filter({ navigation }) {
   const [inputFields, setInputFields] = useState({});
-
-  // function onFromDate() {
-  //   Picker.init({
-  //     pickerData: [
-  //       ["Enero", "Febrero"],
-  //       [2016, 2017, 2018]
-  //     ],
-  //     pickerTitleText: "Selecciona",
-  //     pickerConfirmBtnText: "Confirmar",
-  //     pickerCancelBtnText: "Cancelar",
-  //     pickerFontSize: 24,
-  //     pickerToolBarFontSize: 18,
-  //     onPickerConfirm: ([month, year]) => {
-  //       setInputFields({ ...inputFields, fromDate: { month, year } });
-  //     }
-  //   });
-  //   Picker.show();
-  // }
-
-  // function onEndDate() {
-  //   Picker.init({
-  //     pickerData: [
-  //       ["Enero", "Febrero"],
-  //       [2016, 2017, 2018]
-  //     ],
-  //     pickerTitleText: "Selecciona",
-  //     pickerConfirmBtnText: "Confirmar",
-  //     pickerCancelBtnText: "Cancelar",
-  //     pickerFontSize: 24,
-  //     pickerToolBarFontSize: 18,
-  //     onPickerConfirm: ([month, year]) => {
-  //       setInputFields({ ...inputFields, endDate: { month, year } });
-  //     }
-  //   });
-  //   Picker.show();
-  // }
 
   return (
     <Container type="gray">
@@ -88,7 +63,7 @@ export default function Filter({ navigation }) {
           <Title color={theme.lowDark} size="small">
             Tipo de movimiento
           </Title>
-          <Dropdown />
+          <Dropdown items={movementsTypes} />
         </FieldContainer>
         <DateContainer>
           <FieldTextContainer>

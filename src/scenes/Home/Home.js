@@ -4,7 +4,9 @@ import {
   Dimensions,
   Modal,
   TouchableOpacity,
-  BackHandler
+  BackHandler,
+  RefreshControl,
+  ScrollView
 } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 import { bindActionCreators } from "redux";
@@ -69,14 +71,13 @@ const mapDispatchToProps = dispatch => {
 
 function Home(props) {
   const [unitPopUp, setUnitPopUp] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const deviceHeight = Math.round(Dimensions.get("window").height);
   const drawerOffset = Math.round(deviceHeight * 0.33);
   const drawerHeight = Math.round(deviceHeight * 1.3);
 
   useEffect(() => {
-    props.getUnit(props.auth.defaultUnitId);
-    props.getMaintenance(props.auth.defaultUnitId);
-    props.getWater(props.auth.defaultUnitId);
+    refreshStore();
   }, [props.auth]);
 
   useEffect(() => {
@@ -90,6 +91,27 @@ function Home(props) {
       backHandler.remove();
     };
   }, []);
+
+  useEffect(() => {
+    if (
+      !props.unit.loading &&
+      !props.maintenance.loading &&
+      !props.water.loading
+    ) {
+      setRefreshing(false);
+    }
+  }, [props.unit, props.maintenance, props.water]);
+
+  const refreshStore = () => {
+    props.getUnit(props.auth.defaultUnitId);
+    props.getMaintenance(props.auth.defaultUnitId);
+    props.getWater(props.auth.defaultUnitId);
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    refreshStore();
+  };
 
   if (props.navigation.getParam("unitPopUp") && !unitPopUp) {
     setUnitPopUp(true);
@@ -116,7 +138,7 @@ function Home(props) {
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "rgba(230,230,230, 0.2)"
+            backgroundColor: "rgba(13, 16, 21, 0.5)"
           }}
           activeOpacity={1}
           onPressOut={() => {
@@ -139,71 +161,80 @@ function Home(props) {
           </ModalContainer>
         </TouchableOpacity>
       </Modal>
-      <MenuContainer>
-        <MenuTouchable onPress={() => props.navigation.openDrawer()}>
-          <Image style={{ height: 25, width: 25 }} source={MenuIcon} />
-        </MenuTouchable>
-        <MenuTouchable
-          onPress={() => props.navigation.navigate(SCREENS.INVITE)}
-        >
-          <Image style={{ height: 25, width: 25 }} source={AddIcon} />
-        </MenuTouchable>
-      </MenuContainer>
-      <UnitContainer>
-        <Title size="medium" opacity="0.5" letterSpacing="2px">
-          Departamento
-        </Title>
-        <Title size="XL">
-          {props.unit.data.number}
-          {props.unit.data.section}
-        </Title>
-      </UnitContainer>
-      <ServicesContainer>
-        <ServiceItem
-          onPress={() =>
-            props.navigation.navigate(SCREENS.MAINTENANCE_OWED, {
-              type: "maintenance"
-            })
-          }
-        >
-          <ServiceTitleContainer>
-            <TitleLeftContainer>
-              <Image
-                style={{ height: 35, width: 35, marginRight: 10 }}
-                source={MaintenanceLogo}
-              />
-              <Title size="tiny">Mantenimiento</Title>
-            </TitleLeftContainer>
-            <AmountContainer>
-              <Title color={theme.light}>
-                $ {props.unit.data.totalMaintenanceOwed} MXN
-              </Title>
-            </AmountContainer>
-          </ServiceTitleContainer>
-        </ServiceItem>
-        <ServiceItem
-          onPress={() =>
-            props.navigation.navigate(SCREENS.MAINTENANCE_OWED, {
-              type: "water"
-            })
-          }
-        >
-          <ServiceTitleContainer>
-            <TitleLeftContainer>
-              <Image
-                style={{ height: 35, width: 35, marginRight: 10 }}
-                source={WaterLogo}
-              />
-              <Title size="tiny">Agua</Title>
-            </TitleLeftContainer>
-            <AmountContainer>
-              <Title color={theme.light}>
-                $ {props.unit.data.totalWaterOwed} MXN
-              </Title>
-            </AmountContainer>
-          </ServiceTitleContainer>
-        </ServiceItem>
-      </ServicesContainer>
+      <ScrollView
+        style={{ width: "100%", height: "100%" }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        <Container type="darkBlue">
+          <MenuContainer>
+            <MenuTouchable onPress={() => props.navigation.openDrawer()}>
+              <Image style={{ height: 25, width: 25 }} source={MenuIcon} />
+            </MenuTouchable>
+            <MenuTouchable
+              onPress={() => props.navigation.navigate(SCREENS.INVITE)}
+            >
+              <Image style={{ height: 25, width: 25 }} source={AddIcon} />
+            </MenuTouchable>
+          </MenuContainer>
+          <UnitContainer>
+            <Title size="medium" opacity="0.5" letterSpacing="2px">
+              Departamento
+            </Title>
+            <Title size="XL">
+              {props.unit.data.number}
+              {props.unit.data.section}
+            </Title>
+          </UnitContainer>
+          <ServicesContainer>
+            <ServiceItem
+              onPress={() =>
+                props.navigation.navigate(SCREENS.MAINTENANCE_OWED, {
+                  type: "maintenance"
+                })
+              }
+            >
+              <ServiceTitleContainer>
+                <TitleLeftContainer>
+                  <Image
+                    style={{ height: 35, width: 35, marginRight: 10 }}
+                    source={MaintenanceLogo}
+                  />
+                  <Title size="tiny">Mantenimiento</Title>
+                </TitleLeftContainer>
+                <AmountContainer>
+                  <Title color={theme.light}>
+                    $ {props.unit.data.totalMaintenanceOwed} MXN
+                  </Title>
+                </AmountContainer>
+              </ServiceTitleContainer>
+            </ServiceItem>
+            <ServiceItem
+              onPress={() =>
+                props.navigation.navigate(SCREENS.MAINTENANCE_OWED, {
+                  type: "water"
+                })
+              }
+            >
+              <ServiceTitleContainer>
+                <TitleLeftContainer>
+                  <Image
+                    style={{ height: 35, width: 35, marginRight: 10 }}
+                    source={WaterLogo}
+                  />
+                  <Title size="tiny">Agua</Title>
+                </TitleLeftContainer>
+                <AmountContainer>
+                  <Title color={theme.light}>
+                    $ {props.unit.data.totalWaterOwed} MXN
+                  </Title>
+                </AmountContainer>
+              </ServiceTitleContainer>
+            </ServiceItem>
+          </ServicesContainer>
+        </Container>
+      </ScrollView>
       <BottomDrawer
         containerHeight={drawerHeight}
         offset={Math.abs(drawerOffset) * -1}
