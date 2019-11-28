@@ -16,7 +16,8 @@ const initialState = {
   email: "",
   isOwner: false,
   loading: false,
-  logged: false
+  logged: false,
+  hasError: false
 };
 
 const authReducer = (state = initialState, action) => {
@@ -45,10 +46,8 @@ const authReducer = (state = initialState, action) => {
     }
     case AUTH_ERROR: {
       return {
-        ...state,
-        token: "",
-        loading: false,
-        logged: false
+        ...initialState,
+        hasError: true
       };
     }
     case AUTH_LOGOUT: {

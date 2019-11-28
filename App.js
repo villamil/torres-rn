@@ -17,6 +17,8 @@ import InviteScreen from "./src/scenes/Invite";
 import UsersScreen from "./src/scenes/Users";
 import FilterScreen from "./src/scenes/Filter";
 import DetailsScreen from "./src/scenes/Details";
+import MaintenanceOwedScreen from "./src/scenes/MaintenanceOwed";
+import WaterOwedScreen from "./src/scenes/WaterOwed";
 
 import SystemCheck from "./src/components/SystemCheck";
 
@@ -35,7 +37,9 @@ const MainStack = createStackNavigator(
     Invite: { screen: InviteScreen },
     Users: { screen: UsersScreen },
     Filter: { screen: FilterScreen },
-    Details: { screen: DetailsScreen }
+    Details: { screen: DetailsScreen },
+    MaintenanceOwed: { screen: MaintenanceOwedScreen },
+    WaterOwed: { screen: WaterOwedScreen }
   },
   {
     headerMode: "none"

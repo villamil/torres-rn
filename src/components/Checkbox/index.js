@@ -1,10 +1,10 @@
 import React from "react";
 import { CheckBoxContainer, CheckBoxBorder } from "./styles";
 
-export default function CheckBox({ checked, onPress, backgroundColor }) {
+export default function CheckBox({ checked, onPress, ...restProps }) {
   return (
-    <CheckBoxContainer onPress={onPress} backgroundColor={backgroundColor}>
-      <CheckBoxBorder checked={checked} backgroundColor={backgroundColor} />
+    <CheckBoxContainer onPress={onPress} {...restProps}>
+      <CheckBoxBorder checked={checked} {...restProps} />
     </CheckBoxContainer>
   );
 }

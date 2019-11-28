@@ -92,6 +92,8 @@ function Users(props) {
               checked={item.isOwner}
               onPress={() => onAdminChange(item)}
               backgroundColor={theme.white}
+              checkedColor={theme.lowDark}
+              borderColor={theme.lowDark}
             />
           </UserContainer>
         );

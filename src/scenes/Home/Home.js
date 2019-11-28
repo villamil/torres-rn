@@ -74,8 +74,6 @@ function Home(props) {
   const drawerHeight = Math.round(deviceHeight * 1.3);
 
   useEffect(() => {
-    console.log("-------UPDATE HOME ----------------");
-    console.log(props.auth.defaultUnitId);
     props.getUnit(props.auth.defaultUnitId);
     props.getMaintenance(props.auth.defaultUnitId);
     props.getWater(props.auth.defaultUnitId);
@@ -161,7 +159,9 @@ function Home(props) {
         </Title>
       </UnitContainer>
       <ServicesContainer>
-        <ServiceItem>
+        <ServiceItem
+          onPress={() => props.navigation.navigate(SCREENS.MAINTENANCE_OWED)}
+        >
           <ServiceTitleContainer>
             <TitleLeftContainer>
               <Image
@@ -177,7 +177,9 @@ function Home(props) {
             </AmountContainer>
           </ServiceTitleContainer>
         </ServiceItem>
-        <ServiceItem>
+        <ServiceItem
+          onPress={() => props.navigation.navigate(SCREENS.WATER_OWED)}
+        >
           <ServiceTitleContainer>
             <TitleLeftContainer>
               <Image

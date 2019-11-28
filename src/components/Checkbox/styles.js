@@ -13,11 +13,12 @@ export const CheckBoxBorder = styled.View`
   width: 25;
   height: 25;
   background-color: ${({ checked, checkedColor, backgroundColor }) => {
+    console.log(checkedColor, backgroundColor);
     return checked
       ? checkedColor || theme.green
       : backgroundColor || theme.dark;
   }};
-  border-color: ${theme.green};
+  border-color: ${({ borderColor }) => borderColor || theme.green};
   border-width: 1px;
   border-radius: 180px;
 `;

@@ -7,7 +7,9 @@ const SCREENS = {
   INVITE: "Invite",
   USERS: "Users",
   FILTER: "Filter",
-  DETAILS: "Details"
+  DETAILS: "Details",
+  MAINTENANCE_OWED: "MaintenanceOwed",
+  WATER_OWED: "WaterOwed"
 };
 
 export default SCREENS;

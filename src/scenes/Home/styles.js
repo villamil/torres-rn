@@ -12,7 +12,7 @@ export const ServicesContainer = styled.View`
   flex: 1;
 `;
 
-export const ServiceItem = styled.View`
+export const ServiceItem = styled.TouchableOpacity`
   background-color: ${theme.lowDark};
   width: 100%;
   height: 20%;
@@ -89,8 +89,8 @@ export const ModalContent = styled.View`
 
 export const CloseContainer = styled.View`
   height: 70;
-  width: 40%;
-  margin-left: 10;
+  width: 50%;
+  margin-left: 20;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;

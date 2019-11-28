@@ -47,6 +47,7 @@ const mapDispatchToProps = dispatch => {
 
 function SignIn({ navigation, authenticate, auth, rememberSesion }) {
   const [inputFields, setInputFields] = useState(initialState);
+
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",
@@ -94,6 +95,11 @@ function SignIn({ navigation, authenticate, auth, rememberSesion }) {
       <TitleContainer>
         <Title>¡Bienvenido!</Title>
       </TitleContainer>
+      <TitleContainer height="5%">
+        <Title color={theme.lowGreen} size="small">
+          {auth.hasError && !auth.loading ? "Error de conexión :(" : ""}
+        </Title>
+      </TitleContainer>
       <InputContainer>
         <Title size="tiny" color={theme.green}>
           Correo
@@ -130,7 +136,11 @@ function SignIn({ navigation, authenticate, auth, rememberSesion }) {
       </CheckBoxContainer>
 
       <NextContainer>
-        <Button text="INGRESAR" onPress={onSubmit} />
+        {auth.loading ? (
+          <Button text="CARGANDO..." disabled />
+        ) : (
+          <Button text="INGRESAR" onPress={onSubmit} />
+        )}
       </NextContainer>
     </Container>
   );
