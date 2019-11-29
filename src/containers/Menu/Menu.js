@@ -2,6 +2,7 @@ import React from "react";
 import { Image, Alert } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { VERSION } from "react-native-dotenv";
 
 import AuctionLogo from "../../assets/auction-dark.png";
 import NextLogo from "../../assets/next.png";
@@ -165,7 +166,7 @@ function Menu(props) {
       <FooterContainer>
         <Image style={{ height: 25, width: 25 }} source={TorresLogo} />
         <Title color={theme.darkGray} size="tiny">
-          Torres - V1.0.0
+          Torres - {VERSION}
         </Title>
       </FooterContainer>
     </MenuContainer>

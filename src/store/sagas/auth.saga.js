@@ -7,7 +7,6 @@ import fetch from "../../utils/fetchWithTimeout";
 
 export function* authenticate({ payload }) {
   try {
-    console.log(API_URI);
     const result = yield fetch(
       `${SERVER_URI}:${SERVER_PORT}/auth`,
       {
@@ -19,7 +18,6 @@ export function* authenticate({ payload }) {
       },
       1000 * 10
     ).then(response => response.json());
-    // console.log(result);
     if (result.error) {
       yield put({ type: AUTH_ERROR });
     } else {
