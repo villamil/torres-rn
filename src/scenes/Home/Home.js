@@ -250,13 +250,13 @@ function Home(props) {
             </Title>
           </PullContainer>
           <GeneralDetails />
-          <ViewMoreContainer>
+          {/* <ViewMoreContainer>
             <Button
               text="Ver Mas"
               backgroundColor={theme.lowDark}
               onPress={() => props.navigation.navigate(SCREENS.FILTER)}
             />
-          </ViewMoreContainer>
+          </ViewMoreContainer> */}
         </Container>
       </BottomDrawer>
     </Container>

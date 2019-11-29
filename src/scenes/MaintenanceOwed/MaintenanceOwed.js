@@ -29,7 +29,10 @@ function MaintenanceOwed(props) {
     const data =
       props.navigation.getParam("type") === "maintenance"
         ? Object.values(props.maintenance.data)
-        : Object.values(props.water.data);
+        : Object.values(props.water.data).map(item => ({
+            ...item,
+            isWater: true
+          }));
     const details = [...data].sort((a, b) => {
       return a.month - b.month;
     });
@@ -39,10 +42,10 @@ function MaintenanceOwed(props) {
           <DetailLogoContainer>
             <Image
               style={{ height: 35, width: 35 }}
-              source={item.currentMesured ? WaterDark : MaintenanceDark}
+              source={item.isWater ? WaterDark : MaintenanceDark}
             />
             <Title color={theme.dark} size="tiny" style={{ marginLeft: 5 }}>
-              {item.currentMesured ? "Agua" : "Mantenimiento"}
+              {item.isWater ? "Agua" : "Mantenimiento"}
             </Title>
           </DetailLogoContainer>
           <Title color={theme.lowDark} size="small">
