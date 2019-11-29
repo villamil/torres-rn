@@ -34,7 +34,7 @@ function MaintenanceOwed(props) {
             isWater: true
           }));
     const details = [...data].sort((a, b) => {
-      return a.month - b.month;
+      return b.month - a.month;
     });
     return details.map(item => (
       <DetailContainer key={item.id}>

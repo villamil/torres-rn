@@ -49,6 +49,8 @@ export default function Landing({ navigation }) {
     });
   }, []);
 
+  console.log("Mount landing");
+
   return (
     <Container>
       <AuthCheck navigation={navigation} />

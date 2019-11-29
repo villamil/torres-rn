@@ -78,7 +78,11 @@ function Home(props) {
 
   useEffect(() => {
     refreshStore();
-  }, [props.auth]);
+  }, []);
+
+  useEffect(() => {
+    refreshStore();
+  }, [props.auth.defaultUnitId]);
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
@@ -104,8 +108,8 @@ function Home(props) {
 
   const refreshStore = () => {
     props.getUnit(props.auth.defaultUnitId);
-    props.getMaintenance(props.auth.defaultUnitId);
-    props.getWater(props.auth.defaultUnitId);
+    props.getMaintenance(props.auth.defaultUnitId, 2);
+    props.getWater(props.auth.defaultUnitId, 2);
   };
 
   const onRefresh = () => {
@@ -250,13 +254,13 @@ function Home(props) {
             </Title>
           </PullContainer>
           <GeneralDetails />
-          {/* <ViewMoreContainer>
+          <ViewMoreContainer>
             <Button
               text="Ver Mas"
               backgroundColor={theme.lowDark}
               onPress={() => props.navigation.navigate(SCREENS.FILTER)}
             />
-          </ViewMoreContainer> */}
+          </ViewMoreContainer>
         </Container>
       </BottomDrawer>
     </Container>

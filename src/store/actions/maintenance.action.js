@@ -4,9 +4,9 @@ export const GET_MAINTENANCE_ERROR = "GET_MAINTENANCE_ERROR";
 
 export const CLEAR_MAINTENANCE = "CLEAR_MAINTENANCE";
 
-export const getMaintenance = unitId => ({
+export const getMaintenance = (unitId, limit = null) => ({
   type: GET_MAINTENANCE_START,
-  payload: { unitId }
+  payload: { unitId, limit }
 });
 
 export const clearMaintenance = () => ({

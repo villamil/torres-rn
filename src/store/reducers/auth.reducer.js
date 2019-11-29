@@ -1,3 +1,5 @@
+import jwtDecode from "jwt-decode";
+
 import {
   AUTH_START,
   AUTH_SUCCESS,
@@ -30,16 +32,17 @@ const authReducer = (state = initialState, action) => {
     }
     case AUTH_START: {
       return {
-        ...state,
+        ...initialState,
         loading: true,
         rememberSesion: action.payload.rememberSesion
       };
     }
     case AUTH_SUCCESS: {
+      const tokenData = jwtDecode(action.payload.token);
       return {
         ...state,
         ...action.payload,
-        defaultUnitId: action.payload.defaultUnit.id,
+        ...tokenData,
         loading: false,
         logged: true
       };

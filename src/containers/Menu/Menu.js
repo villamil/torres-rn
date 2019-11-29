@@ -3,6 +3,7 @@ import { Image, Alert } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { VERSION } from "react-native-dotenv";
+import { NavigationActions, StackActions } from "react-navigation";
 
 import AuctionLogo from "../../assets/auction-dark.png";
 import NextLogo from "../../assets/next.png";
@@ -148,7 +149,15 @@ function Menu(props) {
             props.clearMaintenance();
             props.clearWater();
             props.logout();
-            props.navigation.navigate(SCREENS.SIGN_IN);
+            props.navigation.dispatch(
+              StackActions.reset({
+                index: 0,
+                key: null,
+                actions: [
+                  NavigationActions.navigate({ routeName: SCREENS.LANDING })
+                ]
+              })
+            );
           }}
         >
           <ItemWrapper>

@@ -22,7 +22,6 @@ export function* authenticate({ payload }) {
       yield put({ type: AUTH_ERROR });
     } else {
       const payloadResult = {
-        ...result.metadata,
         token: result.token
       };
       yield put({ type: AUTH_SUCCESS, payload: payloadResult });

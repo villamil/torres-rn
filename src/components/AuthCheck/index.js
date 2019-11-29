@@ -12,7 +12,7 @@ const mapStateToProps = ({ auth }) => {
 
 function AuthCheck({ auth, navigation }) {
   useEffect(() => {
-    if (auth.logged) {
+    if (auth.logged && auth.rememberSesion) {
       navigation.navigate(SCREENS.HOME);
     }
   }, [auth]);

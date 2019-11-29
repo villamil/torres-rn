@@ -44,7 +44,7 @@ function GeneralDetails(props) {
         isWater: true
       }))
     ].sort((a, b) => {
-      return a.month - b.month;
+      return b.month - a.month;
     });
     return details.map(item => (
       <DetailContainer key={item.id}>
@@ -99,11 +99,7 @@ function GeneralDetails(props) {
           </Title>
         </BankDetailsContainer>
       </BankContainer>
-      <ScrollView style={{ width: "100%" }}>
-        <TouchableWithoutFeedback>
-          <View>{renderDetailContainer()}</View>
-        </TouchableWithoutFeedback>
-      </ScrollView>
+      {renderDetailContainer()}
     </DetailsContainer>
   );
 }

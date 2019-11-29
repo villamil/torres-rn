@@ -4,9 +4,9 @@ export const GET_WATER_ERROR = "GET_WATER_ERROR";
 
 export const CLEAR_WATER = "CLEAR_WATER";
 
-export const getWater = unitId => ({
+export const getWater = (unitId, limit = null) => ({
   type: GET_WATER_START,
-  payload: { unitId }
+  payload: { unitId, limit }
 });
 
 export const clearWater = () => ({

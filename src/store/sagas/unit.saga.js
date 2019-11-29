@@ -4,6 +4,9 @@ import {
   GET_UNIT_START,
   GET_UNIT_SUCCESS,
   GET_UNIT_ERROR,
+  GET_UNIT_LIST_START,
+  GET_UNIT_LIST_SUCCESS,
+  GET_UNIT_LIST_ERROR,
   DELETE_USER_START,
   DELETE_USER_SUCCESS,
   DELETE_USER_ERROR,
@@ -22,6 +25,21 @@ export function* getUnit({ payload }) {
       yield put({ type: GET_UNIT_ERROR });
     } else {
       yield put({ type: GET_UNIT_SUCCESS, payload: result });
+    }
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+
+export function* getUnitList({ payload }) {
+  try {
+    const result = yield fetch(
+      `${API_URI}/user-unit/${payload.userId}`
+    ).then(response => response.json());
+    if (result.error) {
+      yield put({ type: GET_UNIT_LIST_ERROR });
+    } else {
+      yield put({ type: GET_UNIT_LIST_SUCCESS, payload: result });
     }
   } catch (error) {
     console.log("error", error);
@@ -66,6 +84,7 @@ export function* changeUserPermission({ payload }) {
 
 export function* unitSaga() {
   yield takeEvery(GET_UNIT_START, getUnit);
+  yield takeEvery(GET_UNIT_LIST_START, getUnitList);
   yield takeEvery(DELETE_USER_START, deleteUser);
   yield takeEvery(CHANGE_USER_PERMISSION_START, changeUserPermission);
 }

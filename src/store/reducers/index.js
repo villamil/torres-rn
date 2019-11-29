@@ -6,6 +6,7 @@ import auth from "./auth.reducer";
 import maintenance from "./maintenance.reducer";
 import unit from "./unit.reducer";
 import water from "./water.reducer";
+import userUnit from "./userUnit.reducer";
 
 const rootReducer = combineReducers({
   system,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   auth,
   maintenance,
   unit,
-  water
+  water,
+  userUnit
 });
 
 export default rootReducer;

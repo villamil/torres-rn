@@ -61,6 +61,12 @@ function SignIn({ navigation, authenticate, auth, rememberSesion }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (auth.logged) {
+      navigation.navigate(SCREENS.HOME);
+    }
+  }, [auth.logged]);
+
   function onInputChange(name, value) {
     setInputFields({ ...inputFields, [name]: value });
   }
@@ -85,7 +91,6 @@ function SignIn({ navigation, authenticate, auth, rememberSesion }) {
 
   return (
     <Container>
-      <AuthCheck navigation={navigation} />
       <LogoContainer>
         <Image
           style={{ width: 50, height: 50, marginRight: 10 }}
