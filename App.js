@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { StatusBar, View, Button } from "react-native";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
+import SplashScreen from "react-native-splash-screen";
 
 import { store, persistor } from "./src/store";
 
@@ -18,6 +19,7 @@ import UsersScreen from "./src/scenes/Users";
 import FilterScreen from "./src/scenes/Filter";
 import DetailsScreen from "./src/scenes/Details";
 import MaintenanceOwedScreen from "./src/scenes/MaintenanceOwed";
+import SplashScreenComponent from "./src/scenes/SplashScreen";
 
 import SystemCheck from "./src/components/SystemCheck";
 
@@ -46,6 +48,7 @@ const MainStack = createStackNavigator(
 
 const MenuNavigator = createDrawerNavigator(
   {
+    SplashScreen: { screen: SplashScreenComponent },
     MainStack: {
       screen: MainStack,
       navigationOptions: ({ navigation }) => {
@@ -73,11 +76,14 @@ const MenuNavigator = createDrawerNavigator(
 const AppContent = createAppContainer(MenuNavigator);
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <SystemCheck />
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: theme.dark }}>
           <StatusBar backgroundColor={theme.dark} barStyle="light-content" />
           <AppContent />
         </View>

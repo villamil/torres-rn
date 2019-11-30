@@ -11,7 +11,11 @@ import Input from "../../components/input/input";
 import CheckBox from "../../components/Checkbox";
 import AuthCheck from "../../components/AuthCheck";
 
-import { authenticate, rememberSesion } from "../../store/actions/auth.action";
+import {
+  authenticate,
+  rememberSesion,
+  logout
+} from "../../store/actions/auth.action";
 
 import Torres from "../../assets/torres.png";
 import SCREENS from "../../navigatorMap";
@@ -42,12 +46,12 @@ const mapStateToProps = ({ auth }) => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ authenticate, rememberSesion }, dispatch);
+  return bindActionCreators({ authenticate, rememberSesion, logout }, dispatch);
 };
 
-function SignIn({ navigation, authenticate, auth, rememberSesion }) {
+function SignIn({ navigation, authenticate, auth, rememberSesion, logout }) {
   const [inputFields, setInputFields] = useState(initialState);
-
+  console.log(auth);
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",
