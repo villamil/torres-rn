@@ -51,7 +51,7 @@ const mapDispatchToProps = dispatch => {
 
 function SignIn({ navigation, authenticate, auth, rememberSesion, logout }) {
   const [inputFields, setInputFields] = useState(initialState);
-  console.log(auth);
+
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",
@@ -82,7 +82,7 @@ function SignIn({ navigation, authenticate, auth, rememberSesion, logout }) {
     } else {
       setInputFields(initialState);
       authenticate({
-        rememberSesion: inputFields.rememberLogin,
+        rememberSesion: auth.rememberSesion,
         email: inputFields.email,
         password: inputFields.password
       });

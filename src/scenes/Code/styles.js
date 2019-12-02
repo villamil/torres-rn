@@ -17,7 +17,7 @@ export const NextContainer = styled.View`
   height: 10%;
   margin-bottom: 20;
   width: 80%;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
 `;
 
 export const InstructionsContainer = styled.View`

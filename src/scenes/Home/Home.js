@@ -75,7 +75,6 @@ function Home(props) {
   const deviceHeight = Math.round(Dimensions.get("window").height);
   const drawerOffset = Math.round(deviceHeight * 0.33);
   const drawerHeight = Math.round(deviceHeight * 1.3);
-
   useEffect(() => {
     refreshStore();
   }, []);

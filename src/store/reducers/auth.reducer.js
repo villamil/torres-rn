@@ -50,7 +50,8 @@ const authReducer = (state = initialState, action) => {
     case AUTH_ERROR: {
       return {
         ...initialState,
-        hasError: true
+        hasError: true,
+        loading: false
       };
     }
     case AUTH_LOGOUT: {
