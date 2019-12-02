@@ -12,7 +12,7 @@ export const InputContainer = styled.View`
 `;
 
 export const NextContainer = styled.View`
-  height: 50%;
+  height: 45%;
   width: 80%;
   justify-content: flex-end;
 `;

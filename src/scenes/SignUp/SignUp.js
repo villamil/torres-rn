@@ -34,7 +34,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 function SignUp({ navigation, validateCode, restoreCode, singUp }) {
-  const [inputFields, setInputFields] = useState({ code: "PBrfkVh" });
+  const [inputFields, setInputFields] = useState({ code: "abc" });
   const [codeError, setCodeError] = useState("");
 
   useEffect(() => {

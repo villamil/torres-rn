@@ -83,8 +83,12 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
   return (
     <KeyboardAvoidingView style={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <Container>
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1
+          }}
+        >
+          <Container style={{ bottom: 0 }}>
             <LogoContainer>
               <Image
                 style={{ width: 50, height: 50, marginRight: 10 }}

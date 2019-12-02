@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const LogoContainer = styled.View`
-  height: 15%;
+  height: 120;
   align-items: center;
   justify-content: center;
 `;
@@ -14,10 +14,10 @@ export const InputContainer = styled.View`
 `;
 
 export const NextContainer = styled.View`
-  height: 10%;
-  margin-bottom: 20;
+  height: 50;
   width: 80%;
-  /* justify-content: flex-end; */
+  justify-content: flex-end;
+  margin-bottom: 20;
 `;
 
 export const InstructionsContainer = styled.View`
