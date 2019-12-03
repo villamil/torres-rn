@@ -257,7 +257,11 @@ function Home(props) {
             <Button
               text="Ver Mas"
               backgroundColor={theme.lowDark}
-              onPress={() => props.navigation.navigate(SCREENS.FILTER)}
+              onPress={() =>
+                props.navigation.navigate(SCREENS.MAINTENANCE_OWED, {
+                  type: "all"
+                })
+              }
             />
           </ViewMoreContainer>
         </Container>

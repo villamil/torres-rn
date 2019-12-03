@@ -1,9 +1,13 @@
-import React from "react";
-import { Image, ScrollView } from "react-native";
+import React, { useEffect } from "react";
+import { Image, ScrollView, FlatList } from "react-native";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
+
+import { getMaintenance } from "../../store/actions/maintenance.action";
+import { getWater } from "../../store/actions/water.action";
 
 import NextLogo from "../../assets/next.png";
 import MaintenanceDark from "../../assets/maintenance-logo-dark.png";
@@ -11,6 +15,12 @@ import WaterDark from "../../assets/water-logo-dark.png";
 
 import theme from "../../colorTheme";
 import { MONTHS_MAP } from "../../utils/dates";
+
+const types = {
+  maintenance: "Mantenimiento",
+  water: "Agua",
+  all: "Resumen"
+};
 
 import {
   BackContainer,
@@ -22,19 +32,74 @@ import {
   LowerRow
 } from "./styles";
 
-const mapStateToProps = ({ maintenance, water }) => ({ maintenance, water });
+const mapStateToProps = ({ auth, maintenance, water }) => ({
+  auth,
+  maintenance,
+  water
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getMaintenance, getWater }, dispatch);
+};
 
 function MaintenanceOwed(props) {
+  useEffect(() => {
+    switch (props.navigation.getParam("type")) {
+      case "maintenance": {
+        props.getMaintenance(props.auth.defaultUnitId);
+        break;
+      }
+      case "water": {
+        props.getWater(props.auth.defaultUnitId);
+        break;
+      }
+      case "all": {
+        props.getMaintenance(props.auth.defaultUnitId);
+        props.getWater(props.auth.defaultUnitId);
+        break;
+      }
+      default:
+        return [];
+    }
+
+    return () => {
+      props.getMaintenance(props.auth.defaultUnitId, 2);
+      props.getWater(props.auth.defaultUnitId, 2);
+    };
+  }, []);
+
   function renderOwedMaintenance() {
-    const data =
-      props.navigation.getParam("type") === "maintenance"
-        ? Object.values(props.maintenance.data)
-        : Object.values(props.water.data).map(item => ({
+    let data = [];
+    switch (props.navigation.getParam("type")) {
+      case "maintenance": {
+        data = [...Object.values(props.maintenance.data)];
+        break;
+      }
+      case "water": {
+        data = [
+          ...Object.values(props.water.data).map(item => ({
             ...item,
             isWater: true
-          }));
+          }))
+        ];
+        break;
+      }
+      case "all": {
+        data = [
+          ...Object.values(props.maintenance.data),
+          ...Object.values(props.water.data).map(item => ({
+            ...item,
+            isWater: true
+          }))
+        ];
+        break;
+      }
+      default:
+        return [];
+    }
+
     const details = [...data].sort((a, b) => {
-      return b.month - a.month;
+      return b.year - a.year || b.month - a.month;
     });
     return details.map(item => (
       <DetailContainer key={item.id}>
@@ -84,9 +149,7 @@ function MaintenanceOwed(props) {
             source={NextLogo}
           />
           <Title color={theme.dark} size="small">
-            {props.navigation.getParam("type") === "maintenance"
-              ? "Mantenimiento"
-              : "Agua"}
+            {types[props.navigation.getParam("type") || "-"]}
           </Title>
         </BackTextContainer>
       </BackContainer>
@@ -97,4 +160,4 @@ function MaintenanceOwed(props) {
   );
 }
 
-export default connect(mapStateToProps, null)(MaintenanceOwed);
+export default connect(mapStateToProps, mapDispatchToProps)(MaintenanceOwed);
