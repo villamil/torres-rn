@@ -8,9 +8,9 @@ export const AUTH_CHANGE_UNIT = "AUTH_CHANGE_UNIT";
 
 export const REMEMBER_SESION = "REMEMBER_SESION";
 
-export const changeUnit = unit => ({
+export const changeUnit = (unit, isOwner) => ({
   type: AUTH_CHANGE_UNIT,
-  payload: { unit }
+  payload: { unit, isOwner }
 });
 
 export const authenticate = userInfo => ({

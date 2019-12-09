@@ -27,7 +27,8 @@ const authReducer = (state = initialState, action) => {
     case AUTH_CHANGE_UNIT: {
       return {
         ...state,
-        defaultUnitId: action.payload.unit.id
+        defaultUnitId: action.payload.unit.id,
+        isOwner: action.payload.isOwner
       };
     }
     case AUTH_START: {

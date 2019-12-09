@@ -196,11 +196,13 @@ function Home(props) {
             <MenuTouchable onPress={() => props.navigation.openDrawer()}>
               <Image style={{ height: 25, width: 25 }} source={MenuIcon} />
             </MenuTouchable>
-            <MenuTouchable
-              onPress={() => props.navigation.navigate(SCREENS.INVITE)}
-            >
-              <Image style={{ height: 25, width: 25 }} source={AddIcon} />
-            </MenuTouchable>
+            {props.auth.isOwner ? (
+              <MenuTouchable
+                onPress={() => props.navigation.navigate(SCREENS.INVITE)}
+              >
+                <Image style={{ height: 25, width: 25 }} source={AddIcon} />
+              </MenuTouchable>
+            ) : null}
           </MenuContainer>
           <UnitContainer>
             <Title size="medium" opacity="0.5" letterSpacing="2px">

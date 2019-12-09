@@ -27,6 +27,14 @@ function UnitsSelector(props) {
   useEffect(() => {
     props.getUnitList(props.auth.userId);
   }, []);
+
+  function handleUnitChange(unit) {
+    const [userInUnit] = unit.userUnit.filter(
+      item => item.user.id === props.auth.userId
+    );
+    props.changeUnit(unit, userInUnit.isOwner);
+  }
+
   return (
     <Container>
       {props.userUnit.data
@@ -34,7 +42,7 @@ function UnitsSelector(props) {
             <UnitContainer
               key={unit.id}
               onPress={() => {
-                props.changeUnit(unit);
+                handleUnitChange(unit);
                 props.handleCloseModal();
               }}
             >

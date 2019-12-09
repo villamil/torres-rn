@@ -70,20 +70,22 @@ function Menu(props) {
       </ProfileContainer>
       <LineDivider />
       <MenuItemsContainer>
-        <MenuItemContainer
-          onPress={() => props.navigation.navigate(SCREENS.USERS)}
-        >
-          <ItemWrapper>
-            <Image
-              style={{ height: 20, width: 20, marginRight: 10 }}
-              source={UsersLogo}
-            />
-            <Title color={theme.lowDark} size="tiny">
-              Inquilinos
-            </Title>
-          </ItemWrapper>
-          <Image style={{ height: 15, width: 15 }} source={NextLogo} />
-        </MenuItemContainer>
+        {props.auth.isOwner ? (
+          <MenuItemContainer
+            onPress={() => props.navigation.navigate(SCREENS.USERS)}
+          >
+            <ItemWrapper>
+              <Image
+                style={{ height: 20, width: 20, marginRight: 10 }}
+                source={UsersLogo}
+              />
+              <Title color={theme.lowDark} size="tiny">
+                Inquilinos
+              </Title>
+            </ItemWrapper>
+            <Image style={{ height: 15, width: 15 }} source={NextLogo} />
+          </MenuItemContainer>
+        ) : null}
 
         <MenuItemContainer
           onPress={() => {
