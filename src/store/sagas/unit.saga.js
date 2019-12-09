@@ -12,10 +12,14 @@ import {
   DELETE_USER_ERROR,
   CHANGE_USER_PERMISSION_START,
   CHANGE_USER_PERMISSION_SUCCESS,
-  CHANGE_USER_PERMISSION_ERROR
+  CHANGE_USER_PERMISSION_ERROR,
+  ADD_UNIT_START,
+  ADD_UNIT_SUCCESS,
+  ADD_UNIT_ERROR
 } from "../actions/unit.action";
 import { API_URI, HEADERS } from "../../utils/api";
 import fetch from "../../utils/fetchWithTimeout";
+import { showToast } from "../actions/toast.action";
 
 export function* getUnit({ payload }) {
   try {
@@ -84,9 +88,35 @@ export function* changeUserPermission({ payload }) {
   }
 }
 
+export function* addUnit({ payload }) {
+  try {
+    console.log(payload);
+    const result = yield fetch(
+      `${API_URI}/user-unit/${payload.userId}/code/${payload.code}`,
+      {
+        method: "POST",
+        headers: {
+          ...HEADERS
+        },
+        body: JSON.stringify(payload)
+      }
+    ).then(response => response.json());
+    if (result.error) {
+      yield put({ type: ADD_UNIT_ERROR });
+      yield put(showToast({ message: "Codigo incorrecto." }));
+    } else {
+      yield put({ type: ADD_UNIT_SUCCESS, payload: result });
+      yield put(showToast({ message: "Agregado!" }));
+    }
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+
 export function* unitSaga() {
   yield takeEvery(GET_UNIT_START, getUnit);
   yield takeEvery(GET_UNIT_LIST_START, getUnitList);
   yield takeEvery(DELETE_USER_START, deleteUser);
   yield takeEvery(CHANGE_USER_PERMISSION_START, changeUserPermission);
+  yield takeEvery(ADD_UNIT_START, addUnit);
 }

@@ -26,8 +26,7 @@ import {
   HeaderContainer,
   BackTextContainer,
   InviteContainer,
-  DeleteContainer,
-  View
+  DeleteContainer
 } from "./styles";
 
 import theme from "../../colorTheme";

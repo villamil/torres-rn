@@ -9,7 +9,8 @@ const SCREENS = {
   FILTER: "Filter",
   DETAILS: "Details",
   MAINTENANCE_OWED: "MaintenanceOwed",
-  WATER_OWED: "WaterOwed"
+  WATER_OWED: "WaterOwed",
+  ADD_UNIT: "AddUnit"
 };
 
 export default SCREENS;

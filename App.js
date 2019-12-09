@@ -20,6 +20,7 @@ import FilterScreen from "./src/scenes/Filter";
 import DetailsScreen from "./src/scenes/Details";
 import MaintenanceOwedScreen from "./src/scenes/MaintenanceOwed";
 import SplashScreenComponent from "./src/scenes/SplashScreen";
+import AddUnitScreen from "./src/scenes/AddUnit";
 
 import SystemCheck from "./src/components/SystemCheck";
 import ToastMessage from "./src/containers/ToastMessage";
@@ -40,7 +41,8 @@ const MainStack = createStackNavigator(
     Users: { screen: UsersScreen },
     Filter: { screen: FilterScreen },
     Details: { screen: DetailsScreen },
-    MaintenanceOwed: { screen: MaintenanceOwedScreen }
+    MaintenanceOwed: { screen: MaintenanceOwedScreen },
+    AddUnit: { screen: AddUnitScreen }
   },
   {
     headerMode: "none"

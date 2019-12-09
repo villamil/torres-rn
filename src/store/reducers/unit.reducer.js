@@ -8,21 +8,49 @@ import {
   CHANGE_USER_PERMISSION_START,
   CHANGE_USER_PERMISSION_SUCCESS,
   CHANGE_USER_PERMISSION_ERROR,
-  CLEAR_UNIT
+  CLEAR_UNIT,
+  ADD_UNIT_START,
+  ADD_UNIT_SUCCESS,
+  ADD_UNIT_ERROR
 } from "../actions/unit.action";
 
 const initialState = {
   data: {},
   hasError: false,
-  loading: false
+  loading: false,
+  unitAdded: false
 };
 
 const unitReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_UNIT_START: {
+      return {
+        ...state,
+        loading: true,
+        unitAdded: false
+      };
+    }
+    case ADD_UNIT_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        hasError: false,
+        unitAdded: true
+      };
+    }
+    case ADD_UNIT_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        hasError: true,
+        unitAdded: false
+      };
+    }
     case GET_UNIT_START: {
       return {
         ...state,
-        loading: true
+        loading: true,
+        unitAdded: false
       };
     }
     case GET_UNIT_SUCCESS: {

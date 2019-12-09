@@ -86,6 +86,12 @@ function Home(props) {
   }, [props.auth.defaultUnitId]);
 
   useEffect(() => {
+    if (props.unit.unitAdded) {
+      props.getUnit(props.auth.defaultUnitId);
+    }
+  }, [props.unit]);
+
+  useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",
       () => {
@@ -165,7 +171,14 @@ function Home(props) {
                     Selecciona
                   </Title>
                 </View>
-                <ButtonText text="Agregar" size="small" />
+                <ButtonText
+                  text="Agregar"
+                  size="small"
+                  onPress={() => {
+                    handleCloseModal();
+                    props.navigation.navigate(SCREENS.ADD_UNIT);
+                  }}
+                />
               </CloseContainer>
               <UnitsSelector handleCloseModal={handleCloseModal} />
             </ModalContent>
