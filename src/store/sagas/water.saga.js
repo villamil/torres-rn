@@ -6,6 +6,7 @@ import {
   GET_WATER_ERROR
 } from "../actions/water.action";
 import { API_URI, HEADERS } from "../../utils/api";
+import fetch from "../../utils/fetchWithTimeout";
 
 export function* getWater({ payload }) {
   try {
@@ -14,7 +15,7 @@ export function* getWater({ payload }) {
     if (payload.limit) {
       limit = `?limit=${payload.limit}`;
     }
-    const result = yield fetch(`${URI}${limit}`).then(response =>
+    const result = yield fetch(`${URI}${limit}`, 1000 * 10).then(response =>
       response.json()
     );
     if (result.error) {

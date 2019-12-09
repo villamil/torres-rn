@@ -22,6 +22,7 @@ import MaintenanceOwedScreen from "./src/scenes/MaintenanceOwed";
 import SplashScreenComponent from "./src/scenes/SplashScreen";
 
 import SystemCheck from "./src/components/SystemCheck";
+import ToastMessage from "./src/containers/ToastMessage";
 
 import theme from "./src/colorTheme";
 
@@ -87,6 +88,7 @@ const App = () => {
           <StatusBar backgroundColor={theme.dark} barStyle="light-content" />
           <AppContent />
         </View>
+        <ToastMessage />
       </PersistGate>
     </Provider>
   );

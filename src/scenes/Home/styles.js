@@ -74,7 +74,7 @@ export const MenuContainer = styled.View`
 export const MenuTouchable = styled.TouchableOpacity``;
 
 export const ModalContainer = styled.View`
-  width: 80%;
+  width: 90%;
   height: 80%;
   background-color: ${theme.gray};
   align-items: center;
@@ -89,8 +89,10 @@ export const ModalContent = styled.View`
 
 export const CloseContainer = styled.View`
   height: 70;
-  width: 50%;
-  margin-left: 20;
+  /* width: 50%; */
+  /* margin-left: 20; */
+  padding-right: 20;
+  padding-left: 20;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Alert } from "react-native";
+import { Image, Alert, ToastAndroid } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { VERSION } from "react-native-dotenv";
@@ -104,12 +104,7 @@ function Menu(props) {
         </MenuItemContainer>
 
         <MenuItemContainer
-          onPress={() =>
-            Alert.alert(
-              "Muy pronto!",
-              "Estamos mejorando la aplicacion constantemente."
-            )
-          }
+          onPress={() => ToastAndroid.show("Muy pronto!", ToastAndroid.SHORT)}
         >
           <ItemWrapper>
             <Image
@@ -124,12 +119,7 @@ function Menu(props) {
         </MenuItemContainer>
 
         <MenuItemContainer
-          onPress={() =>
-            Alert.alert(
-              "Muy pronto!",
-              "Estamos mejorando la aplicacion constantemente."
-            )
-          }
+          onPress={() => ToastAndroid.show("Muy pronto!", ToastAndroid.SHORT)}
         >
           <ItemWrapper>
             <Image

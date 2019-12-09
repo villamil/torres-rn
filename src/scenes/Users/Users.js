@@ -26,7 +26,8 @@ import {
   HeaderContainer,
   BackTextContainer,
   InviteContainer,
-  DeleteContainer
+  DeleteContainer,
+  View
 } from "./styles";
 
 import theme from "../../colorTheme";
@@ -114,7 +115,7 @@ function Users(props) {
             source={NextLogo}
           />
           <Title color={theme.dark} size="small">
-            Usuarios
+            Inquilinos
           </Title>
         </BackTextContainer>
         <InviteContainer
@@ -133,7 +134,21 @@ function Users(props) {
         </Title>
       </HeaderContainer>
 
-      <UsersContainer>{renderUsers()}</UsersContainer>
+      <UsersContainer>
+        {props.unit.data.userUnit.filter(
+          item => item.user.id !== props.auth.userId
+        ).length ? (
+          renderUsers()
+        ) : (
+          <Title
+            color={theme.lowDark}
+            size="small"
+            style={{ alignSelf: "flex-start", marginLeft: "10%" }}
+          >
+            Invita a tus inquilinos!
+          </Title>
+        )}
+      </UsersContainer>
     </Container>
   );
 }

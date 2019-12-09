@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   BackHandler,
   RefreshControl,
-  ScrollView
+  ScrollView,
+  View
 } from "react-native";
 import BottomDrawer from "rn-bottom-drawer";
 import { bindActionCreators } from "redux";
@@ -15,6 +16,7 @@ import { connect } from "react-redux";
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
 import Button from "../../components/button/Button";
+import ButtonText from "../../components/button/ButtonText";
 
 import GeneralDetails from "../../containers/GeneralDetails";
 import UnitsSelector from "../../containers/UnitsSelector";
@@ -152,12 +154,18 @@ function Home(props) {
           <ModalContainer>
             <ModalContent>
               <CloseContainer>
-                <CloseTouchable onPress={handleCloseModal}>
-                  <Image style={{ height: 20, width: 20 }} source={CloseIcon} />
-                </CloseTouchable>
-                <Title color={theme.dark} size="small">
-                  Selecciona
-                </Title>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <CloseTouchable onPress={handleCloseModal}>
+                    <Image
+                      style={{ height: 20, width: 20, marginRight: 10 }}
+                      source={CloseIcon}
+                    />
+                  </CloseTouchable>
+                  <Title color={theme.dark} size="small">
+                    Selecciona
+                  </Title>
+                </View>
+                <ButtonText text="Agregar" size="small" />
               </CloseContainer>
               <UnitsSelector handleCloseModal={handleCloseModal} />
             </ModalContent>

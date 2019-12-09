@@ -15,11 +15,13 @@ import {
   CHANGE_USER_PERMISSION_ERROR
 } from "../actions/unit.action";
 import { API_URI, HEADERS } from "../../utils/api";
+import fetch from "../../utils/fetchWithTimeout";
 
 export function* getUnit({ payload }) {
   try {
     const result = yield fetch(
-      `${API_URI}/units/${payload.unitId}`
+      `${API_URI}/units/${payload.unitId}`,
+      1000 * 10
     ).then(response => response.json());
     if (result.error) {
       yield put({ type: GET_UNIT_ERROR });

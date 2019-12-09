@@ -16,7 +16,7 @@ const persistConfig = {
   key: "root",
   storage: AsyncStorage,
   whitelist: ["auth", "unit", "maintenance", "water", "userUnit"],
-  blacklist: ["system", "signUp"]
+  blacklist: ["system", "signUp", "toast"]
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -5,7 +5,9 @@ import {
   GET_MAINTENANCE_SUCCESS,
   GET_MAINTENANCE_ERROR
 } from "../actions/maintenance.action";
+import { showToast } from "../actions/toast.action";
 import { API_URI, HEADERS } from "../../utils/api";
+import fetch from "../../utils/fetchWithTimeout";
 
 export function* getMaintenance({ payload }) {
   try {
@@ -14,13 +16,15 @@ export function* getMaintenance({ payload }) {
     if (payload.limit) {
       limit = `?limit=${payload.limit}`;
     }
-    const result = yield fetch(`${URI}${limit}`).then(response =>
+    const result = yield fetch(`${URI}${limit}`, 1000 * 10).then(response =>
       response.json()
     );
     if (result.error) {
       yield put({ type: GET_MAINTENANCE_ERROR });
+      yield put(showToast({ message: "Error al actualizar." }));
     } else {
       yield put({ type: GET_MAINTENANCE_SUCCESS, payload: result });
+      yield put(showToast({ message: "Actualizado!" }));
     }
   } catch (error) {
     console.log("error", error);
