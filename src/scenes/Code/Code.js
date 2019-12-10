@@ -46,7 +46,7 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
   const [inputFields, setInputFields] = useState({
     firstName: "Luis",
     lastName: "Villamil",
-    email: "villamildasdasd@dasdas.com",
+    email: "villamil_one@hotmail.com",
     password: "1234",
     repeatPassword: "1234"
   });
