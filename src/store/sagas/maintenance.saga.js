@@ -6,28 +6,24 @@ import {
   GET_MAINTENANCE_ERROR
 } from "../actions/maintenance.action";
 import { showToast } from "../actions/toast.action";
-import { API_URI, HEADERS } from "../../utils/api";
-import fetch from "../../utils/fetchWithTimeout";
+import { apiRequest } from "../../utils/api";
 
 export function* getMaintenance({ payload }) {
   try {
-    let URI = `${API_URI}/maintenance/${payload.unitId}`;
+    let URI = `/maintenance/${payload.unitId}`;
     let limit = "";
     if (payload.limit) {
       limit = `?limit=${payload.limit}`;
     }
-    const result = yield fetch(`${URI}${limit}`, 1000 * 10).then(response =>
-      response.json()
-    );
-    if (result.error) {
-      yield put({ type: GET_MAINTENANCE_ERROR });
-      yield put(showToast({ message: "Error al actualizar." }));
-    } else {
-      yield put({ type: GET_MAINTENANCE_SUCCESS, payload: result });
-      yield put(showToast({ message: "Actualizado!" }));
-    }
+
+    const result = yield apiRequest(`${URI}${limit}`);
+
+    yield put({ type: GET_MAINTENANCE_SUCCESS, payload: result });
+    yield put(showToast({ message: "Actualizado!" }));
   } catch (error) {
-    console.log("error", error);
+    console.log("error maintenance", error);
+    yield put({ type: GET_MAINTENANCE_ERROR });
+    yield put(showToast({ message: "Error al actualizar." }));
   }
 }
 

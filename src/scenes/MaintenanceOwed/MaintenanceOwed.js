@@ -43,6 +43,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 function MaintenanceOwed(props) {
+  console.log("Maintenance owed");
   useEffect(() => {
     switch (props.navigation.getParam("type")) {
       case "maintenance": {

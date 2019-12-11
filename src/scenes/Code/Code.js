@@ -74,7 +74,8 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
     } else {
       startSignUp({
         ...inputFields,
-        code: singUp.code
+        code: singUp.code,
+        errors: {}
       });
       setInputFields({ ...inputFields, errors: {} });
     }

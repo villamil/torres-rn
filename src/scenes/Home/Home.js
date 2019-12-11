@@ -72,6 +72,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 function Home(props) {
+  console.log(props.auth.token);
   const [unitPopUp, setUnitPopUp] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const deviceHeight = Math.round(Dimensions.get("window").height);

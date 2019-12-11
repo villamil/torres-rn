@@ -1,7 +1,47 @@
-import { SERVER_URI, SERVER_PORT } from "react-native-dotenv";
-console.log(SERVER_URI);
-export const API_URI = `${SERVER_URI}:${SERVER_PORT}`;
+import { API_URI } from "react-native-dotenv";
+import fetch from "./fetchWithTimeout";
+import { store } from "../store";
 
 export const HEADERS = {
   "Content-Type": "application/json"
+};
+
+const getToken = () => {
+  const state = store.getState();
+
+  if (state && state.auth && state.auth.token) {
+    console.log("SI hay token");
+    return state.auth.token;
+  }
+  console.log("No hay token");
+
+  return "";
+};
+
+export const apiRequest = async (path, options = {}, body) => {
+  const token = getToken();
+  const opts = { ...options, headers: options.headers || HEADERS };
+  console.log(token);
+  if (token) {
+    opts.headers.Authorization = `JWT ${token}`;
+  }
+
+  if (body) {
+    opts.body = JSON.stringify(body);
+  }
+
+  if (!options.timeout) {
+    opts.timeout = 1000 * 10;
+  }
+  const result = await fetch(
+    `${API_URI}${path}`,
+    opts,
+    opts.timeout
+  ).then(response => response.json());
+
+  if (result.error) {
+    throw result.error;
+  }
+
+  return result;
 };

@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Image, BackHandler } from "react-native";
+import {
+  Image,
+  BackHandler,
+  TouchableWithoutFeedback,
+  Keyboard
+} from "react-native";
 import validate from "validate.js";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -94,64 +99,61 @@ function SignIn({ navigation, authenticate, auth, rememberSesion, logout }) {
   }
 
   return (
-    <Container>
-      <LogoContainer>
-        <Image
-          style={{ width: 50, height: 50, marginRight: 10 }}
-          source={Torres}
-        />
-      </LogoContainer>
-      <TitleContainer>
-        <Title>¡Bienvenido!</Title>
-      </TitleContainer>
-      <TitleContainer height="5%">
-        <Title color={theme.lowGreen} size="small">
-          {auth.hasError && !auth.loading ? "Error de conexión :(" : ""}
-        </Title>
-      </TitleContainer>
-      <InputContainer>
-        <Title size="tiny" color={theme.green}>
-          Correo
-        </Title>
-        <Input
-          value={inputFields.email}
-          onChangeText={text => onInputChange("email", text)}
-          keyboardType="email-address"
-          textContentType="emailAddress"
-          errorMessage={inputFields.errors.email}
-        />
-      </InputContainer>
-      <InputContainer>
-        <Title size="tiny" color={theme.green}>
-          Contrasenia
-        </Title>
-        <Input
-          value={inputFields.password}
-          onChangeText={text => onInputChange("password", text)}
-          secureTextEntry={true}
-          errorMessage={inputFields.errors.password}
-        />
-      </InputContainer>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Container>
+        <LogoContainer>
+          <Image
+            style={{ width: 50, height: 50, marginRight: 10 }}
+            source={Torres}
+          />
+        </LogoContainer>
+        <TitleContainer>
+          <Title>¡Bienvenido!</Title>
+        </TitleContainer>
+        <InputContainer>
+          <Title size="tiny" color={theme.green}>
+            Correo
+          </Title>
+          <Input
+            value={inputFields.email}
+            onChangeText={text => onInputChange("email", text)}
+            keyboardType="email-address"
+            textContentType="emailAddress"
+            errorMessage={inputFields.errors.email}
+          />
+        </InputContainer>
+        <InputContainer>
+          <Title size="tiny" color={theme.green}>
+            Contrasenia
+          </Title>
+          <Input
+            value={inputFields.password}
+            onChangeText={text => onInputChange("password", text)}
+            secureTextEntry={true}
+            errorMessage={inputFields.errors.password}
+          />
+        </InputContainer>
 
-      <CheckBoxContainer>
-        <Title color={theme.green} size="tiny" style={{ marginRight: 10 }}>
-          Mantener sesion
-        </Title>
-        <CheckBox
-          style={{ alignSelf: "flex-end" }}
-          onPress={onRememberLogin}
-          checked={auth.rememberSesion}
-        />
-      </CheckBoxContainer>
+        <CheckBoxContainer>
+          <Title color={theme.green} size="tiny" style={{ marginRight: 10 }}>
+            Mantener sesion
+          </Title>
+          <CheckBox
+            style={{ alignSelf: "flex-end" }}
+            onPress={onRememberLogin}
+            checked={auth.rememberSesion}
+          />
+        </CheckBoxContainer>
 
-      <NextContainer>
-        {auth.loading ? (
-          <Button text="CARGANDO..." disabled />
-        ) : (
-          <Button text="INGRESAR" onPress={onSubmit} />
-        )}
-      </NextContainer>
-    </Container>
+        <NextContainer>
+          {auth.loading ? (
+            <Button text="CARGANDO..." disabled />
+          ) : (
+            <Button text="INGRESAR" onPress={onSubmit} />
+          )}
+        </NextContainer>
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }
 

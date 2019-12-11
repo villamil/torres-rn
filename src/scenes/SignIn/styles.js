@@ -19,7 +19,7 @@ export const NextContainer = styled.View`
 `;
 
 export const TitleContainer = styled.View`
-  height: ${({ height }) => height || "7%"};
+  height: ${({ height }) => height || "10%"};
 `;
 
 export const CheckBoxContainer = styled.View`

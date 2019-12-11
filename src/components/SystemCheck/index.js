@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import NetInfo from "@react-native-community/netinfo";
-import { SERVER_URI, SERVER_PORT } from "react-native-dotenv";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {

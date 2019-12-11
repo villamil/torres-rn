@@ -8,46 +8,39 @@ import {
   SIGNUP_RESULT,
   SIGNUP_ERROR
 } from "../actions/signUpAction";
-import { API_URI, HEADERS } from "../../utils/api";
+import { apiRequest } from "../../utils/api";
+import { showToast } from "../actions/toast.action";
 
 export function* validateCode({ payload }) {
   try {
-    const result = yield fetch(
-      `${API_URI}/codes/${payload.code}`
-    ).then(response => response.json());
-    if (result.error) {
-      yield put({ type: INVALID_CODE, error: { ...result.error } });
-    } else {
-      const resultPayload = {
-        code: payload.code,
-        isOwner: result.ownerCode === payload.code,
-        isValidCode: true
-      };
-      yield put({ type: VALID_CODE, payload: { ...resultPayload } });
-    }
+    const result = yield apiRequest(`/codes/${payload.code}`);
+
+    const resultPayload = {
+      code: payload.code,
+      isOwner: result.ownerCode === payload.code,
+      isValidCode: true
+    };
+    yield put({ type: VALID_CODE, payload: { ...resultPayload } });
   } catch (error) {
     yield put({ type: INVALID_CODE, error });
+    yield put({ type: INVALID_CODE, error: { ...error.error } });
+
     console.log(error);
   }
 }
 
 export function* signUp({ payload }) {
   try {
-    const result = yield fetch(`${API_URI}/users`, {
-      method: "POST",
-      headers: {
-        ...HEADERS
-      },
-      body: JSON.stringify(payload)
-    }).then(response => response.json());
-    console.log(result);
-    if (result.error) {
-      yield put({ type: SIGNUP_ERROR });
-    } else {
-      yield put({ type: SIGNUP_RESULT });
-    }
+    const result = yield apiRequest(
+      `/auth/signup`,
+      { method: "POST" },
+      payload
+    );
+    yield put(showToast({ message: "Cuenta creada!" }));
+    yield put({ type: SIGNUP_RESULT });
   } catch (error) {
     console.log(error);
+    yield put({ type: SIGNUP_ERROR });
   }
 }
 
