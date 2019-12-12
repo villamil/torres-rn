@@ -32,6 +32,7 @@ import { getUnit } from "../../store/actions/unit.action";
 import { getMaintenance } from "../../store/actions/maintenance.action";
 import { getWater } from "../../store/actions/water.action";
 
+import numberWithCommas from "../../utils/numberWithCommas";
 import theme from "../../colorTheme";
 
 import {
@@ -232,7 +233,8 @@ function Home(props) {
                 </TitleLeftContainer>
                 <AmountContainer>
                   <Title color={theme.light}>
-                    $ {props.unit.data.totalMaintenanceOwed} MXN
+                    $ {numberWithCommas(props.unit.data.totalMaintenanceOwed)}{" "}
+                    MXN
                   </Title>
                 </AmountContainer>
               </ServiceTitleContainer>
@@ -254,7 +256,7 @@ function Home(props) {
                 </TitleLeftContainer>
                 <AmountContainer>
                   <Title color={theme.light}>
-                    $ {props.unit.data.totalWaterOwed} MXN
+                    $ {numberWithCommas(props.unit.data.totalWaterOwed)} MXN
                   </Title>
                 </AmountContainer>
               </ServiceTitleContainer>
