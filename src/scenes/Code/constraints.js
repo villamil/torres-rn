@@ -11,26 +11,26 @@ const constraints = {
   },
   email: {
     presence: {
-      message: "^Ingresa un correo electronico."
+      message: "^Ingresa un correo electrónico."
     },
     email: {
-      message: "^Ingresa un correo electronico valido."
+      message: "^Ingresa un correo electrónico valido."
     }
   },
 
   password: {
     presence: {
-      message: "^Ingresa una contrasena."
+      message: "^Ingresa una contraseña."
     },
     length: {
       minimum: 4,
-      message: "^Ingresa una contrasena mayor a 4 letras."
+      message: "^Ingresa una contraseña mayor a 4 letras."
     }
   },
 
   repeatPassword: {
     presence: {
-      message: "^La contrasenia con coincide."
+      message: "^La contraseña no coincide."
     }
   }
 };

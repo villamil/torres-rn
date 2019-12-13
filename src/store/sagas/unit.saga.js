@@ -87,7 +87,7 @@ export function* addUnit({ payload }) {
   } catch (error) {
     console.log("error", error);
     yield put({ type: ADD_UNIT_ERROR });
-    yield put(showToast({ message: "Codigo incorrecto." }));
+    yield put(showToast({ message: "Código incorrecto." }));
   }
 }
 

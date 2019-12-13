@@ -29,7 +29,6 @@ import {
 } from "./styles";
 
 import theme from "../../colorTheme";
-import { signUp } from "../../store/sagas/signUp.saga";
 
 const mapStateToProps = ({ singUp, system }) => {
   return {
@@ -44,11 +43,11 @@ const mapDispatchToProps = dispatch => {
 
 function Code({ singUp, startSignUp, navigation, restoreCode }) {
   const [inputFields, setInputFields] = useState({
-    firstName: "Luis",
-    lastName: "Villamil",
-    email: "villamil_one@hotmail.com",
-    password: "1234",
-    repeatPassword: "1234"
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    repeatPassword: ""
   });
 
   useEffect(() => {
@@ -58,7 +57,7 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
     } else if (singUp.hasError) {
       setInputFields({
         ...inputFields,
-        errors: { email: "Este correo ya esta registrado." }
+        errors: { email: "Este correo ya está registrado." }
       });
     }
   }, [singUp]);
@@ -98,7 +97,7 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
             </LogoContainer>
             <InstructionsContainer>
               <Title size="tiny" align="left">
-                Completa la informacion:
+                Completa la información:
               </Title>
             </InstructionsContainer>
             <InputContainer>
@@ -143,7 +142,7 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
             </InputContainer>
             <InputContainer>
               <Title size="tiny" color={theme.green}>
-                Contrasenia
+                Contraseña
               </Title>
               <Input
                 value={inputFields.password}
@@ -156,7 +155,7 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
             </InputContainer>
             <InputContainer>
               <Title size="tiny" color={theme.green}>
-                Repetir Contrasenia
+                Repetir Contraseña
               </Title>
               <Input
                 value={inputFields.repeatPassword}

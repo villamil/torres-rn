@@ -1,20 +1,20 @@
 const constraints = {
   email: {
     presence: {
-      message: "^Ingresa un correo electronico."
+      message: "^Ingresa un correo electrónico."
     },
     email: {
-      message: "^Ingresa un correo electronico valido."
+      message: "^Ingresa un correo electrónico valido."
     }
   },
 
   password: {
     presence: {
-      message: "^Ingresa una contrasena."
+      message: "^Ingresa una contraseña."
     },
     length: {
       minimum: 1,
-      message: "^Ingresa una contrasena."
+      message: "^Ingresa una contraseña."
     }
   }
 };

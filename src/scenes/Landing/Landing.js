@@ -49,8 +49,6 @@ export default function Landing({ navigation }) {
     });
   }, []);
 
-  console.log("Mount landing");
-
   return (
     <Container>
       <AuthCheck navigation={navigation} />
@@ -73,7 +71,7 @@ export default function Landing({ navigation }) {
         <AlreadyAnAccountConteiner>
           <Title size="tiny">¿Ya tienes una cuenta?</Title>
           <ButtonText
-            text="Inicia sesion"
+            text="Inicia sesión"
             onPress={() => navigation.navigate(SCREENS.SIGN_IN)}
           />
         </AlreadyAnAccountConteiner>

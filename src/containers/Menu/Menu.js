@@ -158,7 +158,7 @@ function Menu(props) {
               source={LogoutLogo}
             />
             <Title color={theme.lowDark} size="tiny">
-              Cerrar sesion
+              Cerrar sesión
             </Title>
           </ItemWrapper>
         </MenuItemContainer>

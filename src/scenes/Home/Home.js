@@ -281,7 +281,7 @@ function Home(props) {
           <GeneralDetails />
           <ViewMoreContainer>
             <Button
-              text="Ver Mas"
+              text="Ver Más"
               backgroundColor={theme.lowDark}
               onPress={() =>
                 props.navigation.navigate(SCREENS.MAINTENANCE_OWED, {

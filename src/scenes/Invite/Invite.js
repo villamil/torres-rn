@@ -72,7 +72,7 @@ function Invite(props) {
           {props.unit.data.section}
         </Title>
         <Title color={theme.darkGray} size="small">
-          Comparte este codigo para invitar a alguien a este departamento!
+          Comparte este código para invitar a alguien a este departamento!
         </Title>
       </UnitContainer>
       <CodeContainer>

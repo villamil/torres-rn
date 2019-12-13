@@ -38,7 +38,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 function AddUnit(props) {
-  const [inputFields, setInputFields] = useState({ code: "aaa" });
+  const [inputFields, setInputFields] = useState({ code: "" });
   const [codeError, setCodeError] = useState("");
 
   useEffect(() => {
@@ -81,7 +81,7 @@ function AddUnit(props) {
         </LogoContainer>
         <CodeContainer>
           <Title color={theme.dark} size="tiny">
-            Codigo
+            Código
           </Title>
           <Input
             backgroundColor={theme.darkGray}

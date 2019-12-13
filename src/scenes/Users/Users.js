@@ -50,7 +50,7 @@ function Users(props) {
   function onDelete(userUnit) {
     Alert.alert(
       `Eliminar a ${userUnit.user.firstName} ${userUnit.user.lastName}`,
-      "Seguro que quiere eliminar a este usuario?",
+      "¿Seguro que quiere eliminar a este usuario?",
       [
         {
           text: "Cancelar",
@@ -144,7 +144,7 @@ function Users(props) {
             size="small"
             style={{ alignSelf: "flex-start", marginLeft: "10%" }}
           >
-            Invita a tus inquilinos!
+            ¡Invita a tus inquilinos!
           </Title>
         )}
       </UsersContainer>

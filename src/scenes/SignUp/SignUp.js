@@ -34,7 +34,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 function SignUp({ navigation, validateCode, restoreCode, singUp }) {
-  const [inputFields, setInputFields] = useState({ code: "abc" });
+  const [inputFields, setInputFields] = useState({ code: "" });
   const [codeError, setCodeError] = useState("");
 
   useEffect(() => {
@@ -50,7 +50,7 @@ function SignUp({ navigation, validateCode, restoreCode, singUp }) {
     if (singUp.isValidCode) {
       navigation.navigate(SCREENS.CODE);
     } else if (singUp.hasError) {
-      setCodeError("El codigo no es valido.");
+      setCodeError("El código no es valido.");
     }
   }, [singUp]);
 
@@ -75,7 +75,7 @@ function SignUp({ navigation, validateCode, restoreCode, singUp }) {
         </LogoContainer>
         <InputContainer>
           <Title size="tiny" color={theme.green}>
-            Codigo
+            Código
           </Title>
           <Input
             textAlign="center"
@@ -84,7 +84,7 @@ function SignUp({ navigation, validateCode, restoreCode, singUp }) {
             errorMessage={codeError}
           />
           <Title size="tiny" color={theme.light} style={{ marginTop: 10 }}>
-            Para obtener tu codigo, ponte en contacto con la administracion.
+            Para obtener tu código, ponte en contacto con la administración.
           </Title>
         </InputContainer>
         <NextContainer>

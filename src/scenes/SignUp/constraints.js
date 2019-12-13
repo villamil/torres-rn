@@ -1,7 +1,7 @@
 const constraints = {
   code: {
     presence: {
-      message: "^Ingresa un codigo."
+      message: "^Ingresa un código."
     }
   }
 };

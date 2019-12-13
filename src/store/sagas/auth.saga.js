@@ -15,7 +15,7 @@ export function* authenticate({ payload }) {
     yield put({ type: AUTH_SUCCESS, payload: payloadResult });
   } catch (error) {
     console.log("error auth", error);
-    yield put(showToast({ message: "Correo o contrasena incorrecto." }));
+    yield put(showToast({ message: "Correo o contraseña incorrecto." }));
     yield put({ type: AUTH_ERROR });
   }
 }

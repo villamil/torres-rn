@@ -124,7 +124,7 @@ function SignIn({ navigation, authenticate, auth, rememberSesion, logout }) {
         </InputContainer>
         <InputContainer>
           <Title size="tiny" color={theme.green}>
-            Contrasenia
+            Contraseña
           </Title>
           <Input
             value={inputFields.password}
@@ -136,7 +136,7 @@ function SignIn({ navigation, authenticate, auth, rememberSesion, logout }) {
 
         <CheckBoxContainer>
           <Title color={theme.green} size="tiny" style={{ marginRight: 10 }}>
-            Mantener sesion
+            Mantener sesión
           </Title>
           <CheckBox
             style={{ alignSelf: "flex-end" }}
