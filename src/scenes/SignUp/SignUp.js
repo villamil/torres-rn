@@ -79,7 +79,7 @@ function SignUp({ navigation, validateCode, restoreCode, singUp }) {
           </Title>
           <Input
             textAlign="center"
-            value={inputFields.code}
+            value={inputFields.code.toUpperCase()}
             onChangeText={text => setInputFields({ code: text })}
             errorMessage={codeError}
           />
