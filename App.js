@@ -32,6 +32,7 @@ import Menu from "./src/containers/Menu";
 
 const MainStack = createStackNavigator(
   {
+    SplashScreen: { screen: SplashScreenComponent },
     Landing: { screen: LandingScreen },
     SignUp: { screen: SignUpScreen },
     SignIn: { screen: SignInScreen },
@@ -51,7 +52,6 @@ const MainStack = createStackNavigator(
 
 const MenuNavigator = createDrawerNavigator(
   {
-    SplashScreen: { screen: SplashScreenComponent },
     MainStack: {
       screen: MainStack,
       navigationOptions: ({ navigation }) => {
