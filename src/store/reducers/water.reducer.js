@@ -16,6 +16,7 @@ const waterReducer = (state = initialState, action) => {
     case GET_WATER_START: {
       return {
         ...state,
+        data: {},
         loading: true
       };
     }

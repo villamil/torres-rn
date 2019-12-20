@@ -16,6 +16,7 @@ const maintenanceReducer = (state = initialState, action) => {
     case GET_MAINTENANCE_START: {
       return {
         ...state,
+        data: {},
         loading: true
       };
     }

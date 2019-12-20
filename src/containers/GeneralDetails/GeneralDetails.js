@@ -3,7 +3,8 @@ import {
   Image,
   ScrollView,
   TouchableWithoutFeedback,
-  View
+  View,
+  ActivityIndicator
 } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -36,6 +37,8 @@ const mapStateToProps = ({ maintenance, unit, water }) => ({
 });
 
 function GeneralDetails(props) {
+  const isLoading = props.maintenance.loading || props.water.loading;
+
   function renderDetailContainer() {
     const details = [
       ...Object.values(props.maintenance.data),
@@ -99,7 +102,11 @@ function GeneralDetails(props) {
           </Title>
         </BankDetailsContainer>
       </BankContainer>
-      {renderDetailContainer()}
+      {isLoading ? (
+        <ActivityIndicator size="large" color={theme.green} />
+      ) : (
+        renderDetailContainer()
+      )}
     </DetailsContainer>
   );
 }
