@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import theme from "../../colorTheme";
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
-  align-items: center;
+  /* align-items: center; */
 `;
 
 export const UnitContainer = styled.TouchableOpacity`

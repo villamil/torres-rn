@@ -153,10 +153,6 @@ function Home(props) {
             backgroundColor: "rgba(13, 16, 21, 0.5)"
           }}
           activeOpacity={1}
-          onPressOut={() => {
-            setUnitPopUp(false);
-            props.navigation.setParams({ unitPopUp: false });
-          }}
         >
           <ModalContainer>
             <ModalContent>
