@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Image, ScrollView, FlatList, ActivityIndicator } from "react-native";
+import { Image, View, FlatList, ActivityIndicator } from "react-native";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -45,6 +45,36 @@ const mapDispatchToProps = dispatch => {
 
 function MaintenanceOwed(props) {
   const isLoading = props.maintenance.loading || props.water.loading;
+
+  let data = [];
+  switch (props.navigation.getParam("type")) {
+    case "maintenance": {
+      data = [...Object.values(props.maintenance.data)];
+      break;
+    }
+    case "water": {
+      data = [
+        ...Object.values(props.water.data).map(item => ({
+          ...item,
+          isWater: true
+        }))
+      ];
+      break;
+    }
+    case "all": {
+      data = [
+        ...Object.values(props.maintenance.data),
+        ...Object.values(props.water.data).map(item => ({
+          ...item,
+          isWater: true
+        }))
+      ];
+      break;
+    }
+    default:
+      return [];
+  }
+
   useEffect(() => {
     switch (props.navigation.getParam("type")) {
       case "maintenance": {
@@ -70,40 +100,12 @@ function MaintenanceOwed(props) {
     };
   }, []);
 
-  function renderOwedMaintenance() {
-    let data = [];
-    switch (props.navigation.getParam("type")) {
-      case "maintenance": {
-        data = [...Object.values(props.maintenance.data)];
-        break;
-      }
-      case "water": {
-        data = [
-          ...Object.values(props.water.data).map(item => ({
-            ...item,
-            isWater: true
-          }))
-        ];
-        break;
-      }
-      case "all": {
-        data = [
-          ...Object.values(props.maintenance.data),
-          ...Object.values(props.water.data).map(item => ({
-            ...item,
-            isWater: true
-          }))
-        ];
-        break;
-      }
-      default:
-        return [];
-    }
+  const details = [...data].sort((a, b) => {
+    return b.year - a.year || b.month - a.month;
+  });
 
-    const details = [...data].sort((a, b) => {
-      return b.year - a.year || b.month - a.month;
-    });
-    return details.map(item => (
+  function Item(item) {
+    return (
       <DetailContainer key={item.id}>
         <UpperRow>
           <DetailLogoContainer>
@@ -134,7 +136,7 @@ function MaintenanceOwed(props) {
           </Title>
         </LowerRow>
       </DetailContainer>
-    ));
+    );
   }
 
   return (
@@ -155,13 +157,17 @@ function MaintenanceOwed(props) {
           </Title>
         </BackTextContainer>
       </BackContainer>
-      <ScrollView style={{ width: "100%" }}>
+      <View style={{ flex: 1 }}>
         {isLoading ? (
           <ActivityIndicator size="large" color={theme.green} />
         ) : (
-          renderOwedMaintenance()
+          <FlatList
+            data={details}
+            renderItem={({ item }) => <Item {...item} />}
+            keyExtractor={item => item.id}
+          />
         )}
-      </ScrollView>
+      </View>
     </Container>
   );
 }
