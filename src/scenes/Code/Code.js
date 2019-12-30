@@ -75,9 +75,10 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
   }
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }}>
+    <KeyboardAvoidingView testID="code-form-click-outside" style={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView
+          testID="code-form-scrollview"
           contentContainerStyle={{
             flexGrow: 1
           }}
@@ -99,6 +100,7 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
                 Nombres
               </Title>
               <Input
+                testID="code-form-first-name"
                 value={inputFields.firstName}
                 onChangeText={text =>
                   setInputFields({ ...inputFields, firstName: text })
@@ -113,6 +115,7 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
                 Apellidos
               </Title>
               <Input
+                testID="code-form-last-name"
                 value={inputFields.lastName}
                 onChangeText={text =>
                   setInputFields({ ...inputFields, lastName: text })
@@ -125,6 +128,7 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
                 Correo
               </Title>
               <Input
+                testID="code-form-email"
                 value={inputFields.email}
                 onChangeText={text =>
                   setInputFields({ ...inputFields, email: text })
@@ -139,6 +143,7 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
                 Contraseña
               </Title>
               <Input
+                testID="code-form-password"
                 value={inputFields.password}
                 onChangeText={text =>
                   setInputFields({ ...inputFields, password: text })
@@ -152,6 +157,7 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
                 Repetir Contraseña
               </Title>
               <Input
+                testID="code-form-password-repeat"
                 value={inputFields.repeatPassword}
                 onChangeText={text =>
                   setInputFields({ ...inputFields, repeatPassword: text })
@@ -166,7 +172,11 @@ function Code({ singUp, startSignUp, navigation, restoreCode }) {
               {singUp.loading ? (
                 <Button text="CARGANDO..." disabled />
               ) : (
-                <Button text="CREAR CUENTA" onPress={onSubmit} />
+                <Button
+                  testID="code-form-submit"
+                  text="CREAR CUENTA"
+                  onPress={onSubmit}
+                />
               )}
             </NextContainer>
           </Container>

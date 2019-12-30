@@ -65,7 +65,10 @@ function SignUp({ navigation, validateCode, restoreCode, singUp }) {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback
+      testID={"sing-up-code-click-outside"}
+      onPress={Keyboard.dismiss}
+    >
       <Container>
         <LogoContainer>
           <Image
@@ -78,6 +81,7 @@ function SignUp({ navigation, validateCode, restoreCode, singUp }) {
             Código
           </Title>
           <Input
+            testID={"sing-up-code"}
             textAlign="center"
             value={inputFields.code.toUpperCase()}
             onChangeText={text => setInputFields({ code: text })}
@@ -91,7 +95,11 @@ function SignUp({ navigation, validateCode, restoreCode, singUp }) {
           {singUp.loading ? (
             <Button text="CARGANDO..." disabled />
           ) : (
-            <Button text="SIGUIENTE" onPress={onSubmit} />
+            <Button
+              testID={"sing-up-code-btn"}
+              text="SIGUIENTE"
+              onPress={onSubmit}
+            />
           )}
         </NextContainer>
       </Container>

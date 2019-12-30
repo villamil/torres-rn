@@ -38,8 +38,8 @@ import {
 } from "./styles";
 
 const initialState = {
-  email: "luistres@hotmail.com",
-  password: "1234",
+  email: "",
+  password: "",
   rememberLogin: false,
   errors: {}
 };
@@ -99,7 +99,10 @@ function SignIn({ navigation, authenticate, auth, rememberSesion, logout }) {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback
+      testID="sign-in-click-outside"
+      onPress={Keyboard.dismiss}
+    >
       <Container>
         <LogoContainer>
           <Image
@@ -115,6 +118,7 @@ function SignIn({ navigation, authenticate, auth, rememberSesion, logout }) {
             Correo
           </Title>
           <Input
+            testID="sign-in-email"
             value={inputFields.email}
             onChangeText={text => onInputChange("email", text)}
             keyboardType="email-address"
@@ -127,6 +131,7 @@ function SignIn({ navigation, authenticate, auth, rememberSesion, logout }) {
             Contraseña
           </Title>
           <Input
+            testID="sign-in-password"
             value={inputFields.password}
             onChangeText={text => onInputChange("password", text)}
             secureTextEntry={true}
@@ -149,7 +154,11 @@ function SignIn({ navigation, authenticate, auth, rememberSesion, logout }) {
           {auth.loading ? (
             <Button text="CARGANDO..." disabled />
           ) : (
-            <Button text="INGRESAR" onPress={onSubmit} />
+            <Button
+              testID="sign-in-submit"
+              text="INGRESAR"
+              onPress={onSubmit}
+            />
           )}
         </NextContainer>
       </Container>

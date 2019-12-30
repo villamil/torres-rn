@@ -22,8 +22,9 @@ const ButtonContainer = styled.TouchableOpacity`
   padding: 12px 100px 12px 100px;
 `;
 
-const CustomButton = props => (
+const CustomButton = ({ testID, ...props }) => (
   <ButtonContainer
+    testID={testID}
     onPress={props.onPress}
     backgroundColor={props.backgroundColor}
     {...props}

@@ -64,7 +64,9 @@ export default function Landing({ navigation }) {
         <Title>TORRES</Title>
       </LogoContainer>
       <IntroContainer>
-        <Title size="small">Empieza a administrar tu condominio</Title>
+        <Title size="small" id="welcome-message">
+          Empieza a administrar tu condominio
+        </Title>
       </IntroContainer>
       <Carousel entries={CarouselItems} />
       <CreateContainer>
