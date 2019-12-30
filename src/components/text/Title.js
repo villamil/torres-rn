@@ -11,7 +11,7 @@ const TitleSize = {
   large: hp("3.5%"),
   medium: hp("3%"),
   small: hp("2.5%"),
-  tiny: hp("2%")
+  tiny: hp("1.5%")
 };
 
 const Title = styled.Text`

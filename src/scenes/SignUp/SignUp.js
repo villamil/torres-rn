@@ -49,7 +49,7 @@ function SignUp({ navigation, validateCode, restoreCode, singUp }) {
   useEffect(() => {
     if (singUp.isValidCode) {
       navigation.navigate(SCREENS.CODE);
-    } else if (singUp.hasError) {
+    } else if (singUp.hasErrorCode) {
       setCodeError("El código no es valido.");
     }
   }, [singUp]);

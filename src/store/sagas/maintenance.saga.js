@@ -21,7 +21,6 @@ export function* getMaintenance({ payload }) {
     yield put({ type: GET_MAINTENANCE_SUCCESS, payload: result });
     yield put(showToast({ message: "Actualizado!" }));
   } catch (error) {
-    console.log("error maintenance", error);
     yield put({ type: GET_MAINTENANCE_ERROR });
     yield put(showToast({ message: "Error al actualizar." }));
   }

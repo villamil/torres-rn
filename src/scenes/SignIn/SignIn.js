@@ -38,7 +38,7 @@ import {
 } from "./styles";
 
 const initialState = {
-  email: "villamil_one@hotmail.com",
+  email: "luistres@hotmail.com",
   password: "1234",
   rememberLogin: false,
   errors: {}

@@ -24,8 +24,6 @@ export function* validateCode({ payload }) {
   } catch (error) {
     yield put({ type: INVALID_CODE, error });
     yield put({ type: INVALID_CODE, error: { ...error.error } });
-
-    console.log(error);
   }
 }
 
@@ -39,7 +37,6 @@ export function* signUp({ payload }) {
     yield put(showToast({ message: "Cuenta creada!" }));
     yield put({ type: SIGNUP_RESULT });
   } catch (error) {
-    console.log(error);
     yield put({ type: SIGNUP_ERROR });
   }
 }

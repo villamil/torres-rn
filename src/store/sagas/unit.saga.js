@@ -23,10 +23,8 @@ import { showToast } from "../actions/toast.action";
 export function* getUnit({ payload }) {
   try {
     const result = yield apiRequest(`/units/${payload.unitId}`);
-    console.log(result);
     yield put({ type: GET_UNIT_SUCCESS, payload: result });
   } catch (error) {
-    console.log("error unit", error);
     yield put({ type: GET_UNIT_ERROR });
   }
 }
@@ -38,7 +36,6 @@ export function* getUnitList({ payload }) {
     yield put({ type: GET_UNIT_LIST_SUCCESS, payload: result });
   } catch (error) {
     yield put({ type: GET_UNIT_LIST_ERROR });
-    console.log("error", error);
   }
 }
 
@@ -50,7 +47,6 @@ export function* deleteUser({ payload }) {
 
     yield put({ type: DELETE_USER_SUCCESS, payload: result });
   } catch (error) {
-    console.log("error", error);
     yield put({ type: DELETE_USER_ERROR });
   }
 }
@@ -67,7 +63,6 @@ export function* changeUserPermission({ payload }) {
 
     yield put({ type: CHANGE_USER_PERMISSION_SUCCESS, payload: result });
   } catch (error) {
-    console.log("error", error);
     yield put({ type: CHANGE_USER_PERMISSION_ERROR });
   }
 }
@@ -85,7 +80,6 @@ export function* addUnit({ payload }) {
     yield put({ type: ADD_UNIT_SUCCESS, payload: result });
     yield put(showToast({ message: "Agregado!" }));
   } catch (error) {
-    console.log("error", error);
     yield put({ type: ADD_UNIT_ERROR });
     yield put(showToast({ message: "Código incorrecto." }));
   }

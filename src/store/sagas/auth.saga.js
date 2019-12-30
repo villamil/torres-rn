@@ -7,14 +7,12 @@ import { showToast } from "../actions/toast.action";
 export function* authenticate({ payload }) {
   try {
     const result = yield apiRequest("/auth", { method: "POST" }, payload);
-    console.log(result);
 
     const payloadResult = {
       token: result.token
     };
     yield put({ type: AUTH_SUCCESS, payload: payloadResult });
   } catch (error) {
-    console.log("error auth", error);
     yield put(showToast({ message: "Correo o contraseña incorrecto." }));
     yield put({ type: AUTH_ERROR });
   }

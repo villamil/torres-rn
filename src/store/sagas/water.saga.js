@@ -19,7 +19,6 @@ export function* getWater({ payload }) {
 
     yield put({ type: GET_WATER_SUCCESS, payload: result });
   } catch (error) {
-    console.log("error water", error);
     yield put({ type: GET_WATER_ERROR });
   }
 }

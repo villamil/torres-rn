@@ -22,7 +22,7 @@ export const DetailContainer = styled.View`
   align-items: flex-start;
   justify-content: space-between;
   background-color: ${theme.gray};
-  padding: ${`${hp("2%")}px`};
+  padding: ${hp("1.5%")}px ${hp("2%")}px ${hp("2%")}px ${hp("2%")}px;
   height: ${hp("14%")};
   width: 100%;
   margin-bottom: 15px;

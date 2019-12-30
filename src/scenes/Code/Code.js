@@ -42,19 +42,13 @@ const mapDispatchToProps = dispatch => {
 };
 
 function Code({ singUp, startSignUp, navigation, restoreCode }) {
-  const [inputFields, setInputFields] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    repeatPassword: ""
-  });
+  const [inputFields, setInputFields] = useState({});
 
   useEffect(() => {
     if (singUp.signUpDone) {
       restoreCode();
       navigation.navigate(SCREENS.SIGN_IN);
-    } else if (singUp.hasError) {
+    } else if (singUp.hasErrorForm) {
       setInputFields({
         ...inputFields,
         errors: { email: "Este correo ya está registrado." }

@@ -11,14 +11,14 @@ const TitleSize = {
   large: hp("3.5%"),
   medium: hp("3%"),
   small: hp("2.5%"),
-  tiny: hp("2%")
+  tiny: hp("1.5%")
 };
 
 const ButtonText = styled.Text`
   color: ${theme.green};
   text-align: center;
   font-size: ${({ size }) => {
-    return TitleSize[size] || hp("2%");
+    return TitleSize[size] || hp("1.5%");
   }};
 `;
 

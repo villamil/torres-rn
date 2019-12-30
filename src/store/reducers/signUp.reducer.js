@@ -5,6 +5,8 @@ import {
   RESTORE_CODE,
   SIGNUP_RESULT,
   SIGNUP_ERROR,
+  SIGNUP_ERROR_CODE,
+  SIGNUP_ERROR_FORM,
   SIGNUP_START
 } from "../actions/signUpAction";
 
@@ -14,6 +16,8 @@ const initialState = {
   isValidCode: false,
   signUpDone: false,
   hasError: false,
+  hasErrorCode: false,
+  hasErrorForm: false,
   loading: false
 };
 
@@ -38,7 +42,7 @@ const systemReducer = (state = initialState, action) => {
         code: "",
         isOnwer: false,
         isValidCode: false,
-        hasError: true,
+        hasErrorCode: true,
         loading: false
       };
     }
@@ -64,7 +68,7 @@ const systemReducer = (state = initialState, action) => {
     case SIGNUP_ERROR: {
       return {
         ...state,
-        hasError: true,
+        hasErrorForm: true,
         signUpDone: false,
         loading: false
       };

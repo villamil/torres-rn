@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 import theme from "../../colorTheme";
 
@@ -9,7 +13,8 @@ export const MenuContainer = styled.View`
 
 export const ProfileContainer = styled.View`
   width: 90%;
-  height: 30%;
+  padding-top: ${hp("2%")}px;
+  height: ${hp("25%")};
   align-items: flex-start;
   align-self: center;
   justify-content: center;

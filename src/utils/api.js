@@ -10,18 +10,14 @@ const getToken = () => {
   const state = store.getState();
 
   if (state && state.auth && state.auth.token) {
-    console.log("SI hay token");
     return state.auth.token;
   }
-  console.log("No hay token");
-
   return "";
 };
 
 export const apiRequest = async (path, options = {}, body) => {
   const token = getToken();
   const opts = { ...options, headers: options.headers || HEADERS };
-  console.log(token);
   if (token) {
     opts.headers.Authorization = `JWT ${token}`;
   }
