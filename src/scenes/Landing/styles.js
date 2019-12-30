@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 export const LogoContainer = styled.View`
   width: 100%;
@@ -21,10 +25,10 @@ export const CreateContainer = styled.View`
   justify-content: space-between;
   align-items: center;
   bottom: 10%;
+  width: 100%;
 `;
 
 export const AlreadyAnAccountConteiner = styled.View`
   flex-direction: row;
-  justify-content: space-between;
-  width: 55%;
+  justify-content: center;
 `;

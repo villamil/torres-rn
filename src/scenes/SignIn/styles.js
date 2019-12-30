@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 export const LogoContainer = styled.View`
   height: 15%;
@@ -8,12 +12,12 @@ export const LogoContainer = styled.View`
 
 export const InputContainer = styled.View`
   width: 80%;
-  height: 12%;
+  height: ${hp("14")};
   align-items: flex-start;
 `;
 
 export const NextContainer = styled.View`
-  height: 40%;
+  height: ${hp("35%")};
   width: 80%;
   justify-content: flex-end;
 `;

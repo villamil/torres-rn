@@ -1,12 +1,19 @@
 import React from "react";
 import { Image, View } from "react-native";
 import Carousel from "react-native-snap-carousel";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 export default class MyCarousel extends React.Component {
   _renderItem({ item, index }) {
     return (
       <View>
-        <Image style={{ width: 140, height: 140 }} source={item.src} />
+        <Image
+          style={{ width: wp("35%"), height: hp("20%") }}
+          source={item.src}
+        />
       </View>
     );
   }
@@ -19,8 +26,8 @@ export default class MyCarousel extends React.Component {
         }}
         data={this.props.entries}
         renderItem={this._renderItem}
-        sliderWidth={500}
-        itemWidth={150}
+        sliderWidth={wp("100%")}
+        itemWidth={wp("40%")}
         loop={true}
         autoplay={true}
         loopClonesPerSide={5}

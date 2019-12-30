@@ -1,17 +1,22 @@
 import styled from "styled-components";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
+
 import theme from "../../colorTheme";
 
 const TitleSize = {
-  XL: "46px",
-  large: "32px",
-  medium: "24px",
-  small: "18px",
-  tiny: "12px"
+  XL: hp("6%"),
+  large: hp("3.5%"),
+  medium: hp("3%"),
+  small: hp("2.5%"),
+  tiny: hp("2%")
 };
 
 const Title = styled.Text`
   font-size: ${({ size }) => {
-    return TitleSize[size] || "24px";
+    return TitleSize[size] || hp("3%");
   }};
   font-weight: ${({ bold }) => {
     return bold ? "bold" : 500;

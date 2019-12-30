@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
+
 import theme from "../../colorTheme";
 
 export const DetailsContainer = styled.View`
@@ -17,8 +22,8 @@ export const DetailContainer = styled.View`
   align-items: flex-start;
   justify-content: space-between;
   background-color: ${theme.gray};
-  padding: 20px;
-  height: 120;
+  padding: ${`${hp("2%")}px`};
+  height: ${hp("14%")};
   width: 100%;
   margin-bottom: 15px;
 `;

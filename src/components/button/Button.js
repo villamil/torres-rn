@@ -1,12 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import theme from "../../colorTheme";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 const ButtonText = styled.Text`
   color: ${({ color }) => {
     return color || theme.light;
   }};
   text-align: center;
+  font-size: ${hp("2%")};
 `;
 
 const ButtonContainer = styled.TouchableOpacity`

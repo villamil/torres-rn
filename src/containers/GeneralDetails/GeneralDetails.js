@@ -8,6 +8,10 @@ import {
 } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 import MaintenanceDark from "../../assets/maintenance-logo-dark.png";
 import WaterDark from "../../assets/water-logo-dark.png";
@@ -54,7 +58,7 @@ function GeneralDetails(props) {
         <UpperRow>
           <DetailLogoContainer>
             <Image
-              style={{ height: 35, width: 35 }}
+              style={{ height: hp("5%"), width: wp("9%") }}
               source={item.isWater ? WaterDark : MaintenanceDark}
             />
             <Title color={theme.dark} size="tiny" style={{ marginLeft: 5 }}>

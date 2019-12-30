@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { Image, Linking } from "react-native";
 import queryString from "query-string";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
@@ -54,7 +58,7 @@ export default function Landing({ navigation }) {
       <AuthCheck navigation={navigation} />
       <LogoContainer>
         <Image
-          style={{ width: 80, height: 80, marginRight: 10 }}
+          style={{ width: wp("22%"), height: hp("12%"), marginRight: 10 }}
           source={Torres}
         />
         <Title>TORRES</Title>
@@ -69,7 +73,9 @@ export default function Landing({ navigation }) {
           onPress={() => navigation.navigate(SCREENS.SIGN_UP)}
         />
         <AlreadyAnAccountConteiner>
-          <Title size="tiny">¿Ya tienes una cuenta?</Title>
+          <Title size="tiny" style={{ marginRight: 7 }}>
+            ¿Ya tienes una cuenta?
+          </Title>
           <ButtonText
             text="Inicia sesión"
             onPress={() => navigation.navigate(SCREENS.SIGN_IN)}
