@@ -44,18 +44,8 @@ const CarouselItems = [
 ];
 
 export default function Landing({ navigation }) {
-  useEffect(() => {
-    Linking.getInitialURL().then(url => {
-      if (url) {
-        const params = queryString.parse(url.replace("app://torres?", ""));
-        navigation.navigate(SCREENS.SIGN_UP, { code: params.code });
-      }
-    });
-  }, []);
-
   return (
     <Container>
-      <AuthCheck navigation={navigation} />
       <LogoContainer>
         <Image
           style={{ width: wp("22%"), height: hp("12%"), marginRight: 10 }}

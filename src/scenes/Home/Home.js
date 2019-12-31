@@ -79,6 +79,12 @@ function Home(props) {
   const drawerOffset = Math.round(deviceHeight * 0.33);
   const drawerHeight = Math.round(deviceHeight * 1.3);
   useEffect(() => {
+    console.log(props.navigation.getParam("code"));
+    if (props.navigation.getParam("code")) {
+      props.navigation.navigate(SCREENS.ADD_UNIT, {
+        code: props.navigation.getParam("code")
+      });
+    }
     refreshStore();
   }, []);
 

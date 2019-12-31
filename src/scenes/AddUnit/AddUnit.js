@@ -42,6 +42,12 @@ function AddUnit(props) {
   const [codeError, setCodeError] = useState("");
 
   useEffect(() => {
+    if (props.navigation.getParam("code")) {
+      setInputFields({ code: props.navigation.getParam("code") });
+    }
+  }, []);
+
+  useEffect(() => {
     if (props.unit.unitAdded) {
       props.navigation.navigate(SCREENS.HOME);
     }
