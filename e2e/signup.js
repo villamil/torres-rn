@@ -1,7 +1,11 @@
 const fakeEmail = "test@email.com";
 const fakePassword = "1234";
+const fakeCode = "XX91CA14";
 
-describe("Signup", () => {
+const fakeEmail2 = "test2@email.com";
+const fakeCode2 = "HN51ET19";
+
+export const signUpTests = () => {
   beforeEach(async () => {
     await device.reloadReactNative();
   });
@@ -9,8 +13,8 @@ describe("Signup", () => {
   it("should be able to create an account", async () => {
     // Code validation
     await element(by.text("CREAR TU CUENTA")).tap();
-    await element(by.id("sing-up-code")).typeText("XX91CA14");
-    await expect(element(by.text("XX91CA14"))).toBeVisible();
+    await element(by.id("sing-up-code")).typeText(fakeCode);
+    await expect(element(by.text(fakeCode))).toBeVisible();
     await element(by.id("sing-up-code-click-outside")).tap();
     await element(by.id("sing-up-code-btn")).tap();
 
@@ -39,6 +43,39 @@ describe("Signup", () => {
     await expect(element(by.text("102A"))).toBeVisible();
   });
 
+  it("should be able to create a second", async () => {
+    // Code validation
+    await element(by.text("CREAR TU CUENTA")).tap();
+    await element(by.id("sing-up-code")).typeText(fakeCode2);
+    await expect(element(by.text(fakeCode2))).toBeVisible();
+    await element(by.id("sing-up-code-click-outside")).tap();
+    await element(by.id("sing-up-code-btn")).tap();
+
+    // Signup form
+    await element(by.id("code-form-first-name")).typeText("test firstname");
+    await element(by.id("code-form-click-outside")).tap();
+    await element(by.id("code-form-last-name")).typeText("test lastname");
+    await element(by.id("code-form-click-outside")).tap();
+    await element(by.id("code-form-email")).typeText(fakeEmail2);
+    await element(by.id("code-form-click-outside")).tap();
+    await element(by.id("code-form-password")).typeText(fakePassword);
+    await element(by.id("code-form-click-outside")).tap();
+    await element(by.id("code-form-password-repeat")).typeText(fakePassword);
+    await element(by.id("code-form-click-outside")).tap();
+    await element(by.id("code-form-scrollview")).scrollTo("bottom");
+    await element(by.id("code-form-submit")).tap();
+    await expect(element(by.text("INGRESAR"))).toBeVisible();
+
+    // Try to sign In
+    await element(by.id("sign-in-email")).typeText(fakeEmail2);
+    await element(by.id("sign-in-click-outside")).tap();
+    await element(by.id("sign-in-password")).typeText(fakePassword);
+    await element(by.id("sign-in-click-outside")).tap();
+    await element(by.id("sign-in-submit")).tap();
+
+    await expect(element(by.text("104A"))).toBeVisible();
+  });
+
   it("should validate codes", async () => {
     await element(by.text("CREAR TU CUENTA")).tap();
     await element(by.id("sing-up-code")).typeText("wrongcode");
@@ -49,8 +86,8 @@ describe("Signup", () => {
 
   it("should validate sign up form", async () => {
     await element(by.text("CREAR TU CUENTA")).tap();
-    await element(by.id("sing-up-code")).typeText("XX91CA14");
-    await expect(element(by.text("XX91CA14"))).toBeVisible();
+    await element(by.id("sing-up-code")).typeText(fakeCode);
+    await expect(element(by.text(fakeCode))).toBeVisible();
     await element(by.id("sing-up-code-click-outside")).tap();
     await element(by.id("sing-up-code-btn")).tap();
 
@@ -67,8 +104,8 @@ describe("Signup", () => {
 
   it("should validate email format", async () => {
     await element(by.text("CREAR TU CUENTA")).tap();
-    await element(by.id("sing-up-code")).typeText("XX91CA14");
-    await expect(element(by.text("XX91CA14"))).toBeVisible();
+    await element(by.id("sing-up-code")).typeText(fakeCode);
+    await expect(element(by.text(fakeCode))).toBeVisible();
     await element(by.id("sing-up-code-click-outside")).tap();
     await element(by.id("sing-up-code-btn")).tap();
 
@@ -83,8 +120,8 @@ describe("Signup", () => {
 
   it("should validate email existing emails", async () => {
     await element(by.text("CREAR TU CUENTA")).tap();
-    await element(by.id("sing-up-code")).typeText("XX91CA14");
-    await expect(element(by.text("XX91CA14"))).toBeVisible();
+    await element(by.id("sing-up-code")).typeText(fakeCode);
+    await expect(element(by.text(fakeCode))).toBeVisible();
     await element(by.id("sing-up-code-click-outside")).tap();
     await element(by.id("sing-up-code-btn")).tap();
 
@@ -104,4 +141,4 @@ describe("Signup", () => {
       element(by.text("Este correo ya está registrado."))
     ).toBeVisible();
   });
-});
+};

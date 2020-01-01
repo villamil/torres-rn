@@ -99,6 +99,7 @@ function AddUnit(props) {
         </CodeContainer>
         <ActionContainer>
           <Button
+            testID="add-unit-btn"
             backgroundColor={theme.lowDark}
             onPress={onSubmit}
             text="AGREGAR"

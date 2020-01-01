@@ -38,8 +38,8 @@ import {
 } from "./styles";
 
 const initialState = {
-  email: "villamil_one@hotmail.com",
-  password: "1234",
+  email: "",
+  password: "",
   rememberLogin: false,
   errors: {}
 };
@@ -144,6 +144,7 @@ function SignIn({ navigation, authenticate, auth, rememberSesion, logout }) {
             Mantener sesión
           </Title>
           <CheckBox
+            testID="sign-in-maintain-session-btn"
             style={{ alignSelf: "flex-end" }}
             onPress={onRememberLogin}
             checked={auth.rememberSesion}

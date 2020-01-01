@@ -196,7 +196,10 @@ function Home(props) {
       >
         <Container type="darkBlue">
           <MenuContainer>
-            <MenuTouchable onPress={() => props.navigation.openDrawer()}>
+            <MenuTouchable
+              testID="home-menu-btn"
+              onPress={() => props.navigation.openDrawer()}
+            >
               <Image style={{ height: 25, width: 25 }} source={MenuIcon} />
             </MenuTouchable>
             {props.auth.isOwner ? (
@@ -266,6 +269,7 @@ function Home(props) {
         </Container>
       </ScrollView>
       <BottomDrawer
+        testID="home-bottom-drawer"
         containerHeight={drawerHeight}
         offset={Math.abs(drawerOffset) * -1}
         startUp={false}
@@ -282,6 +286,7 @@ function Home(props) {
           <GeneralDetails />
           <ViewMoreContainer>
             <Button
+              testID="home-see-more-btn"
               text="Ver Más"
               backgroundColor={theme.lowDark}
               onPress={() =>

@@ -69,6 +69,7 @@ export default function Landing({ navigation }) {
             ¿Ya tienes una cuenta?
           </Title>
           <ButtonText
+            testID="landing-signin-btn"
             text="Inicia sesión"
             onPress={() => navigation.navigate(SCREENS.SIGN_IN)}
           />

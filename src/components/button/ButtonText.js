@@ -25,7 +25,7 @@ const ButtonText = styled.Text`
 const ButtonContainer = styled.TouchableOpacity``;
 
 const ButtonOnlyText = props => (
-  <ButtonContainer onPress={props.onPress}>
+  <ButtonContainer onPress={props.onPress} testID={props.testID}>
     <ButtonText {...props}>{props.text}</ButtonText>
   </ButtonContainer>
 );
