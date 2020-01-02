@@ -164,7 +164,10 @@ function Home(props) {
             <ModalContent>
               <CloseContainer>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <CloseTouchable onPress={handleCloseModal}>
+                  <CloseTouchable
+                    testID="units-list-close-btn"
+                    onPress={handleCloseModal}
+                  >
                     <Image
                       style={{ height: 20, width: 20, marginRight: 10 }}
                       source={CloseIcon}
