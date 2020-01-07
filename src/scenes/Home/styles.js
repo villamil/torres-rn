@@ -42,27 +42,6 @@ export const AmountContainer = styled.View`
 
 export const SummaryContainer = styled.View``;
 
-export const PullBarr = styled.View`
-  border-bottom-color: ${theme.dark};
-  border-bottom-width: 5px;
-  border-radius: 2px;
-  opacity: 0.3;
-  width: 8%;
-`;
-
-export const PullMenuContainer = styled.View`
-  padding-top: 2%;
-  width: 100%;
-  align-items: center;
-`;
-
-export const PullContainer = styled.View`
-  width: 100%;
-  align-items: center;
-  justify-content: flex-start;
-  height: 50px;
-`;
-
 export const MenuContainer = styled.View`
   padding: 20px;
   width: 100%;
@@ -99,9 +78,3 @@ export const CloseContainer = styled.View`
 `;
 
 export const CloseTouchable = styled.TouchableOpacity``;
-
-export const ViewMoreContainer = styled.View`
-  height: 5%;
-  width: 90%;
-  justify-content: flex-end;
-`;

@@ -38,8 +38,8 @@ import {
 } from "./styles";
 
 const initialState = {
-  email: "",
-  password: "",
+  email: "villamil_one@hotmail.com",
+  password: "1234",
   rememberLogin: false,
   errors: {}
 };

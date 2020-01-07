@@ -76,6 +76,7 @@ export const BankDetailsContainer = styled.View`
 `;
 
 export const BankContainer = styled.View`
-  height: 50px;
+  height: ${hp(10)};
   width: 90%;
+  justify-content: center;
 `;

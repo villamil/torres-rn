@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   Image,
-  Dimensions,
   Modal,
   TouchableOpacity,
   BackHandler,
@@ -9,17 +8,19 @@ import {
   ScrollView,
   View
 } from "react-native";
-import BottomDrawer from "rn-bottom-drawer";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 import Container from "../../components/layout/Container";
 import Title from "../../components/text/Title";
-import Button from "../../components/button/Button";
 import ButtonText from "../../components/button/ButtonText";
 
-import GeneralDetails from "../../containers/GeneralDetails";
 import UnitsSelector from "../../containers/UnitsSelector";
+import BottomDrawer from "../../containers/BottomDrawer";
 import SCREENS from "../../navigatorMap";
 
 import MaintenanceLogo from "../../assets/maintenance-logo.png";
@@ -41,10 +42,6 @@ import {
   ServiceItem,
   ServiceTitleContainer,
   TitleLeftContainer,
-  ViewMoreContainer,
-  PullBarr,
-  PullMenuContainer,
-  PullContainer,
   MenuContainer,
   MenuTouchable,
   ModalContainer,
@@ -75,11 +72,8 @@ const mapDispatchToProps = dispatch => {
 function Home(props) {
   const [unitPopUp, setUnitPopUp] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const deviceHeight = Math.round(Dimensions.get("window").height);
-  const drawerOffset = Math.round(deviceHeight * 0.33);
-  const drawerHeight = Math.round(deviceHeight * 1.3);
+
   useEffect(() => {
-    console.log(props.navigation.getParam("code"));
     if (props.navigation.getParam("code")) {
       props.navigation.navigate(SCREENS.ADD_UNIT, {
         code: props.navigation.getParam("code")
@@ -272,35 +266,11 @@ function Home(props) {
         </Container>
       </ScrollView>
       <BottomDrawer
-        testID="home-bottom-drawer"
-        containerHeight={drawerHeight}
-        offset={Math.abs(drawerOffset) * -1}
-        startUp={false}
-      >
-        <Container type="light" radius="100px">
-          <PullMenuContainer>
-            <PullBarr />
-          </PullMenuContainer>
-          <PullContainer>
-            <Title color={theme.dark} opacity="0.7" letterSpacing="2px">
-              Detalles
-            </Title>
-          </PullContainer>
-          <GeneralDetails />
-          <ViewMoreContainer>
-            <Button
-              testID="home-see-more-btn"
-              text="Ver Más"
-              backgroundColor={theme.lowDark}
-              onPress={() =>
-                props.navigation.navigate(SCREENS.MAINTENANCE_OWED, {
-                  type: "all"
-                })
-              }
-            />
-          </ViewMoreContainer>
-        </Container>
-      </BottomDrawer>
+        currentPosition={{ x: 0, y: hp(89) }}
+        upPosition={{ x: 0, y: hp(20) }}
+        downPosition={{ x: 0, y: hp(89) }}
+        navigation={props.navigation}
+      />
     </Container>
   );
 }
