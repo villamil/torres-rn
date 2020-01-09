@@ -24,7 +24,7 @@ import SCREENS from "../../navigatorMap";
 
 const Drawer = styled.View`
   width: 100%;
-  height: ${hp(80)};
+  height: ${hp(100)};
   background-color: white;
   position: absolute;
   border-radius: 10px;

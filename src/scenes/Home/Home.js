@@ -267,7 +267,7 @@ function Home(props) {
       </ScrollView>
       <BottomDrawer
         currentPosition={{ x: 0, y: hp(89) }}
-        upPosition={{ x: 0, y: hp(20) }}
+        upPosition={{ x: 0, y: hp(5) }}
         downPosition={{ x: 0, y: hp(89) }}
         navigation={props.navigation}
       />

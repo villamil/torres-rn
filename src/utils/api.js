@@ -36,6 +36,7 @@ export const apiRequest = async (path, options = {}, body) => {
   ).then(response => response.json());
 
   if (result.error) {
+    console.log(result.error);
     throw result.error;
   }
 
